@@ -64,19 +64,17 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="DBHORTI TABELAS" />
-    <Folder Include="DBHORTI DATA" />
-    <Folder Include="DBHORTI PROCEDURES" />
+    <Folder Include="DBHORTI PROCEDURE" />
+    <Folder Include="DBHORTI TABLE" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DBHORTI TABELAS\Produtor.sql" />
-    <None Include="DBHORTI DATA\InserirMunicipio.sql" />
-    <None Include="DBHORTI TABELAS\Unidade.sql" />
-    <None Include="DBHORTI TABELAS\Bairro.sql" />
-    <None Include="DBHORTI TABELAS\Produto.sql" />
-    <None Include="DBHORTI TABELAS\Estado.sql" />
-    <None Include="DBHORTI TABELAS\Municipio.sql" />
-    <None Include="DBHORTI PROCEDURES\P_REMOVE_FK.sql" />
-    <None Include="DBHORTI TABELAS\Pais.sql" />
+    <Build Include="DBHORTI PROCEDURE\P_REMOVE_FK.sql" />
+    <Build Include="DBHORTI TABLE\City.sql" />
+    <Build Include="DBHORTI TABLE\Country.sql" />
+    <Build Include="DBHORTI TABLE\District.sql" />
+    <Build Include="DBHORTI TABLE\Producer.sql" />
+    <Build Include="DBHORTI TABLE\Product.sql" />
+    <Build Include="DBHORTI TABLE\State.sql" />
+    <Build Include="DBHORTI TABLE\Unity.sql" />
   </ItemGroup>
 </Project>

@@ -2,12 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Contato\**" />
-    <EmbeddedResource Remove="Contato\**" />
-    <None Remove="Contato\**" />
+    <ProjectReference Include="..\BasicDomainCoreCommand\BasicDomainCoreCommand.csproj" />
   </ItemGroup>
 
 </Project>
