@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>ZSqlDomonioHorti</Name>
+    <Name>ZSQL</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{d0a29789-d2ec-4030-8571-56d39c69c0e6}</ProjectGuid>
@@ -66,6 +66,7 @@
     <Folder Include="Properties" />
     <Folder Include="DBHORTI PROCEDURE" />
     <Folder Include="DBHORTI TABLE" />
+    <Folder Include="DBHORTI DATA" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="DBHORTI PROCEDURE\P_REMOVE_FK.sql" />
@@ -76,5 +77,8 @@
     <Build Include="DBHORTI TABLE\Product.sql" />
     <Build Include="DBHORTI TABLE\State.sql" />
     <Build Include="DBHORTI TABLE\Unity.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBHORTI DATA\INSERT_CITY.sql" />
   </ItemGroup>
 </Project>

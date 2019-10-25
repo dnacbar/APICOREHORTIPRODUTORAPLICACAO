@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ZSqlDomonioHorti", "ZSqlDomonioHorti\ZSqlDomonioHorti.sqlproj", "{D0A29789-D2EC-4030-8571-56D39C69C0E6}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ZSQL", "ZSqlDomonioHorti\ZSQL.sqlproj", "{D0A29789-D2EC-4030-8571-56D39C69C0E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "COMMAND", "COMMAND", "{62716D91-35DD-43C0-9BA5-3C4461011C98}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiCoreHortiCommand", "WebApiCoreHortiCommand\WebApiCoreHortiCommand.csproj", "{4365E0BF-BE03-48F3-92FF-8739F34F81FD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiCoreHortiQuery", "WebApiCoreHortiQuery\WebApiCoreHortiQuery.csproj", "{A90014D1-BB7D-48AD-A9A3-BE10076A75FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZINFRASTRUCTURE", "ZINFRASTRUCTURE", "{7761AFBF-CACC-4C5B-B03F-6309FE8526DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
