@@ -1,28 +1,33 @@
-using DataCoreHortiQuery.DBHORTICONTEXT;
+//using DataCoreHortiQuery.DBHORTICONTEXT;
+using DataCoreHortiQuery.CONTEXT;
+using DataCoreHortiQuery.IQUERIES;
+using DataCoreHortiQuery.QUERIES;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.OpenApi.Models;
 
 namespace WebApiCoreHortiQuery
 {
     public class Startup
     {
+        private IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DBHortiContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DBHortiContext")));
+            services.AddDbContext<DBHORTICONTEXT>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("DBHORTICONTEXT")));
+
+            HortiQueryServices(services);
 
             services.AddControllers();
 
@@ -57,5 +62,11 @@ namespace WebApiCoreHortiQuery
                 endpoints.MapControllers();
             });
         }
+
+        private void HortiQueryServices(IServiceCollection services)
+        {
+            services.AddScoped<ICityRepository, CityRepository>();
+        }
+
     }
 }

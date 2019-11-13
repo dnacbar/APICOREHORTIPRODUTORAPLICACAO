@@ -1,4 +1,4 @@
-using DataCoreHortiQuery.DBHORTICONTEXT;
+using DataCoreHortiQuery.CONTEXT;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,7 +19,7 @@ namespace WebApiCoreHortiQuery
 
                 try
                 {
-                    var context = services.GetRequiredService<DBHortiContext>();
+                    var context = services.GetRequiredService<DBHORTICONTEXT>();
                     context.Database.EnsureCreated();
                 }
                 catch (Exception ex)
@@ -32,7 +32,11 @@ namespace WebApiCoreHortiQuery
             host.Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-                                                                           .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }

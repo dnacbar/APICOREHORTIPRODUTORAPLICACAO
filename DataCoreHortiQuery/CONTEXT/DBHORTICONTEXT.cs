@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace DataCoreHortiQuery.DBHORTICONTEXT
+namespace DataCoreHortiQuery.CONTEXT
 {
-    public partial class DBHortiContext : DbContext
+    public partial class DBHORTICONTEXT : DbContext
     {
-        public DBHortiContext(DbContextOptions<DBHortiContext> options) : base(options) { }
+        public DBHORTICONTEXT(DbContextOptions<DBHORTICONTEXT> options) : base(options) { }
 
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Country> Country { get; set; }
@@ -248,11 +248,6 @@ namespace DataCoreHortiQuery.DBHORTICONTEXT
                 entity.Property(e => e.NmValue)
                     .HasColumnName("NM_VALUE")
                     .HasColumnType("decimal(12, 2)");
-
-                entity.HasOne(d => d.CdUnityNavigation)
-                    .WithMany(p => p.Product)
-                    .HasForeignKey(d => d.CdUnity)
-                    .HasConstraintName("FK_PRODUCT_UNITY");
             });
 
             modelBuilder.Entity<State>(entity =>
@@ -295,7 +290,11 @@ namespace DataCoreHortiQuery.DBHORTICONTEXT
 
                 entity.Property(e => e.DsName)
                     .HasColumnName("DS_NAME")
-                    .HasMaxLength(50)
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.DsUnity)
+                    .HasColumnName("DS_UNITY")
+                    .HasMaxLength(4)
                     .IsUnicode(false);
 
                 entity.Property(e => e.DtAtualization)

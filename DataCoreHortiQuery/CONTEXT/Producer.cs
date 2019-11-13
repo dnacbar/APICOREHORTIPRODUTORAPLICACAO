@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataCoreHortiQuery.DBHORTICONTEXT
+namespace DataCoreHortiQuery.CONTEXT
 {
     public partial class Producer
     {

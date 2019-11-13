@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataCoreHortiQuery.DBHORTICONTEXT
+namespace DataCoreHortiQuery.CONTEXT
 {
     public partial class Product
     {
@@ -15,7 +15,5 @@ namespace DataCoreHortiQuery.DBHORTICONTEXT
         public DateTime? DtDiscount { get; set; }
         public Guid? CdUnity { get; set; }
         public bool? BoStock { get; set; }
-
-        public virtual Unity CdUnityNavigation { get; set; }
     }
 }

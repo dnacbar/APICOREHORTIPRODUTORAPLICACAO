@@ -11,10 +11,13 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BasicDomainCoreCommand\BasicDomainCoreCommand.csproj" />
     <ProjectReference Include="..\CrossCuttingCoreHortiCommand\CrossCuttingCoreHortiCommand.csproj" />
+    <ProjectReference Include="..\ProducerDomainCoreHortiCommand\ProducerDomainCoreHortiCommand.csproj" />
   </ItemGroup>
 
 </Project>
