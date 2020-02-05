@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataCoreHortiQuery.CONTEXT
+namespace DomainCoreHortiCommand
 {
     public partial class Producer
     {
@@ -27,5 +27,6 @@ namespace DataCoreHortiQuery.CONTEXT
 
         public virtual City CdCityNavigation { get; set; }
         public virtual District CdDistrictNavigation { get; set; }
+        public virtual Userhorti DsEmailNavigation { get; set; }
     }
 }

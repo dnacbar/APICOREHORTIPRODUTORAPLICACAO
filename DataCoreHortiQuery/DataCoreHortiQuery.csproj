@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
@@ -15,9 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BasicDomainCoreCommand\BasicDomainCoreCommand.csproj" />
     <ProjectReference Include="..\CrossCuttingCoreHortiCommand\CrossCuttingCoreHortiCommand.csproj" />
-    <ProjectReference Include="..\ProducerDomainCoreHortiCommand\ProducerDomainCoreHortiCommand.csproj" />
+    <ProjectReference Include="..\DataCoreHortiCommand\DataCoreHortiCommand.csproj" />
+    <ProjectReference Include="..\DomainCoreHortiCommand\DomainCoreHortiCommand.csproj" />
   </ItemGroup>
 
 </Project>

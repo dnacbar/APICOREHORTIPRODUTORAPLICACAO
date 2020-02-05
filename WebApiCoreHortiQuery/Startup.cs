@@ -1,14 +1,15 @@
-//using DataCoreHortiQuery.DBHORTICONTEXT;
-using DataCoreHortiQuery.CONTEXT;
+using DataCoreHortiCommand;
 using DataCoreHortiQuery.IQUERIES;
 using DataCoreHortiQuery.QUERIES;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.IO.Compression;
 
 namespace WebApiCoreHortiQuery
 {
@@ -21,15 +22,27 @@ namespace WebApiCoreHortiQuery
             Configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DBHORTICONTEXT>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("DBHORTICONTEXT")));
+            services.AddDbContext<DBHORTICONTEXT>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DBHORTICONTEXT")));
 
             HortiQueryServices(services);
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(x =>
+                {
+                    x.JsonSerializerOptions.PropertyNamingPolicy = null;
+                    x.JsonSerializerOptions.IgnoreNullValues = true;
+                });
+
+            services.AddResponseCompression(x =>
+            {
+                x.Providers.Add<BrotliCompressionProvider>();
+                x.Providers.Add<GzipCompressionProvider>();
+            });
+
+            services.Configure<BrotliCompressionProviderOptions>(x => x.Level = CompressionLevel.Fastest);
+            services.Configure<GzipCompressionProviderOptions>(x => x.Level = CompressionLevel.Fastest);
 
             services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new OpenApiInfo
             {
@@ -39,13 +52,19 @@ namespace WebApiCoreHortiQuery
             }));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseLogExceptionMiddleware();
             }
+            else
+            {
+                app.UseLogExceptionMiddleware();
+                app.UseExceptionHandler();
+            }
+            app.UseResponseCompression();
 
             app.UseSwagger();
             app.UseSwaggerUI(opt =>
@@ -66,7 +85,7 @@ namespace WebApiCoreHortiQuery
         private void HortiQueryServices(IServiceCollection services)
         {
             services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<IDiscrictRepository, DistrictRepository>();
         }
-
     }
 }

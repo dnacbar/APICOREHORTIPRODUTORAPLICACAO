@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataCoreHortiQuery.CONTEXT
+namespace DomainCoreHortiCommand
 {
     public partial class City
     {
         public City()
         {
+            Client = new HashSet<Client>();
             Producer = new HashSet<Producer>();
         }
 
@@ -17,6 +18,7 @@ namespace DataCoreHortiQuery.CONTEXT
         public string CdCity { get; set; }
 
         public virtual State Id { get; set; }
+        public virtual ICollection<Client> Client { get; set; }
         public virtual ICollection<Producer> Producer { get; set; }
     }
 }

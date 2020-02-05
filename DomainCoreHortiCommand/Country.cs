@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataCoreHortiQuery.CONTEXT
+namespace DomainCoreHortiCommand
 {
     public partial class Country
     {

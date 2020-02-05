@@ -1,4 +1,4 @@
-﻿using DataCoreHortiQuery.CONTEXT;
+﻿using DomainCoreHortiCommand;
 using DataCoreHortiQuery.IQUERIES;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,6 +26,20 @@ namespace WebApiCoreHortiQuery.Controllers
             {
                 return Ok(await _cityRepository.ListOfCities());
             }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        // GET: producer/City/0/10
+        [HttpGet("{idPage:int}/{idSize:int}")]
+        public async Task<IActionResult> GetCities(int idPage, int idSize)
+        {
+            try
+            {
+                return Ok(await _cityRepository.ListOfCities(idPage, idSize));
+            }
             catch (Exception)
             {
                 return BadRequest();
@@ -33,7 +47,7 @@ namespace WebApiCoreHortiQuery.Controllers
         }
 
         // GET: producer/City/5
-        [HttpGet("{id}")]
+        [HttpGet("{idCity:int}")]
         public async Task<IActionResult> GetCity(int idCity)
         {
             try

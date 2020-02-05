@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataCoreHortiQuery.CONTEXT
+namespace DomainCoreHortiCommand
 {
-    public partial class District
+    public partial class Userhorti
     {
-        public District()
+        public Userhorti()
         {
+            Client = new HashSet<Client>();
             Producer = new HashSet<Producer>();
         }
 
-        public Guid IdDistrict { get; set; }
-        public string DsName { get; set; }
+        public string DsLogin { get; set; }
+        public string DsPassword { get; set; }
         public bool? BoActive { get; set; }
         public DateTime DtCreation { get; set; }
         public DateTime DtAtualization { get; set; }
 
+        public virtual ICollection<Client> Client { get; set; }
         public virtual ICollection<Producer> Producer { get; set; }
     }
 }

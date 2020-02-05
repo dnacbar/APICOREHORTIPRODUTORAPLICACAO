@@ -78,8 +78,11 @@
     <Build Include="DBHORTI TABLE\Product.sql" />
     <Build Include="DBHORTI TABLE\State.sql" />
     <Build Include="DBHORTI TABLE\Unity.sql" />
+    <Build Include="DBHORTI TABLE\User.sql" />
+    <Build Include="DBHORTI TABLE\Client.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DBHORTI DATA\INSERT_CITY.sql" />
+    <None Include="DBHORTI TABLE\Log.sql" />
   </ItemGroup>
 </Project>
