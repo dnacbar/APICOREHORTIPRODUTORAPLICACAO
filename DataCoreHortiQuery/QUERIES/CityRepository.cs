@@ -1,15 +1,16 @@
-﻿using DomainCoreHortiCommand;
-using DataCoreHortiQuery.IQUERIES;
+﻿using APPDTOCOREHORTIQUERY.SIGNATURE;
+using DataAccessCoreHortiCommand;
+using DATACOREHORTIQUERY.IQUERIES;
+using DomainCoreHortiCommand;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DataCoreHortiCommand;
+using System.Transactions;
 
-namespace DataCoreHortiQuery.QUERIES
+namespace DATACOREHORTIQUERY.QUERIES
 {
-    public class CityRepository : ICityRepository, IDisposable
+    public sealed class CityRepository : ICityRepository
     {
         private readonly DBHORTICONTEXT dBHORTICONTEXT;
 
@@ -20,71 +21,132 @@ namespace DataCoreHortiQuery.QUERIES
 
         public async Task<IEnumerable<City>> ListOfCities()
         {
-            using (dBHORTICONTEXT)
+            var listOfCities = new List<City>();
+            using (var scope = new TransactionScope(TransactionScopeOption.Required,
+                                                    new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
+                                                    TransactionScopeAsyncFlowOption.Enabled))
             {
-                return await dBHORTICONTEXT.City
-                                           .OrderBy(x => x.Id.DsState)
+                using (dBHORTICONTEXT)
+                {
+                    listOfCities = await dBHORTICONTEXT.City
+                                               .OrderBy(x => x.Id.DsState)
+                                               .Select(x => new City
+                                               {
+                                                   IdState = x.IdState,
+                                                   IdCity = x.IdCity,
+                                                   DsCity = x.DsCity,
+                                                   CdCity = x.CdCity
+                                               })
+                                               .AsNoTracking()
+                                               .OrderBy(x => x.DsCity)
+                                               .ToListAsync();
+                }
+                scope.Complete();
+            }
+            return listOfCities;
+        }
+
+        public async Task<IEnumerable<City>> ListOfCitiesByQuantity(ConsultByQuantitySignature signature)
+        {
+            var listOfCities = new List<City>();
+            using (var scope = new TransactionScope(TransactionScopeOption.Required,
+                                                    new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
+                                                    TransactionScopeAsyncFlowOption.Enabled))
+            {
+                using (dBHORTICONTEXT)
+                {
+                    listOfCities = await dBHORTICONTEXT.City
+                                               .OrderBy(x => x.Id.DsState)
+                                               .Select(x => new City
+                                               {
+                                                   IdState = x.IdState,
+                                                   DsCity = x.DsCity,
+                                                   CdCity = x.CdCity
+                                               })
+                                               .AsNoTracking()
+                                               .Skip(signature.Page * signature.Quantity)
+                                               .Take(signature.Quantity)
+                                               .OrderBy(x => x.DsCity).ToListAsync();
+                }
+                scope.Complete();
+            }
+            return listOfCities;
+        }
+
+        public async Task<IEnumerable<City>> ListOfCitiesByName(ConsultCityByIdNameSignature signature)
+        {
+            var listOfCities = new List<City>();
+            using (var scope = new TransactionScope(TransactionScopeOption.Required,
+                                                    new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
+                                                    TransactionScopeAsyncFlowOption.Enabled))
+            {
+                using (dBHORTICONTEXT)
+                {
+                    listOfCities = await dBHORTICONTEXT.City
                                            .Select(x => new City
                                            {
-                                               IdCountry = x.IdCountry,
                                                IdState = x.IdState,
-                                               IdCity = x.IdCity,
                                                DsCity = x.DsCity,
                                                CdCity = x.CdCity
                                            })
-                                           .AsNoTracking().ToListAsync();
+                                           .AsNoTracking()
+                                           .Where(x => x.DsCity.Contains(signature.DsCity))
+                                           .Take(signature.Quantity)
+                                           .OrderBy(x => x.DsCity).ToListAsync();
+                }
             }
+            return listOfCities;
         }
 
-        public async Task<IEnumerable<City>> ListOfCities(int idPage, int idSize)
+        public async Task<City> CityById(ConsultCityByIdNameSignature signature)
         {
-            using (dBHORTICONTEXT)
+            var city = new City();
+            using (var scope = new TransactionScope(TransactionScopeOption.Required,
+                                                    new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
+                                                    TransactionScopeAsyncFlowOption.Enabled))
             {
-                return await dBHORTICONTEXT.City
-                                           .OrderBy(x => x.Id.DsState)
-                                           .Select(x => new City
-                                           {
-                                               IdCountry = x.IdCountry,
-                                               IdState = x.IdState,
-                                               IdCity = x.IdCity,
-                                               DsCity = x.DsCity,
-                                               CdCity = x.CdCity
-                                           })
-                                           .Skip(idPage * idSize)
-                                           .Take(idSize)
-                                           .AsNoTracking().ToListAsync();
-            }
-        }
-
-        public async Task<City> GetCityByCode(int idCity)
-        {
-            return await dBHORTICONTEXT.City
+                using (dBHORTICONTEXT)
+                {
+                    city = await dBHORTICONTEXT.City
                                        .Select(x => new City
                                        {
-                                           IdCountry = x.IdCountry,
                                            IdState = x.IdState,
-                                           IdCity = x.IdCity,
                                            DsCity = x.DsCity,
                                            CdCity = x.CdCity
                                        })
                                        .AsNoTracking()
-                                       .FirstOrDefaultAsync(x => x.IdCity == idCity);
+                                       .OrderBy(x => x.DsCity)
+                                       .FirstOrDefaultAsync(x => x.IdCity == signature.IdCity);
+                }
+                scope.Complete();
+            }
+            return city;
         }
 
-        public async Task<City> GetCityByName(string strCity)
+        public async Task<IEnumerable<City>> ListOfCitiesByState(ConsultCityByStateSignature signature)
         {
-            return await dBHORTICONTEXT.City
+            var listOfCities = new List<City>();
+            using (var scope = new TransactionScope(TransactionScopeOption.Required,
+                                                    new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
+                                                    TransactionScopeAsyncFlowOption.Enabled))
+            {
+                using (dBHORTICONTEXT)
+                {
+                    listOfCities = await dBHORTICONTEXT.City
                                        .Select(x => new City
                                        {
-                                           IdCity = x.IdCity,
+                                           IdState = x.IdState,
                                            DsCity = x.DsCity,
                                            CdCity = x.CdCity
-                                       }).FirstOrDefaultAsync(x => x.DsCity == strCity);
-        }
-
-        public async void Dispose()
-        {
-            await dBHORTICONTEXT.DisposeAsync();
+                                       })
+                                       .AsNoTracking()
+                                       .OrderBy(x => x.DsCity)
+                                       .Where(x => x.IdState == signature.IdState)
+                                       .ToListAsync();
+                }
+                scope.Complete();
+            }
+            return listOfCities;
         }
     }
 }

@@ -1,8 +1,6 @@
-﻿using DomainCoreHortiCommand;
-using DataCoreHortiQuery.IQUERIES;
+﻿using APPCOREHORTIQUERY.INTERFACES;
+using APPDTOCOREHORTIQUERY.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace WebApiCoreHortiQuery.Controllers
@@ -11,54 +9,40 @@ namespace WebApiCoreHortiQuery.Controllers
     [ApiController]
     public class CityController : ControllerBase
     {
-        private readonly ICityRepository _cityRepository;
-
-        public CityController(ICityRepository cityRepository)
+        private readonly IConsultCityApp _consultCityApp;
+        public CityController(IConsultCityApp consultCityApp)
         {
-            _cityRepository = cityRepository;
+            _consultCityApp = consultCityApp;
         }
 
-        // GET: producer/City
-        [HttpGet]
-        public async Task<IActionResult> GetCities()
+        [HttpGet(nameof(GetListOfCities))]
+        public async Task<IActionResult> GetListOfCities()
         {
-            try
-            {
-                return Ok(await _cityRepository.ListOfCities());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
+            return Ok(await _consultCityApp.GetListOfCities());
         }
 
-        // GET: producer/City/0/10
-        [HttpGet("{idPage:int}/{idSize:int}")]
-        public async Task<IActionResult> GetCities(int idPage, int idSize)
+        [HttpPost(nameof(GetListOfCitiesByQuantity))]
+        public async Task<IActionResult> GetListOfCitiesByQuantity([FromBody] ConsultByQuantitySignature signature)
         {
-            try
-            {
-                return Ok(await _cityRepository.ListOfCities(idPage, idSize));
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            return Ok(await _consultCityApp.GetListOfCitiesByQuantity(signature));
         }
 
-        // GET: producer/City/5
-        [HttpGet("{idCity:int}")]
-        public async Task<IActionResult> GetCity(int idCity)
+        [HttpPost(nameof(GetListOfCitiesByName))]
+        public async Task<IActionResult> GetListOfCitiesByName([FromBody] ConsultCityByIdNameSignature signature)
         {
-            try
-            {
-                return Ok(await _cityRepository.GetCityByCode(idCity));
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            return Ok(await _consultCityApp.GetListOfCitiesByName(signature));
         }
 
+        [HttpPost(nameof(GetCityById))]
+        public async Task<IActionResult> GetCityById([FromBody] ConsultCityByIdNameSignature signature)
+        {
+            return Ok(await _consultCityApp.GetCityById(signature));
+        }
+
+        [HttpPost(nameof(GetListOfCitiesByState))]
+        public async Task<IActionResult> GetListOfCitiesByState(ConsultCityByStateSignature signature)
+        {
+            return Ok(await _consultCityApp.GetListOfCitiesByState(signature));
+        }
     }
 }

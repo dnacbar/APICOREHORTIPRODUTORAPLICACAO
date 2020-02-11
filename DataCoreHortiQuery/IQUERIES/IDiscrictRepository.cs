@@ -1,15 +1,15 @@
-﻿using DomainCoreHortiCommand;
-using System;
+﻿using APPDTOCOREHORTIQUERY.SIGNATURE;
+using DomainCoreHortiCommand;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace DataCoreHortiQuery.IQUERIES
+namespace DATACOREHORTIQUERY.IQUERIES
 {
     public interface IDiscrictRepository
     {
-        Task<IEnumerable<District>> GetDistricts();
-        Task<IEnumerable<District>> GetDistricts(int idPage, int idSize);
-        Task<District> GetDistrict(Guid idDistrict);
-        void Dispose();
+        Task<IEnumerable<District>> ListOfDistricts();
+        Task<IEnumerable<District>> ListOfDistrictsByQuantity(ConsultByQuantitySignature signature);
+        Task<District> DistrictById(ConsultDistrictByIdNameSignature signature);
+        Task<IEnumerable<District>> ListOfDistrictsByName(ConsultDistrictByIdNameSignature signature);
     }
 }

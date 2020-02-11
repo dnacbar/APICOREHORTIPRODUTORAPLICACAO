@@ -1,6 +1,8 @@
-using DataCoreHortiCommand;
-using DataCoreHortiQuery.IQUERIES;
-using DataCoreHortiQuery.QUERIES;
+using APPCOREHORTIQUERY;
+using APPCOREHORTIQUERY.INTERFACES;
+using DataAccessCoreHortiCommand;
+using DATACOREHORTIQUERY.IQUERIES;
+using DATACOREHORTIQUERY.QUERIES;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -8,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.IO.Compression;
 
@@ -24,9 +27,14 @@ namespace WebApiCoreHortiQuery
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DBHORTICONTEXT>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DBHORTICONTEXT")));
+            services.AddDbContext<DBHORTICONTEXT>(opt =>
+            {
+                opt.UseSqlServer(Configuration.GetConnectionString("DBHORTICONTEXT"));
+                opt.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
+            });
 
-            HortiQueryServices(services);
+            HortiQueryRepositoryServices(services);
+            HortiQueryAppServices(services);
 
             services.AddControllers()
                 .AddJsonOptions(x =>
@@ -57,11 +65,9 @@ namespace WebApiCoreHortiQuery
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseLogExceptionMiddleware();
             }
             else
             {
-                app.UseLogExceptionMiddleware();
                 app.UseExceptionHandler();
             }
             app.UseResponseCompression();
@@ -73,6 +79,8 @@ namespace WebApiCoreHortiQuery
                 opt.RoutePrefix = string.Empty;
             });
 
+            app.UseLogExceptionMiddleware();
+
             app.UseRouting();
             app.UseAuthorization();
 
@@ -82,10 +90,16 @@ namespace WebApiCoreHortiQuery
             });
         }
 
-        private void HortiQueryServices(IServiceCollection services)
+        private void HortiQueryRepositoryServices(IServiceCollection services)
         {
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IDiscrictRepository, DistrictRepository>();
+        }
+
+        private void HortiQueryAppServices(IServiceCollection services)
+        {
+            services.AddScoped<IConsultCityApp, ConsultCityApp>();
+            services.AddScoped<IConsultDistrictApp, ConsultDistrictApp>();
         }
     }
 }

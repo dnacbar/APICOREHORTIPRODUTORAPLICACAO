@@ -1,9 +1,7 @@
-﻿using CrossCuttingCoreHortiCommand.EXCEPTION;
-using CrossCuttingCoreHortiCommand.LOG;
+﻿using CrossCuttingCoreHortiCommand.LOG;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace WebApiCoreHortiQuery
@@ -23,47 +21,19 @@ namespace WebApiCoreHortiQuery
             {
                 await requestDelegate(httpContext);
             }
-            catch (HttpStatusCodeException ex)
+            catch (Exception ex)
             {
-                if (ex.StatusCode == HttpStatusCode.InternalServerError)
+                LogExtension.CreateLog(new LogObject
                 {
-                    LogExtension.CreateLog(new LogObject
-                    {
-                        Id = new Guid().ToString(),
-                        UserLog = "",
-                        InfoLog = ex.ToString(),
-                        LevelLog = CrossCuttingCoreHortiCommand.ENUM.EnumLevelLog.Fatal,
-                        TimeLog = DateTime.Now,
-                        IPAddress = httpContext.Connection.RemoteIpAddress
-                    });
-                }
-                else if (ex.StatusCode == HttpStatusCode.BadRequest)
-                {
-                    LogExtension.CreateLog(new LogObject
-                    {
-                        Id = new Guid().ToString(),
-                        UserLog = "",
-                        InfoLog = ex.ToString(),
-                        LevelLog = CrossCuttingCoreHortiCommand.ENUM.EnumLevelLog.Error,
-                        TimeLog = DateTime.Now,
-                        IPAddress = httpContext.Connection.RemoteIpAddress
-                    });
-                }
-                else
-                {
-                    LogExtension.CreateLog(new LogObject
-                    {
-                        Id = new Guid().ToString(),
-                        UserLog = "",
-                        InfoLog = ex.ToString(),
-                        LevelLog = CrossCuttingCoreHortiCommand.ENUM.EnumLevelLog.Information,
-                        TimeLog = DateTime.Now,
-                        IPAddress = httpContext.Connection.RemoteIpAddress
-                    });
-                }
+                    Id = Guid.NewGuid().ToString(),
+                    UserLog = httpContext.User.Identity.Name,
+                    InfoLog = ex.ToString(),
+                    LevelLog = CrossCuttingCoreHortiCommand.ENUM.EnumLevelLog.Error,
+                    TimeLog = DateTime.Now,
+                    IPAddress = httpContext.Connection.RemoteIpAddress
+                });
 
-                httpContext.Response.StatusCode = (int)ex.StatusCode;
-                httpContext.Response.ContentType = ex.ContentType;
+                httpContext.Response.ContentType = httpContext.Request.ContentType;
                 await httpContext.Response.WriteAsync(ex.Message);
             }
         }

@@ -11,7 +11,7 @@ namespace DomainCoreHortiCommand
         }
 
         public Guid IdDistrict { get; set; }
-        public string DsName { get; set; }
+        public string DsDistrict { get; set; }
         public bool? BoActive { get; set; }
         public DateTime DtCreation { get; set; }
         public DateTime DtAtualization { get; set; }

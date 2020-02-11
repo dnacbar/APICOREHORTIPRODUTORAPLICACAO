@@ -11,29 +11,10 @@ namespace CrossCuttingCoreHortiCommand.LOG
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                switch (logMongoObject.LevelLog)
-                {
-                    case ENUM.EnumLevelLog.Error:
-                        Log.Logger = new LoggerConfiguration()
-                                         .WriteTo
-                                         .File(@"C:\log\log_error.txt", rollingInterval: RollingInterval.Hour)
-                                         .CreateLogger();
-                        break;
-                    case ENUM.EnumLevelLog.Fatal:
-                        Log.Logger = new LoggerConfiguration()
-                                         .WriteTo
-                                         .File(@"C:\log\log_fatal.txt", rollingInterval: RollingInterval.Hour)
-                                         .CreateLogger();
-                        break;
-                    case ENUM.EnumLevelLog.Information:
-                        Log.Logger = new LoggerConfiguration()
-                                         .WriteTo
-                                         .File(@"C:\log\log_information.txt", rollingInterval: RollingInterval.Hour)
-                                         .CreateLogger();
-                        break;
-                    default:
-                        break;
-                }
+                Log.Logger = new LoggerConfiguration()
+                                 .WriteTo
+                                 .File(@"C:\log\log_error.txt", rollingInterval: RollingInterval.Hour)
+                                 .CreateLogger();
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
@@ -43,14 +24,7 @@ namespace CrossCuttingCoreHortiCommand.LOG
                                  .CreateLogger();
             }
 
-            if (logMongoObject.LevelLog == ENUM.EnumLevelLog.Information)
-                Log.Information(logMongoObject.LogMessage());
-
-            else if (logMongoObject.LevelLog == ENUM.EnumLevelLog.Error)
-                Log.Error(logMongoObject.LogMessage());
-
-            else if (logMongoObject.LevelLog == ENUM.EnumLevelLog.Fatal)
-                Log.Fatal(logMongoObject.LogMessage());
+            Log.Information(logMongoObject.LogMessage());
         }
     }
 }

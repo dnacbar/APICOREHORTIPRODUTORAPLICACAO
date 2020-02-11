@@ -6,7 +6,7 @@ namespace DomainCoreHortiCommand
     public partial class Producer
     {
         public Guid IdProducer { get; set; }
-        public string DsName { get; set; }
+        public string DsProducer { get; set; }
         public bool? BoActive { get; set; }
         public DateTime DtCreation { get; set; }
         public DateTime DtAtualization { get; set; }

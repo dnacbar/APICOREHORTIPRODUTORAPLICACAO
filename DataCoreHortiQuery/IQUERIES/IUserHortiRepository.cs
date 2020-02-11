@@ -1,9 +1,9 @@
 ﻿using DomainCoreHortiCommand;
 using System.Threading.Tasks;
 
-namespace DataCoreHortiQuery.IQUERIES
+namespace DATACOREHORTIQUERY.IQUERIES
 {
-    public interface IUserHorti
+    public interface IUserHortiRepository
     {
         Task<Userhorti> GetLoginUser(string dsLogin, string dsPassword);
         Task<Userhorti> GetUserhorti(string dsLogin);

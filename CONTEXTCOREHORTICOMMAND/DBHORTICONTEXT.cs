@@ -1,7 +1,7 @@
 ﻿using DomainCoreHortiCommand;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataCoreHortiCommand
+namespace DataAccessCoreHortiCommand
 {
     public partial class DBHORTICONTEXT : DbContext
     {
@@ -11,11 +11,13 @@ namespace DataCoreHortiCommand
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<District> District { get; set; }
+        public virtual DbSet<Log> Log { get; set; }
         public virtual DbSet<Producer> Producer { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<State> State { get; set; }
-        public virtual DbSet<Unity> Unity { get; set; }
+        public virtual DbSet<Unit> Unit { get; set; }
         public virtual DbSet<Userhorti> Userhorti { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -72,15 +74,15 @@ namespace DataCoreHortiCommand
 
                 entity.Property(e => e.CdCity).HasColumnName("CD_CITY");
 
+                entity.Property(e => e.DsClient)
+                    .IsRequired()
+                    .HasColumnName("DS_CLIENT")
+                    .HasMaxLength(100);
+
                 entity.Property(e => e.DsEmail)
                     .IsRequired()
                     .HasColumnName("DS_EMAIL")
                     .HasMaxLength(50);
-
-                entity.Property(e => e.DsName)
-                    .IsRequired()
-                    .HasColumnName("DS_NAME")
-                    .HasMaxLength(100);
 
                 entity.Property(e => e.DsPhone)
                     .HasColumnName("DS_PHONE")
@@ -140,8 +142,8 @@ namespace DataCoreHortiCommand
                     .HasColumnName("BO_ACTIVE")
                     .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.DsName)
-                    .HasColumnName("DS_NAME")
+                entity.Property(e => e.DsDistrict)
+                    .HasColumnName("DS_DISTRICT")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -149,6 +151,38 @@ namespace DataCoreHortiCommand
                     .HasColumnName("DT_ATUALIZATION")
                     .HasColumnType("datetime2(3)")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.DtCreation)
+                    .HasColumnName("DT_CREATION")
+                    .HasColumnType("datetime2(3)")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<Log>(entity =>
+            {
+                entity.HasKey(e => e.IdLog);
+
+                entity.ToTable("LOG");
+
+                entity.Property(e => e.IdLog)
+                    .HasColumnName("ID_LOG")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.CdLevellog)
+                    .IsRequired()
+                    .HasColumnName("CD_LEVELLOG")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DsInfolog)
+                    .IsRequired()
+                    .HasColumnName("DS_INFOLOG")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DsUserlog)
+                    .IsRequired()
+                    .HasColumnName("DS_USERLOG")
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
@@ -206,11 +240,6 @@ namespace DataCoreHortiCommand
                     .HasMaxLength(25)
                     .IsUnicode(false);
 
-                entity.Property(e => e.DsName)
-                    .IsRequired()
-                    .HasColumnName("DS_NAME")
-                    .HasMaxLength(100);
-
                 entity.Property(e => e.DsNumber)
                     .HasColumnName("DS_NUMBER")
                     .HasMaxLength(5)
@@ -220,6 +249,11 @@ namespace DataCoreHortiCommand
                     .HasColumnName("DS_PHONE")
                     .HasMaxLength(11)
                     .IsUnicode(false);
+
+                entity.Property(e => e.DsProducer)
+                    .IsRequired()
+                    .HasColumnName("DS_PRODUCER")
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.DsStateinscription)
                     .HasColumnName("DS_STATEINSCRIPTION")
@@ -285,8 +319,8 @@ namespace DataCoreHortiCommand
 
                 entity.Property(e => e.CdUnity).HasColumnName("CD_UNITY");
 
-                entity.Property(e => e.DsName)
-                    .HasColumnName("DS_NAME")
+                entity.Property(e => e.DsProduct)
+                    .HasColumnName("DS_PRODUCT")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -334,14 +368,14 @@ namespace DataCoreHortiCommand
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Unity>(entity =>
+            modelBuilder.Entity<Unit>(entity =>
             {
-                entity.HasKey(e => e.IdUnity);
+                entity.HasKey(e => e.IdUnit);
 
-                entity.ToTable("UNITY");
+                entity.ToTable("UNIT");
 
-                entity.Property(e => e.IdUnity)
-                    .HasColumnName("ID_UNITY")
+                entity.Property(e => e.IdUnit)
+                    .HasColumnName("ID_UNIT")
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.BoActive)
@@ -349,14 +383,14 @@ namespace DataCoreHortiCommand
                     .HasColumnName("BO_ACTIVE")
                     .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.DsName)
-                    .HasColumnName("DS_NAME")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.DsUnity)
-                    .HasColumnName("DS_UNITY")
+                entity.Property(e => e.DsAbreviation)
+                    .HasColumnName("DS_ABREVIATION")
                     .HasMaxLength(4)
                     .IsUnicode(false);
+
+                entity.Property(e => e.DsUnit)
+                    .HasColumnName("DS_UNIT")
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.DtAtualization)
                     .HasColumnName("DT_ATUALIZATION")
@@ -399,6 +433,7 @@ namespace DataCoreHortiCommand
                     .HasColumnType("datetime2(3)")
                     .HasDefaultValueSql("(getdate())");
             });
+
             OnModelCreatingPartial(modelBuilder);
         }
 

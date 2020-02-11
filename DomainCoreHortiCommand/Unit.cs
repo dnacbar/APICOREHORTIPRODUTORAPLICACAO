@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace DomainCoreHortiCommand
 {
-    public partial class Unity
+    public partial class Unit
     {
-        public Guid IdUnity { get; set; }
-        public string DsName { get; set; }
-        public string DsUnity { get; set; }
+        public Guid IdUnit { get; set; }
+        public string DsUnit { get; set; }
+        public string DsAbreviation { get; set; }
         public bool? BoActive { get; set; }
         public DateTime DtCreation { get; set; }
         public DateTime DtAtualization { get; set; }

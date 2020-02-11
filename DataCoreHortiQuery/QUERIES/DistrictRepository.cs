@@ -1,13 +1,14 @@
-﻿using DataCoreHortiQuery.IQUERIES;
+﻿using APPDTOCOREHORTIQUERY.SIGNATURE;
+using DataAccessCoreHortiCommand;
+using DATACOREHORTIQUERY.IQUERIES;
 using DomainCoreHortiCommand;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using DataCoreHortiCommand;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Transactions;
 
-namespace DataCoreHortiQuery.QUERIES
+namespace DATACOREHORTIQUERY.QUERIES
 {
     public class DistrictRepository : IDiscrictRepository
     {
@@ -18,56 +19,114 @@ namespace DataCoreHortiQuery.QUERIES
             dBHORTICONTEXT = _dBHORTICONTEXT;
         }
 
-        public async Task<District> GetDistrict(Guid idDistrict)
+        public async Task<IEnumerable<District>> ListOfDistricts()
         {
-            return await dBHORTICONTEXT.District.OrderBy(x => x.DsName)
-                                          .Select(x => new District
-                                          {
-                                              IdDistrict = x.IdDistrict,
-                                              DsName = x.DsName,
-                                              DtCreation = x.DtCreation,
-                                              DtAtualization = x.DtAtualization,
-                                              BoActive = x.BoActive,
-                                          })
-                                          .AsNoTracking()
-                                          .FirstOrDefaultAsync(x => x.IdDistrict == idDistrict);
+            var listOfDistricts = new List<District>();
+            using (var scope = new TransactionScope(TransactionScopeOption.Required,
+                                                    new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
+                                                    TransactionScopeAsyncFlowOption.Enabled))
+            {
+                using (dBHORTICONTEXT)
+                {
+
+                    listOfDistricts = await dBHORTICONTEXT.District
+                                                          .Select(x => new District
+                                                          {
+                                                              IdDistrict = x.IdDistrict,
+                                                              DsDistrict = x.DsDistrict,
+                                                              DtCreation = x.DtCreation,
+                                                              DtAtualization = x.DtAtualization,
+                                                              BoActive = x.BoActive,
+                                                          })
+                                                          .AsNoTracking()
+                                                          .OrderBy(x => x.DsDistrict).ToListAsync();
+                }
+                scope.Complete();
+            }
+            return listOfDistricts;
         }
 
-        public async Task<IEnumerable<District>> GetDistricts()
+        public async Task<IEnumerable<District>> ListOfDistrictsByQuantity(ConsultByQuantitySignature signature)
         {
-            return await dBHORTICONTEXT.District
-                                       .OrderBy(x => x.DsName)
+            var listOfDistricts = new List<District>();
+            using (var scope = new TransactionScope(TransactionScopeOption.Required,
+                                                    new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
+                                                    TransactionScopeAsyncFlowOption.Enabled))
+            {
+                using (dBHORTICONTEXT)
+                {
+                    listOfDistricts = await dBHORTICONTEXT.District
                                        .Select(x => new District
                                        {
                                            IdDistrict = x.IdDistrict,
-                                           DsName = x.DsName,
+                                           DsDistrict = x.DsDistrict,
                                            BoActive = x.BoActive,
                                            DtCreation = x.DtCreation,
                                            DtAtualization = x.DtAtualization
                                        })
-                                       .AsNoTracking().ToListAsync();
+                                       .Skip(signature.Page * signature.Quantity)
+                                       .Take(signature.Quantity)
+                                       .AsNoTracking()
+                                       .OrderBy(x => x.DsDistrict).ToListAsync();
+                }
+                scope.Complete();
+            }
+            return listOfDistricts;
         }
 
-        public async Task<IEnumerable<District>> GetDistricts(int idPage, int idSize)
+        public async Task<IEnumerable<District>> ListOfDistrictsByName(ConsultDistrictByIdNameSignature signature)
         {
-            return await dBHORTICONTEXT.District
-                                       .OrderBy(x => x.DsName)
+            var listOfDistricts = new List<District>();
+            using (var scope = new TransactionScope(TransactionScopeOption.Required,
+                                                    new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
+                                                    TransactionScopeAsyncFlowOption.Enabled))
+            {
+                using (dBHORTICONTEXT)
+                {
+                    listOfDistricts = await dBHORTICONTEXT.District
                                        .Select(x => new District
                                        {
                                            IdDistrict = x.IdDistrict,
-                                           DsName = x.DsName,
+                                           DsDistrict = x.DsDistrict,
                                            BoActive = x.BoActive,
                                            DtCreation = x.DtCreation,
                                            DtAtualization = x.DtAtualization
                                        })
-                                       .Skip(idPage * idSize)
-                                       .Take(idSize)
-                                       .AsNoTracking().ToListAsync();
+                                       .AsNoTracking()
+                                       .Take(signature.Quantity)
+                                       .Where(x => x.DsDistrict.Contains(signature.DsDistrict))
+                                       .OrderBy(x => x.DsDistrict).ToListAsync();
+                }
+                scope.Complete();
+            }
+            return listOfDistricts;
         }
 
-        public void Dispose()
+        public async Task<District> DistrictById(ConsultDistrictByIdNameSignature signature)
         {
-            throw new NotImplementedException();
+            var district = new District();
+            using (var scope = new TransactionScope(TransactionScopeOption.Required,
+                                                    new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
+                                                    TransactionScopeAsyncFlowOption.Enabled))
+            {
+                using (dBHORTICONTEXT)
+                {
+                    district = await dBHORTICONTEXT.District
+                                       .Select(x => new District
+                                       {
+                                           IdDistrict = x.IdDistrict,
+                                           DsDistrict = x.DsDistrict,
+                                           BoActive = x.BoActive,
+                                           DtCreation = x.DtCreation,
+                                           DtAtualization = x.DtAtualization
+                                       })
+                                       .AsNoTracking()
+                                       .OrderBy(x => x.DsDistrict)
+                                       .FirstOrDefaultAsync(x => x.IdDistrict == signature.IdDistrict);
+                }
+                scope.Complete();
+            }
+            return district;
         }
     }
 }

@@ -1,46 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using APPCOREHORTIQUERY.INTERFACES;
+using APPDTOCOREHORTIQUERY.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace WebApiCoreHortiQuery.Controllers
 {
-    [Route("[controller]")]
+    [Route("producer/[controller]")]
     [ApiController]
     public class DistrictController : ControllerBase
     {
-        // GET: api/District
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IConsultDistrictApp _consultDistrictApp;
+
+        public DistrictController(IConsultDistrictApp consultDistrictApp)
         {
-            return new string[] { "value1", "value2" };
+            _consultDistrictApp = consultDistrictApp;
         }
 
-        // GET: api/District/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpPost(nameof(GetListOfDistricts))]
+        public async Task<IActionResult> GetListOfDistricts()
         {
-            return "value";
+            return Ok(await _consultDistrictApp.GetListOfDistricts());
         }
 
-        // POST: api/District
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost(nameof(GetListOfDistrictsByQuantity))]
+        public async Task<IActionResult> GetListOfDistrictsByQuantity(ConsultByQuantitySignature signature)
         {
+            return Ok(await _consultDistrictApp.GetListOfDistrictsByQuantity(signature));
         }
 
-        // PUT: api/District/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost(nameof(GetDistrictById))]
+        public async Task<IActionResult> GetDistrictById(ConsultDistrictByIdNameSignature signature)
         {
+            return Ok(await _consultDistrictApp.GetDistrictById(signature));
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPost(nameof(GetListOfDistrictsByName))]
+        public async Task<IActionResult> GetListOfDistrictsByName(ConsultDistrictByIdNameSignature signature)
         {
+            return Ok(await _consultDistrictApp.GetListOfDistrictsByName(signature));
         }
     }
 }

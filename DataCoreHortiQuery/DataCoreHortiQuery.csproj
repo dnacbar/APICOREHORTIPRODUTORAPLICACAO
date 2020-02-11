@@ -15,9 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CrossCuttingCoreHortiCommand\CrossCuttingCoreHortiCommand.csproj" />
-    <ProjectReference Include="..\DataCoreHortiCommand\DataCoreHortiCommand.csproj" />
-    <ProjectReference Include="..\DomainCoreHortiCommand\DomainCoreHortiCommand.csproj" />
+    <ProjectReference Include="..\AppDtoCoreHortiQuery\APPDTOCOREHORTIQUERY.csproj" />
+    <ProjectReference Include="..\CONTEXTCOREHORTICOMMAND\DATAACCESSCOREHORTICOMMAND.csproj" />
+    <ProjectReference Include="..\CrossCuttingCoreHortiCommand\CROSSCUTTINGCOREHORTI.csproj" />
+    <ProjectReference Include="..\DomainCoreHortiCommand\DOMAINCOREHORTICOMMAND.csproj" />
   </ItemGroup>
 
 </Project>
