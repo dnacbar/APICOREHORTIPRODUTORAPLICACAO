@@ -28,19 +28,19 @@ namespace WebApiCoreHortiQuery.Controllers
         }
 
         [HttpPost(nameof(GetListOfCitiesByName))]
-        public async Task<IActionResult> GetListOfCitiesByName([FromBody] ConsultCityByIdNameSignature signature)
+        public async Task<IActionResult> GetListOfCitiesByName([FromBody] ConsultCitySignature signature)
         {
             return Ok(await _consultCityApp.GetListOfCitiesByName(signature));
         }
 
         [HttpPost(nameof(GetCityById))]
-        public async Task<IActionResult> GetCityById([FromBody] ConsultCityByIdNameSignature signature)
+        public async Task<IActionResult> GetCityById([FromBody] ConsultCitySignature signature)
         {
             return Ok(await _consultCityApp.GetCityById(signature));
         }
 
         [HttpPost(nameof(GetListOfCitiesByState))]
-        public async Task<IActionResult> GetListOfCitiesByState(ConsultCityByStateSignature signature)
+        public async Task<IActionResult> GetListOfCitiesByState(ConsultCitySignature signature)
         {
             return Ok(await _consultCityApp.GetListOfCitiesByState(signature));
         }

@@ -18,7 +18,7 @@
     <ProjectReference Include="..\AppDtoCoreHortiQuery\APPDTOCOREHORTIQUERY.csproj" />
     <ProjectReference Include="..\CONTEXTCOREHORTICOMMAND\DATAACCESSCOREHORTICOMMAND.csproj" />
     <ProjectReference Include="..\CrossCuttingCoreHortiCommand\CROSSCUTTINGCOREHORTI.csproj" />
-    <ProjectReference Include="..\DomainCoreHortiCommand\DOMAINCOREHORTICOMMAND.csproj" />
+    <ProjectReference Include="..\DOMAINCOREHORTICOMMAND\DOMAINCOREHORTICOMMAND.csproj" />
   </ItemGroup>
 
 </Project>

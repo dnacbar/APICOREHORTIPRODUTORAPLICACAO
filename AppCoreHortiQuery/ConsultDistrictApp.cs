@@ -17,7 +17,7 @@ namespace APPCOREHORTIQUERY
             _discrictRepository = discrictRepository;
         }
 
-        public async Task<ConsultDistrictResult> GetDistrictById(ConsultDistrictByIdNameSignature signature)
+        public async Task<ConsultDistrictResult> GetDistrictById(ConsultDistrictSignature signature)
         {
             return (await _discrictRepository.DistrictById(signature)).ToDistrictResult();
         }
@@ -27,7 +27,7 @@ namespace APPCOREHORTIQUERY
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<ConsultDistrictResult>> GetListOfDistrictsByName(ConsultDistrictByIdNameSignature signature)
+        public Task<IEnumerable<ConsultDistrictResult>> GetListOfDistrictsByName(ConsultDistrictSignature signature)
         {
             throw new System.NotImplementedException();
         }

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace DomainCoreHortiCommand
+namespace DOMAINCOREHORTICOMMAND
 {
     public partial class Product
     {
@@ -13,7 +12,9 @@ namespace DomainCoreHortiCommand
         public decimal NmValue { get; set; }
         public byte? NmDiscount { get; set; }
         public DateTime? DtDiscount { get; set; }
-        public Guid? CdUnity { get; set; }
+        public int? IdUnit { get; set; }
         public bool? BoStock { get; set; }
+
+        public virtual Unit IdUnitNavigation { get; set; }
     }
 }

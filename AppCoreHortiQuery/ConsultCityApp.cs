@@ -17,7 +17,7 @@ namespace APPCOREHORTIQUERY
             _cityRepository = cityRepository;
         }
 
-        public async Task<ConsultCityResult> GetCityById(ConsultCityByIdNameSignature signature)
+        public async Task<ConsultCityResult> GetCityById(ConsultCitySignature signature)
         {
             return (await _cityRepository.CityById(signature)).ToCityResult();
         }
@@ -27,7 +27,7 @@ namespace APPCOREHORTIQUERY
             return (await _cityRepository.ListOfCities()).ToHashSetCityResult();
         }
 
-        public async Task<IEnumerable<ConsultCityResult>> GetListOfCitiesByName(ConsultCityByIdNameSignature signature)
+        public async Task<IEnumerable<ConsultCityResult>> GetListOfCitiesByName(ConsultCitySignature signature)
         {
             return (await _cityRepository.ListOfCitiesByName(signature)).ToHashSetCityResult();
         }
@@ -37,7 +37,7 @@ namespace APPCOREHORTIQUERY
             return (await _cityRepository.ListOfCitiesByQuantity(signature)).ToHashSetCityResult();
         }
 
-        public async Task<IEnumerable<ConsultCityResult>> GetListOfCitiesByState(ConsultCityByStateSignature signature)
+        public async Task<IEnumerable<ConsultCityResult>> GetListOfCitiesByState(ConsultCitySignature signature)
         {
             return (await _cityRepository.ListOfCitiesByState(signature)).ToHashSetCityResult();
         }

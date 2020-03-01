@@ -28,7 +28,7 @@ namespace WebApiCoreHortiQuery
                     Id = Guid.NewGuid().ToString(),
                     UserLog = httpContext.User.Identity.Name,
                     InfoLog = ex.ToString(),
-                    LevelLog = CrossCuttingCoreHortiCommand.ENUM.EnumLevelLog.Error,
+                    LevelLog = CrossCuttingCoreHortiCommand.ENUM.EnumLogLevel.Error,
                     TimeLog = DateTime.Now,
                     IPAddress = httpContext.Connection.RemoteIpAddress
                 });

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DomainCoreHortiCommand
+namespace DOMAINCOREHORTICOMMAND
 {
     public partial class District
     {
         public District()
         {
             Producer = new HashSet<Producer>();
+            Client = new HashSet<Client>();
         }
 
         public Guid IdDistrict { get; set; }
@@ -17,5 +18,6 @@ namespace DomainCoreHortiCommand
         public DateTime DtAtualization { get; set; }
 
         public virtual ICollection<Producer> Producer { get; set; }
+        public virtual ICollection<Client> Client { get; set; }
     }
 }

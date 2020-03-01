@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DomainCoreHortiCommand
+namespace DOMAINCOREHORTICOMMAND
 {
     public partial class Country
     {

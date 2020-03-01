@@ -29,13 +29,13 @@ namespace WebApiCoreHortiQuery.Controllers
         }
 
         [HttpPost(nameof(GetDistrictById))]
-        public async Task<IActionResult> GetDistrictById(ConsultDistrictByIdNameSignature signature)
+        public async Task<IActionResult> GetDistrictById(ConsultDistrictSignature signature)
         {
             return Ok(await _consultDistrictApp.GetDistrictById(signature));
         }
 
         [HttpPost(nameof(GetListOfDistrictsByName))]
-        public async Task<IActionResult> GetListOfDistrictsByName(ConsultDistrictByIdNameSignature signature)
+        public async Task<IActionResult> GetListOfDistrictsByName(ConsultDistrictSignature signature)
         {
             return Ok(await _consultDistrictApp.GetListOfDistrictsByName(signature));
         }

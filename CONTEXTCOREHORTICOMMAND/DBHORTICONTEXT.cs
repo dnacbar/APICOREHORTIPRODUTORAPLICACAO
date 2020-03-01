@@ -1,4 +1,4 @@
-﻿using DomainCoreHortiCommand;
+﻿using DOMAINCOREHORTICOMMAND;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessCoreHortiCommand
@@ -59,30 +59,25 @@ namespace DataAccessCoreHortiCommand
 
             modelBuilder.Entity<Client>(entity =>
             {
-                entity.HasKey(e => e.IdClient);
+                entity.HasKey(e => new { e.IdClient, e.DsEmail });
 
                 entity.ToTable("CLIENT");
 
-                entity.Property(e => e.IdClient)
-                    .HasColumnName("ID_CLIENT")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdClient).HasColumnName("ID_CLIENT");
+
+                entity.Property(e => e.DsEmail)
+                    .HasColumnName("DS_EMAIL")
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.BoActive)
                     .IsRequired()
                     .HasColumnName("BO_ACTIVE")
                     .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.CdCity).HasColumnName("CD_CITY");
-
                 entity.Property(e => e.DsClient)
                     .IsRequired()
                     .HasColumnName("DS_CLIENT")
                     .HasMaxLength(100);
-
-                entity.Property(e => e.DsEmail)
-                    .IsRequired()
-                    .HasColumnName("DS_EMAIL")
-                    .HasMaxLength(50);
 
                 entity.Property(e => e.DsPhone)
                     .HasColumnName("DS_PHONE")
@@ -99,16 +94,20 @@ namespace DataAccessCoreHortiCommand
                     .HasColumnType("datetime2(3)")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.HasOne(d => d.CdCityNavigation)
+                entity.Property(e => e.IdCity).HasColumnName("ID_CITY");
+
+                entity.HasOne(d => d.IdCityNavigation)
                     .WithMany(p => p.Client)
-                    .HasForeignKey(d => d.CdCity)
+                    .HasForeignKey(d => d.IdCity)
                     .HasConstraintName("FK_CLIENT_CITY");
 
-                entity.HasOne(d => d.DsEmailNavigation)
+                entity.Property(e => e.IdDistrict).HasColumnName("ID_DISTRICT");
+
+                entity.HasOne(d => d.IdDistrictNavigation)
                     .WithMany(p => p.Client)
-                    .HasForeignKey(d => d.DsEmail)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_CLIENT_USERHORTI");
+                    .HasForeignKey(d => d.IdDistrict)
+                    .HasConstraintName("FK_CLIENT_DISTRICT");
+
             });
 
             modelBuilder.Entity<Country>(entity =>
@@ -192,25 +191,23 @@ namespace DataAccessCoreHortiCommand
 
             modelBuilder.Entity<Producer>(entity =>
             {
-                entity.HasKey(e => e.IdProducer);
+                entity.HasKey(e => new { e.IdProducer, e.DsEmail });
 
                 entity.ToTable("PRODUCER");
 
-                entity.Property(e => e.IdProducer)
-                    .HasColumnName("ID_PRODUCER")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdProducer).HasColumnName("ID_PRODUCER");
+
+                entity.Property(e => e.DsEmail)
+                    .HasColumnName("DS_EMAIL")
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.BoActive)
                     .IsRequired()
                     .HasColumnName("BO_ACTIVE")
                     .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.CdCity).HasColumnName("CD_CITY");
-
-                entity.Property(e => e.CdDistrict).HasColumnName("CD_DISTRICT");
-
-                entity.Property(e => e.DsAdress)
-                    .HasColumnName("DS_ADRESS")
+                entity.Property(e => e.DsAddress)
+                    .HasColumnName("DS_ADDRESS")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.DsComplement)
@@ -219,11 +216,6 @@ namespace DataAccessCoreHortiCommand
                     .IsUnicode(false);
 
                 entity.Property(e => e.DsDescription).HasColumnName("DS_DESCRIPTION");
-
-                entity.Property(e => e.DsEmail)
-                    .IsRequired()
-                    .HasColumnName("DS_EMAIL")
-                    .HasMaxLength(50);
 
                 entity.Property(e => e.DsFantasyname)
                     .HasColumnName("DS_FANTASYNAME")
@@ -271,30 +263,24 @@ namespace DataAccessCoreHortiCommand
                     .HasColumnType("datetime2(3)")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.DtBirth)
-                    .HasColumnName("DT_BIRTH")
-                    .HasColumnType("date");
-
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
                     .HasColumnType("datetime2(3)")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.HasOne(d => d.CdCityNavigation)
+                entity.Property(e => e.IdCity).HasColumnName("ID_CITY");
+
+                entity.Property(e => e.IdDistrict).HasColumnName("ID_DISTRICT");
+
+                entity.HasOne(d => d.IdCityNavigation)
                     .WithMany(p => p.Producer)
-                    .HasForeignKey(d => d.CdCity)
+                    .HasForeignKey(d => d.IdCity)
                     .HasConstraintName("FK_PRODUCER_CITY");
 
-                entity.HasOne(d => d.CdDistrictNavigation)
+                entity.HasOne(d => d.IdDistrictNavigation)
                     .WithMany(p => p.Producer)
-                    .HasForeignKey(d => d.CdDistrict)
+                    .HasForeignKey(d => d.IdDistrict)
                     .HasConstraintName("FK_PRODUCER_DISTRICT");
-
-                entity.HasOne(d => d.DsEmailNavigation)
-                    .WithMany(p => p.Producer)
-                    .HasForeignKey(d => d.DsEmail)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PRODUCER_USERHORTI");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -317,8 +303,6 @@ namespace DataAccessCoreHortiCommand
                     .HasColumnName("BO_STOCK")
                     .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.CdUnity).HasColumnName("CD_UNITY");
-
                 entity.Property(e => e.DsProduct)
                     .HasColumnName("DS_PRODUCT")
                     .HasMaxLength(50)
@@ -338,11 +322,18 @@ namespace DataAccessCoreHortiCommand
                     .HasColumnName("DT_DISCOUNT")
                     .HasColumnType("date");
 
+                entity.Property(e => e.IdUnit).HasColumnName("ID_UNIT");
+
                 entity.Property(e => e.NmDiscount).HasColumnName("NM_DISCOUNT");
 
                 entity.Property(e => e.NmValue)
                     .HasColumnName("NM_VALUE")
                     .HasColumnType("decimal(12, 2)");
+
+                entity.HasOne(d => d.IdUnitNavigation)
+                    .WithMany(p => p.Product)
+                    .HasForeignKey(d => d.IdUnit)
+                    .HasConstraintName("FK_PRODUCT_UNIT");
             });
 
             modelBuilder.Entity<State>(entity =>
@@ -411,7 +402,7 @@ namespace DataAccessCoreHortiCommand
 
                 entity.Property(e => e.DsLogin)
                     .HasColumnName("DS_LOGIN")
-                    .HasMaxLength(50);
+                    .HasMaxLength(15);
 
                 entity.Property(e => e.BoActive)
                     .IsRequired()

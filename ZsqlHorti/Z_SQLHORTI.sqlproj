@@ -68,21 +68,25 @@
     <Folder Include="DBHORTI PROCEDURE" />
     <Folder Include="DBHORTI TABLE" />
     <Folder Include="DBHORTI DATA" />
+    <Folder Include="DBHORTI DATA\HORTI_V.1" />
+    <Folder Include="DBHORTI DATA\HORTI_V.1\DML" />
+    <Folder Include="DBHORTI DATA\HORTI_V.1\ROLLBACK" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="DBHORTI PROCEDURE\P_REMOVE_FK.sql" />
-    <Build Include="DBHORTI TABLE\City.sql" />
-    <Build Include="DBHORTI TABLE\Country.sql" />
-    <Build Include="DBHORTI TABLE\District.sql" />
-    <Build Include="DBHORTI TABLE\Producer.sql" />
-    <Build Include="DBHORTI TABLE\Product.sql" />
-    <Build Include="DBHORTI TABLE\State.sql" />
-    <Build Include="DBHORTI TABLE\Unit.sql" />
-    <Build Include="DBHORTI TABLE\User.sql" />
-    <Build Include="DBHORTI TABLE\Client.sql" />
+    <Build Include="DBHORTI TABLE\CITY.sql" />
+    <Build Include="DBHORTI TABLE\COUNTRY.sql" />
+    <Build Include="DBHORTI TABLE\DISTRICT.sql" />
+    <Build Include="DBHORTI TABLE\PRODUCER.sql" />
+    <Build Include="DBHORTI TABLE\PRODUCT.sql" />
+    <Build Include="DBHORTI TABLE\STATE.sql" />
+    <Build Include="DBHORTI TABLE\UNIT.sql" />
+    <Build Include="DBHORTI TABLE\USER.sql" />
+    <Build Include="DBHORTI TABLE\CLIENT.sql" />
+    <None Include="DBHORTI DATA\HORTI_V.1\DML\INSERT_CITY.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DBHORTI DATA\INSERT_CITY.sql" />
-    <None Include="DBHORTI TABLE\Log.sql" />
+    <None Include="DBHORTI TABLE\LOG.sql" />
+    <None Include="DBHORTI DATA\HORTI_V.1\ROLLBACK\ROLLBACK_DML.sql" />
   </ItemGroup>
 </Project>

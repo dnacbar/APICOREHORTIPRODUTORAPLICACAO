@@ -13,10 +13,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.IO.Compression;
+using VALIDATIONCOREHORTIQUERY;
 
 namespace WebApiCoreHortiQuery
 {
-    public class Startup
+    public sealed class Startup
     {
         private IConfiguration Configuration { get; }
 
@@ -35,6 +36,7 @@ namespace WebApiCoreHortiQuery
 
             HortiQueryRepositoryServices(services);
             HortiQueryAppServices(services);
+            HortiQueryValidatorServices(services);
 
             services.AddControllers()
                 .AddJsonOptions(x =>
@@ -90,16 +92,24 @@ namespace WebApiCoreHortiQuery
             });
         }
 
+        // CONTAINER DI - REPOSITORY LAYER
         private void HortiQueryRepositoryServices(IServiceCollection services)
         {
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IDiscrictRepository, DistrictRepository>();
+            services.AddScoped<IUserAccessRepository, UserAccessRepository>();
         }
 
+        // CONTAINER DI - APP LAYER
         private void HortiQueryAppServices(IServiceCollection services)
         {
             services.AddScoped<IConsultCityApp, ConsultCityApp>();
             services.AddScoped<IConsultDistrictApp, ConsultDistrictApp>();
+        }
+
+        private void HortiQueryValidatorServices(IServiceCollection services)
+        {
+            services.AddScoped<UserAccessSignatureValidation>();
         }
     }
 }

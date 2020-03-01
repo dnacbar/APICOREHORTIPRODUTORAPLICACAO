@@ -9,7 +9,7 @@ namespace APPCOREHORTIQUERY.INTERFACES
     {
         Task<IEnumerable<ConsultDistrictResult>> GetListOfDistricts();
         Task<IEnumerable<ConsultDistrictResult>> GetListOfDistrictsByQuantity(ConsultByQuantitySignature signature);
-        Task<ConsultDistrictResult> GetDistrictById(ConsultDistrictByIdNameSignature signature);
-        Task<IEnumerable<ConsultDistrictResult>> GetListOfDistrictsByName(ConsultDistrictByIdNameSignature signature);
+        Task<ConsultDistrictResult> GetDistrictById(ConsultDistrictSignature signature);
+        Task<IEnumerable<ConsultDistrictResult>> GetListOfDistrictsByName(ConsultDistrictSignature signature);
     }
 }

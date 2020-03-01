@@ -1,7 +1,7 @@
 ﻿using APPDTOCOREHORTIQUERY.SIGNATURE;
 using DataAccessCoreHortiCommand;
 using DATACOREHORTIQUERY.IQUERIES;
-using DomainCoreHortiCommand;
+using DOMAINCOREHORTICOMMAND;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,6 @@ namespace DATACOREHORTIQUERY.QUERIES
                 using (dBHORTICONTEXT)
                 {
                     listOfCities = await dBHORTICONTEXT.City
-                                               .OrderBy(x => x.Id.DsState)
                                                .Select(x => new City
                                                {
                                                    IdState = x.IdState,
@@ -56,7 +55,6 @@ namespace DATACOREHORTIQUERY.QUERIES
                 using (dBHORTICONTEXT)
                 {
                     listOfCities = await dBHORTICONTEXT.City
-                                               .OrderBy(x => x.Id.DsState)
                                                .Select(x => new City
                                                {
                                                    IdState = x.IdState,
@@ -73,7 +71,7 @@ namespace DATACOREHORTIQUERY.QUERIES
             return listOfCities;
         }
 
-        public async Task<IEnumerable<City>> ListOfCitiesByName(ConsultCityByIdNameSignature signature)
+        public async Task<IEnumerable<City>> ListOfCitiesByName(ConsultCitySignature signature)
         {
             var listOfCities = new List<City>();
             using (var scope = new TransactionScope(TransactionScopeOption.Required,
@@ -98,7 +96,7 @@ namespace DATACOREHORTIQUERY.QUERIES
             return listOfCities;
         }
 
-        public async Task<City> CityById(ConsultCityByIdNameSignature signature)
+        public async Task<City> CityById(ConsultCitySignature signature)
         {
             var city = new City();
             using (var scope = new TransactionScope(TransactionScopeOption.Required,
@@ -123,7 +121,7 @@ namespace DATACOREHORTIQUERY.QUERIES
             return city;
         }
 
-        public async Task<IEnumerable<City>> ListOfCitiesByState(ConsultCityByStateSignature signature)
+        public async Task<IEnumerable<City>> ListOfCitiesByState(ConsultCitySignature signature)
         {
             var listOfCities = new List<City>();
             using (var scope = new TransactionScope(TransactionScopeOption.Required,

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DOMAINCOREHORTICOMMAND.DOMAIN_OBJECT;
+using System;
 
-namespace DomainCoreHortiCommand
+namespace DOMAINCOREHORTICOMMAND
 {
     public partial class Producer
     {
@@ -11,22 +11,23 @@ namespace DomainCoreHortiCommand
         public DateTime DtCreation { get; set; }
         public DateTime DtAtualization { get; set; }
         public string DsFantasyname { get; set; }
-        public int? CdCity { get; set; }
-        public Guid? CdDistrict { get; set; }
+        public int? IdCity { get; set; }
+        public Guid? IdDistrict { get; set; }
         public string DsZip { get; set; }
-        public string DsAdress { get; set; }
+        public string DsAddress { get; set; }
         public string DsNumber { get; set; }
         public string DsComplement { get; set; }
         public string DsFederalinscription { get; set; }
         public string DsStateinscription { get; set; }
         public string DsMunicipalinscription { get; set; }
         public string DsDescription { get; set; }
-        public DateTime? DtBirth { get; set; }
         public string DsEmail { get; set; }
         public string DsPhone { get; set; }
 
-        public virtual City CdCityNavigation { get; set; }
-        public virtual District CdDistrictNavigation { get; set; }
+        public PhoneObject Phone => new PhoneObject(DsPhone, "pt-Br");
+
+        public virtual City IdCityNavigation { get; set; }
+        public virtual District IdDistrictNavigation { get; set; }
         public virtual Userhorti DsEmailNavigation { get; set; }
     }
 }

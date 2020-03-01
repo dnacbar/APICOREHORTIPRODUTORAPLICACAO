@@ -7,7 +7,7 @@ namespace CrossCuttingCoreHortiCommand.LOG
 {
     public static class LogExtension
     {
-        public static void CreateLog(LogObject logMongoObject)
+        public static void CreateLog(LogObject logObject)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -24,7 +24,7 @@ namespace CrossCuttingCoreHortiCommand.LOG
                                  .CreateLogger();
             }
 
-            Log.Information(logMongoObject.LogMessage());
+            Log.Information(logObject.LogMessage());
         }
     }
 }

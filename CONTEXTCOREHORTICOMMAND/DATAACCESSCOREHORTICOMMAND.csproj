@@ -7,11 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CrossCuttingCoreHortiCommand\CROSSCUTTINGCOREHORTI.csproj" />
-    <ProjectReference Include="..\DomainCoreHortiCommand\DOMAINCOREHORTICOMMAND.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="SCAFFOLD\" />
+    <ProjectReference Include="..\DOMAINCOREHORTICOMMAND\DOMAINCOREHORTICOMMAND.csproj" />
   </ItemGroup>
 
 </Project>

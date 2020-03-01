@@ -1,5 +1,5 @@
 ﻿using APPDTOCOREHORTIQUERY.SIGNATURE;
-using DomainCoreHortiCommand;
+using DOMAINCOREHORTICOMMAND;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,7 +9,7 @@ namespace DATACOREHORTIQUERY.IQUERIES
     {
         Task<IEnumerable<District>> ListOfDistricts();
         Task<IEnumerable<District>> ListOfDistrictsByQuantity(ConsultByQuantitySignature signature);
-        Task<District> DistrictById(ConsultDistrictByIdNameSignature signature);
-        Task<IEnumerable<District>> ListOfDistrictsByName(ConsultDistrictByIdNameSignature signature);
+        Task<District> DistrictById(ConsultDistrictSignature signature);
+        Task<IEnumerable<District>> ListOfDistrictsByName(ConsultDistrictSignature signature);
     }
 }

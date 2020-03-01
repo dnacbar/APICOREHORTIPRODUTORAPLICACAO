@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataCoreHortiQuery\DATACOREHORTIQUERY.csproj" />
+    <ProjectReference Include="..\VALIDATIONCOREHORTIQUERY\VALIDATIONCOREHORTIQUERY.csproj" />
   </ItemGroup>
 
 </Project>

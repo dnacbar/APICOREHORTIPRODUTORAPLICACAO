@@ -9,8 +9,8 @@ namespace APPCOREHORTIQUERY.INTERFACES
     {
         Task<IEnumerable<ConsultCityResult>> GetListOfCities();
         Task<IEnumerable<ConsultCityResult>> GetListOfCitiesByQuantity(ConsultByQuantitySignature signature);
-        Task<IEnumerable<ConsultCityResult>> GetListOfCitiesByName(ConsultCityByIdNameSignature signature);
-        Task<ConsultCityResult> GetCityById(ConsultCityByIdNameSignature signature);
-        Task<IEnumerable<ConsultCityResult>> GetListOfCitiesByState(ConsultCityByStateSignature signature);
+        Task<IEnumerable<ConsultCityResult>> GetListOfCitiesByName(ConsultCitySignature signature);
+        Task<ConsultCityResult> GetCityById(ConsultCitySignature signature);
+        Task<IEnumerable<ConsultCityResult>> GetListOfCitiesByState(ConsultCitySignature signature);
     }
 }

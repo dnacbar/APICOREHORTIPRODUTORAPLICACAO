@@ -1,7 +1,7 @@
 ﻿using APPDTOCOREHORTIQUERY.SIGNATURE;
 using DataAccessCoreHortiCommand;
 using DATACOREHORTIQUERY.IQUERIES;
-using DomainCoreHortiCommand;
+using DOMAINCOREHORTICOMMAND;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,7 +74,7 @@ namespace DATACOREHORTIQUERY.QUERIES
             return listOfDistricts;
         }
 
-        public async Task<IEnumerable<District>> ListOfDistrictsByName(ConsultDistrictByIdNameSignature signature)
+        public async Task<IEnumerable<District>> ListOfDistrictsByName(ConsultDistrictSignature signature)
         {
             var listOfDistricts = new List<District>();
             using (var scope = new TransactionScope(TransactionScopeOption.Required,
@@ -102,7 +102,7 @@ namespace DATACOREHORTIQUERY.QUERIES
             return listOfDistricts;
         }
 
-        public async Task<District> DistrictById(ConsultDistrictByIdNameSignature signature)
+        public async Task<District> DistrictById(ConsultDistrictSignature signature)
         {
             var district = new District();
             using (var scope = new TransactionScope(TransactionScopeOption.Required,
