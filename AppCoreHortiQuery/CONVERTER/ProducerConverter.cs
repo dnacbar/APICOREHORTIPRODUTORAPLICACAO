@@ -5,9 +5,9 @@ namespace APPCOREHORTIQUERY.CONVERTERS
 {
     public static class ProducerConverter
     {
-        public static UserProducerInformationResult ToUserProducerInformationResult(this Producer producer)
+        public static UserProducerResult ToUserProducerInformationResult(this Producer producer)
         {
-            return new UserProducerInformationResult
+            return new UserProducerResult
             {
                 IdProducer = producer.IdProducer,
                 DsFantasyName = producer.DsFantasyname,

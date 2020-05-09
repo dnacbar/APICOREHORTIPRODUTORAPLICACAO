@@ -53,11 +53,11 @@ namespace APPCOREHORTIQUERY
             return userClientReturn;
         }
 
-        public async Task<UserProducerInformationResult> ValidateUserAccessProducer(UserAccessSignature signature)
+        public async Task<UserProducerResult> ValidateUserAccessProducer(UserAccessSignature signature)
         {
             _userAccessSignatureValidation.Validate(signature);
 
-            var userProducerReturn = new UserProducerInformationResult();
+            var userProducerReturn = new UserProducerResult();
 
             var userHorti = await _userAccessRepository.GetUserAccessHorti(signature);
 
