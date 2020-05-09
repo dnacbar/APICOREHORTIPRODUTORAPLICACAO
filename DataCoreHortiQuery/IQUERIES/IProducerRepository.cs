@@ -6,6 +6,6 @@ namespace DATACOREHORTIQUERY.IQUERIES
 {
     public interface IProducerRepository
     {
-        Task<Producer> GetProducerByEmail(ConsultProducerSignature signature);
+        Task<Producer> GetProducerByIdOrEmail(ConsultProducerSignature signature);
     }
 }

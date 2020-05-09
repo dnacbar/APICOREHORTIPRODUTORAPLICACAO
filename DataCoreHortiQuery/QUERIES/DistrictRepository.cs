@@ -39,7 +39,8 @@ namespace DATACOREHORTIQUERY.QUERIES
                                                               BoActive = x.BoActive,
                                                           })
                                                           .AsNoTracking()
-                                                          .OrderBy(x => x.DsDistrict).ToListAsync();
+                                                          .OrderBy(x => x.DsDistrict)
+                                                          .ToListAsync();
                 }
                 scope.Complete();
             }

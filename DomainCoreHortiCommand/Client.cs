@@ -1,5 +1,4 @@
-﻿using DOMAINCOREHORTICOMMAND.DOMAIN_OBJECT;
-using System;
+﻿using System;
 
 namespace DOMAINCOREHORTICOMMAND
 {
@@ -14,10 +13,6 @@ namespace DOMAINCOREHORTICOMMAND
         public Guid? IdDistrict { get; set; }
         public string DsEmail { get; set; }
         public string DsPhone { get; set; }
-
-        public EmailObject EmailObject { get; set; }
-        public PhoneObject PhoneObject { get; set; }
-
 
         public virtual City IdCityNavigation { get; set; }
         public virtual Userhorti DsEmailNavigation { get; set; }

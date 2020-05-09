@@ -7,7 +7,7 @@ namespace WebApiCoreHortiQuery.Controllers
 {
     [Route("producer/[controller]")]
     [ApiController]
-    public class DistrictController : ControllerBase
+    public sealed class DistrictController : ControllerBase
     {
         private readonly IConsultDistrictApp _consultDistrictApp;
 
@@ -16,7 +16,7 @@ namespace WebApiCoreHortiQuery.Controllers
             _consultDistrictApp = consultDistrictApp;
         }
 
-        [HttpPost(nameof(GetListOfDistricts))]
+        [HttpGet(nameof(GetListOfDistricts))]
         public async Task<IActionResult> GetListOfDistricts()
         {
             return Ok(await _consultDistrictApp.GetListOfDistricts());

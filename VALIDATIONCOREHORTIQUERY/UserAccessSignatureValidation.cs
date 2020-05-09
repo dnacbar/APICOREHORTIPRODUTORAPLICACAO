@@ -7,7 +7,8 @@ namespace VALIDATIONCOREHORTIQUERY
     {
         public UserAccessSignatureValidation()
         {
-            RuleFor(x => !string.IsNullOrEmpty(x.DsLogin) && !string.IsNullOrEmpty(x.DsPassword));
+            RuleFor(x => x.DsLogin).NotNull().NotEmpty();
+            RuleFor(x => x.DsPassword).NotNull().NotEmpty();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace DATACOREHORTIQUERY.QUERIES
             dBHORTICONTEXT = _dBHORTICONTEXT;
         }
 
-        public async Task<Producer> GetProducerByEmail(ConsultProducerSignature signature)
+        public async Task<Producer> GetProducerByIdOrEmail(ConsultProducerSignature signature)
         {
             var producer = new Producer();
             using (var scope = new TransactionScope(TransactionScopeOption.Required,
@@ -61,7 +61,8 @@ namespace DATACOREHORTIQUERY.QUERIES
                                                        }
                                                    })
                                                    .AsNoTracking()
-                                                   .FirstOrDefaultAsync(x => x.DsEmail == signature.DsEmail);
+                                                   .FirstOrDefaultAsync(x => x.IdProducer == signature.IdProducer
+                                                                          || x.DsEmail == signature.DsEmail);
                 }
                 scope.Complete();
             }

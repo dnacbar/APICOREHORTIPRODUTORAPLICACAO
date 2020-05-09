@@ -1,6 +1,6 @@
-﻿namespace CROSSCUTTINGCOREHORTI.EXTENSION_METHODS
+﻿namespace CROSSCUTTINGCOREHORTI.EXTENSION
 {
-    public static class ExtensionToString
+    public static class StringExtension
     {
         public static bool IsOnlyNumber(this string strValue)
         {

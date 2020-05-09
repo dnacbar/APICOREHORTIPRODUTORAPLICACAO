@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Net;
 using System.Threading.Tasks;
 
-namespace WebApiCoreHortiQuery
+namespace WEBAPICOREHORTIQUERY.MIDDLEWARE
 {
-    public class LogExceptionMiddleware
+    public sealed class LogExceptionMiddleware
     {
         private readonly RequestDelegate requestDelegate;
 
@@ -33,8 +34,9 @@ namespace WebApiCoreHortiQuery
                     IPAddress = httpContext.Connection.RemoteIpAddress
                 });
 
-                httpContext.Response.ContentType = httpContext.Request.ContentType;
-                await httpContext.Response.WriteAsync(ex.Message);
+                httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+                await httpContext.Response.WriteAsync("{Status: 500}");
             }
         }
     }

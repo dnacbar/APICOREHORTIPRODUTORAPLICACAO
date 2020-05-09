@@ -7,30 +7,12 @@ namespace WebApiCoreHortiQuery.Controllers
 {
     [Route("producer/[controller]")]
     [ApiController]
-    public class CityController : ControllerBase
+    public sealed class CityController : ControllerBase
     {
         private readonly IConsultCityApp _consultCityApp;
         public CityController(IConsultCityApp consultCityApp)
         {
             _consultCityApp = consultCityApp;
-        }
-
-        [HttpGet(nameof(GetListOfCities))]
-        public async Task<IActionResult> GetListOfCities()
-        {
-            return Ok(await _consultCityApp.GetListOfCities());
-        }
-
-        [HttpPost(nameof(GetListOfCitiesByQuantity))]
-        public async Task<IActionResult> GetListOfCitiesByQuantity([FromBody] ConsultByQuantitySignature signature)
-        {
-            return Ok(await _consultCityApp.GetListOfCitiesByQuantity(signature));
-        }
-
-        [HttpPost(nameof(GetListOfCitiesByName))]
-        public async Task<IActionResult> GetListOfCitiesByName([FromBody] ConsultCitySignature signature)
-        {
-            return Ok(await _consultCityApp.GetListOfCitiesByName(signature));
         }
 
         [HttpPost(nameof(GetCityById))]
@@ -39,10 +21,16 @@ namespace WebApiCoreHortiQuery.Controllers
             return Ok(await _consultCityApp.GetCityById(signature));
         }
 
-        [HttpPost(nameof(GetListOfCitiesByState))]
-        public async Task<IActionResult> GetListOfCitiesByState(ConsultCitySignature signature)
+        [HttpGet(nameof(GetFullListOfCities))]
+        public async Task<IActionResult> GetFullListOfCities()
         {
-            return Ok(await _consultCityApp.GetListOfCitiesByState(signature));
+            return Ok(await _consultCityApp.GetFullListOfCities());
+        }
+
+        [HttpPost(nameof(GetListOfCities))]
+        public async Task<IActionResult> GetListOfCities([FromBody] ConsultCitySignature signature)
+        {
+            return Ok(await _consultCityApp.GetListOfCities(signature));
         }
     }
 }

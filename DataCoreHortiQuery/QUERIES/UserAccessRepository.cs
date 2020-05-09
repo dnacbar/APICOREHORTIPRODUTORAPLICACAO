@@ -21,21 +21,19 @@ namespace DATACOREHORTIQUERY.QUERIES
         public async Task<Userhorti> GetUserAccessHorti(UserAccessSignature signature)
         {
             var userHorti = new Userhorti();
+
             using (var scope = new TransactionScope(TransactionScopeOption.Required,
                                                     new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
                                                     TransactionScopeAsyncFlowOption.Enabled))
             {
                 using (dBHORTICONTEXT)
                 {
-                    userHorti = await dBHORTICONTEXT.Userhorti
-                                                    .Select(x => new Userhorti
-                                                    {
-                                                        DsLogin = x.DsLogin,
-                                                        DsPassword = x.DsPassword
-                                                    })
-                                                    .AsNoTracking()
-                                                    .FirstOrDefaultAsync(x => x.DsLogin == signature.DsLogin
-                                                                           && x.BoActive);
+                    userHorti = await (from x in dBHORTICONTEXT.Userhorti.AsNoTracking() 
+                                       select new Userhorti
+                                       {
+                                           DsLogin = x.DsLogin,
+                                           DsPassword = x.DsPassword
+                                       }).FirstOrDefaultAsync(x => x.DsLogin == signature.DsLogin && x.BoActive);
                 }
                 scope.Complete();
             }

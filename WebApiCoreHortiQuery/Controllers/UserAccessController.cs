@@ -1,21 +1,30 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using APPCOREHORTIQUERY.INTERFACES;
+using APPDTOCOREHORTIQUERY.SIGNATURE;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace WebApiCoreHortiQuery.Controllers
 {
     [Route("producer/[controller]")]
     [ApiController]
-    public class UserAccessController : ControllerBase
+    public sealed class UserAccessController : ControllerBase
     {
-        public UserAccessController()
+        private readonly IUserAccessApp _userAccessApp;
+        public UserAccessController(IUserAccessApp userAccessApp)
         {
-
+            _userAccessApp = userAccessApp;
         }
 
-        [HttpGet(nameof(UserAccess))]
-        public async Task<IActionResult> UserAccess()
-        { 
-            return Ok();
+        [HttpPost(nameof(ValidateUserAccessClient))]
+        public async Task<IActionResult> ValidateUserAccessClient([FromBody]UserAccessSignature signature)
+        {
+            return Ok(await _userAccessApp.ValidateUserAccessClient(signature));
+        }
+
+        [HttpPost(nameof(ValidateUserAccessProducer))]
+        public async Task<IActionResult> ValidateUserAccessProducer([FromBody]UserAccessSignature signature)
+        {
+            return Ok(await _userAccessApp.ValidateUserAccessProducer(signature));
         }
     }
 }

@@ -22,9 +22,9 @@ namespace APPCOREHORTIQUERY
             return (await _discrictRepository.DistrictById(signature)).ToDistrictResult();
         }
 
-        public Task<IEnumerable<ConsultDistrictResult>> GetListOfDistricts()
+        public async Task<IEnumerable<ConsultDistrictResult>> GetListOfDistricts()
         {
-            throw new System.NotImplementedException();
+            return (await _discrictRepository.ListOfDistricts()).ToHashSetDistrictResult();
         }
 
         public Task<IEnumerable<ConsultDistrictResult>> GetListOfDistrictsByName(ConsultDistrictSignature signature)

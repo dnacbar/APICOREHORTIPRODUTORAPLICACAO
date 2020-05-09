@@ -4,7 +4,9 @@ namespace APPDTOCOREHORTIQUERY.SIGNATURE
 {
     public class ConsultClientSignature
     {
-        public Guid IdClient { get; set; }
+        public string DsClient { get; set; }
         public string DsEmail { get; set; }
+        public Guid? IdClient { get; set; }
+        
     }
 }
