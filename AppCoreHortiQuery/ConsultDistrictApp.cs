@@ -17,24 +17,19 @@ namespace APPCOREHORTIQUERY
             _discrictRepository = discrictRepository;
         }
 
-        public async Task<ConsultDistrictResult> GetDistrictById(ConsultDistrictSignature signature)
+        public async Task<DistrictResult> GetDistrictByIdOrName(ConsultDistrictSignature signature)
         {
-            return (await _discrictRepository.DistrictById(signature)).ToDistrictResult();
+            return (await _discrictRepository.DistrictByIdOrName(signature)).ToDistrictResult();
         }
 
-        public async Task<IEnumerable<ConsultDistrictResult>> GetListOfDistricts()
+        public async Task<IEnumerable<DistrictResult>> GetFullListOfDistricts()
         {
-            return (await _discrictRepository.ListOfDistricts()).ToHashSetDistrictResult();
+            return (await _discrictRepository.FullListOfDistricts()).ToHashSetDistrictResult();
         }
 
-        public Task<IEnumerable<ConsultDistrictResult>> GetListOfDistrictsByName(ConsultDistrictSignature signature)
+        public async Task<IEnumerable<DistrictResult>> GetListOfDistricts(ConsultDistrictSignature signature)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<IEnumerable<ConsultDistrictResult>> GetListOfDistrictsByQuantity(ConsultByQuantitySignature signature)
-        {
-            throw new System.NotImplementedException();
+            return (await _discrictRepository.ListOfDistricts(signature)).ToHashSetDistrictResult();
         }
     }
 }

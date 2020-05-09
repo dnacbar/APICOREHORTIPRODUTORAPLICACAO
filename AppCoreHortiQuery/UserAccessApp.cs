@@ -29,11 +29,11 @@ namespace APPCOREHORTIQUERY
             _userAccessSignatureValidation = userAccessSignatureValidation;
         }
 
-        public async Task<UserClientInformationResult> ValidateUserAccessClient(UserAccessSignature signature)
+        public async Task<UserClientResult> ValidateUserAccessClient(UserAccessSignature signature)
         {
             _userAccessSignatureValidation.ValidateHorti(signature);
 
-            var userClientReturn = new UserClientInformationResult();
+            var userClientReturn = new UserClientResult();
 
             var userHorti = await _userAccessRepository.GetUserAccessHorti(signature);
 
@@ -68,7 +68,7 @@ namespace APPCOREHORTIQUERY
 
             if (signature.DsPassword.Equals(strDecryptPassword))
             {
-                userProducerReturn = (await _producerRepository.GetProducerByIdOrEmail(new ConsultProducerSignature
+                userProducerReturn = (await _producerRepository.ProducerByIdOrEmail(new ConsultProducerSignature
                 {
                     DsEmail = signature.DsLogin
                 }))?.ToUserProducerInformationResult();

@@ -70,7 +70,6 @@
     <Folder Include="DBHORTI DATA" />
     <Folder Include="DBHORTI DATA\HORTI_V.1" />
     <Folder Include="DBHORTI DATA\HORTI_V.1\DML" />
-    <Folder Include="DBHORTI DATA\HORTI_V.1\ROLLBACK" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="DBHORTI PROCEDURE\P_REMOVE_FK.sql" />
@@ -87,6 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DBHORTI TABLE\LOG.sql" />
-    <None Include="DBHORTI DATA\HORTI_V.1\ROLLBACK\ROLLBACK_DML.sql" />
+    <None Include="DBHORTI DATA\HORTI_V.1\DML\INSERT_DISTRICT.sql" />
   </ItemGroup>
 </Project>

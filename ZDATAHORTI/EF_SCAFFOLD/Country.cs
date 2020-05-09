@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Z_DATAHORTI.EF_SCAFFOLD
+﻿namespace Z_DATAHORTI.EF_SCAFFOLD
 {
     public partial class Country
     {

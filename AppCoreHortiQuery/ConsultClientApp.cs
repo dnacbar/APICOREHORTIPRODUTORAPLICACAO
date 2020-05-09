@@ -1,5 +1,4 @@
-﻿using APPCOREHORTIQUERY.CONVERTERS;
-using APPCOREHORTIQUERY.INTERFACES;
+﻿using APPCOREHORTIQUERY.INTERFACES;
 using APPDTOCOREHORTIQUERY.RESULT;
 using APPDTOCOREHORTIQUERY.SIGNATURE;
 using DATACOREHORTIQUERY.IQUERIES;
@@ -17,22 +16,22 @@ namespace APPCOREHORTIQUERY
             _clientRepository = clientRepository;
         }
 
-        public Task<UserInformationResult> GetClient(ConsultCitySignature signature)
+        public Task<UserResult> GetClient(ConsultCitySignature signature)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<UserClientInformationResult>> GetListOfCitiesByName(ConsultClientSignature signature)
+        public Task<IEnumerable<UserClientResult>> GetListOfCitiesByName(ConsultClientSignature signature)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<UserClientInformationResult>> GetListOfClients()
+        public Task<IEnumerable<UserClientResult>> GetListOfClients()
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<UserClientInformationResult>> GetListOfClientsByName(ConsultClientSignature signature)
+        public Task<IEnumerable<UserClientResult>> GetListOfClientsByName(ConsultClientSignature signature)
         {
             throw new System.NotImplementedException();
         }

@@ -1,12 +1,9 @@
 using APPCOREHORTIQUERY;
 using APPCOREHORTIQUERY.INTERFACES;
-using APPDTOCOREHORTIQUERY.SIGNATURE;
-using CROSSCUTTINGCOREHORTI.EXTENSION;
 using DataAccessCoreHortiCommand;
 using DATACOREHORTIQUERY.IQUERIES;
 using DATACOREHORTIQUERY.QUERIES;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;

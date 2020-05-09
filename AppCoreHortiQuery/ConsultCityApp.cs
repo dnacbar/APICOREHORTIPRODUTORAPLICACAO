@@ -18,7 +18,7 @@ namespace APPCOREHORTIQUERY
             _cityRepository = cityRepository;
         }
 
-        public async Task<ConsultCityResult> GetCityById(ConsultCitySignature signature)
+        public async Task<CityResult> GetCityById(ConsultCitySignature signature)
         {
             if (signature is null)
                 throw new FluentValidation.ValidationException(((int)EnumException.City).ToString());
@@ -26,12 +26,12 @@ namespace APPCOREHORTIQUERY
             return (await _cityRepository.CityById(signature)).ToCityResult();
         }
 
-        public async Task<IEnumerable<ConsultCityResult>> GetFullListOfCities()
+        public async Task<IEnumerable<CityResult>> GetFullListOfCities()
         {
             return (await _cityRepository.FullListOfCities()).ToHashSetCityResult();
         }
 
-        public async Task<IEnumerable<ConsultCityResult>> GetListOfCities(ConsultCitySignature signature)
+        public async Task<IEnumerable<CityResult>> GetListOfCities(ConsultCitySignature signature)
         {
             if (signature is null)
                 throw new FluentValidation.ValidationException(((int)EnumException.City).ToString());

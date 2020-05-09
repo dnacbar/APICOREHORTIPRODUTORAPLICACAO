@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApiCoreHortiQuery.Controllers
 {
-    [Route("producer/[controller]")]
+    [Route("horti/[controller]")]
     [ApiController]
     public sealed class UserAccessController : ControllerBase
     {

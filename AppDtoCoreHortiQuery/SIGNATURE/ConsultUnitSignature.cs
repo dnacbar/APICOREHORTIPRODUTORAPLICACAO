@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace APPDTOCOREHORTIQUERY.SIGNATURE
+﻿namespace APPDTOCOREHORTIQUERY.SIGNATURE
 {
-    public class ConsultUnitSignature : ConsultByQuantitySignature
+    public class ConsultUnitSignature : _BaseQuantitySignature
     {
         public int IdUnit { get; set; }
         public string DsUnit { get; set; }

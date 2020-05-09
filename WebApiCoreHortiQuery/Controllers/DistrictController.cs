@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApiCoreHortiQuery.Controllers
 {
-    [Route("producer/[controller]")]
+    [Route("horti/[controller]")]
     [ApiController]
     public sealed class DistrictController : ControllerBase
     {
@@ -16,28 +16,22 @@ namespace WebApiCoreHortiQuery.Controllers
             _consultDistrictApp = consultDistrictApp;
         }
 
-        [HttpGet(nameof(GetListOfDistricts))]
-        public async Task<IActionResult> GetListOfDistricts()
+        [HttpPost(nameof(GetDistrictByIdOrName))]
+        public async Task<IActionResult> GetDistrictByIdOrName(ConsultDistrictSignature signature)
         {
-            return Ok(await _consultDistrictApp.GetListOfDistricts());
+            return Ok(await _consultDistrictApp.GetDistrictByIdOrName(signature));
         }
 
-        [HttpPost(nameof(GetListOfDistrictsByQuantity))]
-        public async Task<IActionResult> GetListOfDistrictsByQuantity(ConsultByQuantitySignature signature)
+        [HttpGet(nameof(GetFullListOfDistricts))]
+        public async Task<IActionResult> GetFullListOfDistricts()
         {
-            return Ok(await _consultDistrictApp.GetListOfDistrictsByQuantity(signature));
+            return Ok(await _consultDistrictApp.GetFullListOfDistricts());
         }
 
-        [HttpPost(nameof(GetDistrictById))]
-        public async Task<IActionResult> GetDistrictById(ConsultDistrictSignature signature)
+        [HttpPost(nameof(GetListOfDistricts))]
+        public async Task<IActionResult> GetListOfDistricts(ConsultDistrictSignature signature)
         {
-            return Ok(await _consultDistrictApp.GetDistrictById(signature));
-        }
-
-        [HttpPost(nameof(GetListOfDistrictsByName))]
-        public async Task<IActionResult> GetListOfDistrictsByName(ConsultDistrictSignature signature)
-        {
-            return Ok(await _consultDistrictApp.GetListOfDistrictsByName(signature));
+            return Ok(await _consultDistrictApp.GetListOfDistricts(signature));
         }
     }
 }
