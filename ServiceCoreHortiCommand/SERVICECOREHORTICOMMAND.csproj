@@ -5,4 +5,9 @@
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CONTEXTCOREHORTICOMMAND\DATAACCESSCOREHORTICOMMAND.csproj" />
+    <ProjectReference Include="..\VALIDATIONCOREHORTICOMMAND\VALIDATIONCOREHORTICOMMAND.csproj" />
+  </ItemGroup>
+
 </Project>

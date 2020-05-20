@@ -1,6 +1,7 @@
-using APPCOREHORTIQUERY;
-using APPCOREHORTIQUERY.INTERFACES;
-using DataAccessCoreHortiCommand;
+using APPCOREHORTIQUERY.APP;
+using APPCOREHORTIQUERY.IAPP;
+using CROSSCUTTINGCOREHORTI.MIDDLEWARE;
+using DATACOREHORTICOMMAND;
 using DATACOREHORTIQUERY.IQUERIES;
 using DATACOREHORTIQUERY.QUERIES;
 using Microsoft.AspNetCore.Builder;
@@ -14,9 +15,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.IO.Compression;
 using VALIDATIONCOREHORTIQUERY;
-using WEBAPICOREHORTIQUERY.MIDDLEWARE;
 
-namespace WebApiCoreHortiQuery
+namespace WEBAPICOREHORTIQUERY
 {
     public sealed class Startup
     {
@@ -36,7 +36,7 @@ namespace WebApiCoreHortiQuery
                 opt.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
             });
 
-            services.AddCors(x => x.AddPolicy(strCorsConfig, p => { p.WithHeaders("DN-MR-WASATAIN"); }));
+            services.AddCors(x => x.AddPolicy(strCorsConfig, p => { p.WithHeaders("DN-MR-WASATAIN-QUERY"); }));
 
             services.AddControllers()
                     .AddJsonOptions(x =>
@@ -61,28 +61,26 @@ namespace WebApiCoreHortiQuery
                 Version = "V1",
             }));
 
+            HortiQueryApplicationServices(services);
             HortiQueryRepositoryServices(services);
-            HortiQueryAppServices(services);
-            HortiQueryValidatorServices(services);
+            HortiQueryValidationServices(services);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
-            else
-                app.UseExceptionHandler();
 
             app.UseResponseCompression();
 
             app.UseSwagger();
             app.UseSwaggerUI(opt =>
             {
-                opt.SwaggerEndpoint("/swagger/v1/swagger.json", "WS REST - WEB API HORTI V1");
+                opt.SwaggerEndpoint("/swagger/v1/swagger.json", "WS REST - HORTI QUERY");
                 opt.RoutePrefix = string.Empty;
             });
 
-            app.UseLogExceptionMiddleware();
+            app.UseFatalExceptionMiddleware();
             app.UseValidationExceptionMiddleware();
 
             app.UseRouting();
@@ -95,6 +93,16 @@ namespace WebApiCoreHortiQuery
             });
         }
 
+        // CONTAINER DI - APP LAYER
+        private void HortiQueryApplicationServices(IServiceCollection services)
+        {
+            services.AddScoped<IUserAccessApp, UserAccessApp>();
+            services.AddScoped<ICityQueryApp, CityQueryApp>();
+            services.AddScoped<IDistrictQueryApp, DistrictQueryApp>();
+            services.AddScoped<IClientQueryApp, ClientQueryApp>();
+            services.AddScoped<IProducerQueryApp, ProducerQueryApp>();
+        }
+
         // CONTAINER DI - REPOSITORY LAYER
         private void HortiQueryRepositoryServices(IServiceCollection services)
         {
@@ -105,16 +113,8 @@ namespace WebApiCoreHortiQuery
             services.AddScoped<IUserAccessRepository, UserAccessRepository>();
         }
 
-        // CONTAINER DI - APP LAYER
-        private void HortiQueryAppServices(IServiceCollection services)
-        {
-            services.AddScoped<IUserAccessApp, UserAccessApp>();
-            services.AddScoped<IConsultCityApp, ConsultCityApp>();
-            services.AddScoped<IConsultDistrictApp, ConsultDistrictApp>();
-        }
-
-        // CONTAINER DI - VALIDATOR
-        private void HortiQueryValidatorServices(IServiceCollection services)
+        // CONTAINER DI - VALIDATION
+        private void HortiQueryValidationServices(IServiceCollection services)
         {
             services.AddSingleton<UserAccessSignatureValidation>();
         }

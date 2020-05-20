@@ -2,7 +2,7 @@
 
 namespace APPDTOCOREHORTIQUERY.RESULT
 {
-    public sealed class UserProducerResult : UserResult
+    public sealed class ProducerResult : UserResult
     {
         public Guid IdProducer { get; set; }
         public string DsFantasyName { get; set; }

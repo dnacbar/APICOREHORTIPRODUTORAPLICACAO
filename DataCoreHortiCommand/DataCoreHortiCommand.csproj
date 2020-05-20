@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CrossCuttingCoreHortiCommand\CROSSCUTTINGCOREHORTI.csproj" />
     <ProjectReference Include="..\DOMAINCOREHORTICOMMAND\DOMAINCOREHORTICOMMAND.csproj" />
   </ItemGroup>
 

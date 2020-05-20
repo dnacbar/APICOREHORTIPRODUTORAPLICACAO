@@ -1,11 +1,11 @@
-﻿using APPCOREHORTIQUERY.INTERFACES;
+﻿using APPCOREHORTIQUERY.IAPP;
 using APPDTOCOREHORTIQUERY.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace WebApiCoreHortiQuery.Controllers
+namespace WEBAPICOREHORTIQUERY.Controllers
 {
-    [Route("horti/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public sealed class UserAccessController : ControllerBase
     {

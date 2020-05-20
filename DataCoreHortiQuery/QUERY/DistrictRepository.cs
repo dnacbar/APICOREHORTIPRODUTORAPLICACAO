@@ -1,5 +1,5 @@
 ﻿using APPDTOCOREHORTIQUERY.SIGNATURE;
-using DataAccessCoreHortiCommand;
+using DATACOREHORTICOMMAND;
 using DATACOREHORTIQUERY.IQUERIES;
 using DOMAINCOREHORTICOMMAND;
 using System.Collections.Generic;
@@ -18,7 +18,6 @@ namespace DATACOREHORTIQUERY.QUERIES
                                         {
                                             IdDistrict = p.IdDistrict,
                                             DsDistrict = p.DsDistrict,
-                                            BoActive = p.BoActive,
                                             DtCreation = p.DtCreation,
                                             DtAtualization = p.DtAtualization
                                         });
@@ -31,8 +30,7 @@ namespace DATACOREHORTIQUERY.QUERIES
                 IdDistrict = x.IdDistrict,
                 DsDistrict = x.DsDistrict,
                 DtCreation = x.DtCreation,
-                DtAtualization = x.DtAtualization,
-                BoActive = x.BoActive,
+                DtAtualization = x.DtAtualization
             },
             OrderBy: p => p.DsDistrict);
         }
@@ -44,7 +42,6 @@ namespace DATACOREHORTIQUERY.QUERIES
             {
                 IdDistrict = p.IdDistrict,
                 DsDistrict = p.DsDistrict,
-                BoActive = p.BoActive,
                 DtCreation = p.DtCreation,
                 DtAtualization = p.DtAtualization
             },

@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace Z_DATAHORTI.EF_SCAFFOLD
+namespace Z_DATAHORTI.EF_SCAFOLD
 {
     public partial class Producer
     {
@@ -24,6 +25,5 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
         public string DsPhone { get; set; }
 
         public virtual City IdCityNavigation { get; set; }
-        public virtual District IdDistrictNavigation { get; set; }
     }
 }

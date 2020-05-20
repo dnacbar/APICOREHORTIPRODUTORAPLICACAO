@@ -1,5 +1,5 @@
 ﻿using APPDTOCOREHORTIQUERY.SIGNATURE;
-using DataAccessCoreHortiCommand;
+using DATACOREHORTICOMMAND;
 using DATACOREHORTIQUERY.IQUERIES;
 using DOMAINCOREHORTICOMMAND;
 using System.Collections.Generic;
@@ -13,8 +13,7 @@ namespace DATACOREHORTIQUERY.QUERIES
 
         public async Task<IEnumerable<Unit>> ListOfUnits(ConsultUnitSignature signature)
         {
-            return await ListOfEntities(Where: x => x.BoActive == true
-                                                && (signature.DsUnit == null || signature.DsUnit.Contains(x.DsUnit)),
+            return await ListOfEntities(Where: x => (signature.DsUnit == null || signature.DsUnit.Contains(x.DsUnit)),
                 Select: p => new Unit
                 {
                     IdUnit = p.IdUnit,

@@ -2,7 +2,7 @@
 
 namespace DOMAINCOREHORTICOMMAND
 {
-    public partial class Log
+    public class Log
     {
         public Guid IdLog { get; set; }
         public string DsUserlog { get; set; }

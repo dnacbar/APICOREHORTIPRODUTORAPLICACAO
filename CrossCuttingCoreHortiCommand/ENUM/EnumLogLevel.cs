@@ -1,9 +1,10 @@
-﻿namespace CrossCuttingCoreHortiCommand.ENUM
+﻿namespace CROSSCUTTINGCOREHORTI.ENUM
 {
     public enum EnumLogLevel : int
     {
-        Information = 0,
+        Fatal = 0,
         Error = 1,
-        Fatal = 2
+        Warning = 2,
+        Information = 3,
     }
 }

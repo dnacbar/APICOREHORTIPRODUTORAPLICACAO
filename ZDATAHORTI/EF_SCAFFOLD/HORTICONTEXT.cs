@@ -1,10 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Z_DATAHORTI.EF_SCAFFOLD
+namespace Z_DATAHORTI.EF_SCAFOLD
 {
     public partial class HORTICONTEXT : DbContext
     {
-        public HORTICONTEXT(DbContextOptions<HORTICONTEXT> options) : base(options) { }
+        public HORTICONTEXT()
+        {
+        }
+
+        public HORTICONTEXT(DbContextOptions<HORTICONTEXT> options)
+            : base(options)
+        {
+        }
 
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Client> Client { get; set; }
@@ -17,11 +26,8 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
         public virtual DbSet<Unit> Unit { get; set; }
         public virtual DbSet<Userhorti> Userhorti { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<City>(entity =>
             {
                 entity.HasKey(e => e.IdCity);
@@ -66,7 +72,7 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
 
                 entity.Property(e => e.DsEmail)
                     .HasColumnName("DS_EMAIL")
-                    .HasMaxLength(50);
+                    .HasMaxLength(40);
 
                 entity.Property(e => e.BoActive)
                     .IsRequired()
@@ -77,6 +83,11 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
                     .IsRequired()
                     .HasColumnName("DS_CLIENT")
                     .HasMaxLength(100);
+
+                entity.Property(e => e.DsFederalinscription)
+                    .HasColumnName("DS_FEDERALINSCRIPTION")
+                    .HasMaxLength(16)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.DsPhone)
                     .HasColumnName("DS_PHONE")
@@ -95,10 +106,23 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
 
                 entity.Property(e => e.IdCity).HasColumnName("ID_CITY");
 
+                entity.Property(e => e.IdDistrict).HasColumnName("ID_DISTRICT");
+
+                entity.HasOne(d => d.DsEmailNavigation)
+                    .WithMany(p => p.Client)
+                    .HasForeignKey(d => d.DsEmail)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CLIENT_USERHORTI");
+
                 entity.HasOne(d => d.IdCityNavigation)
                     .WithMany(p => p.Client)
                     .HasForeignKey(d => d.IdCity)
                     .HasConstraintName("FK_CLIENT_CITY");
+
+                entity.HasOne(d => d.IdDistrictNavigation)
+                    .WithMany(p => p.Client)
+                    .HasForeignKey(d => d.IdDistrict)
+                    .HasConstraintName("FK_CLIENT_DISTRICT");
             });
 
             modelBuilder.Entity<Country>(entity =>
@@ -126,11 +150,6 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
                 entity.Property(e => e.IdDistrict)
                     .HasColumnName("ID_DISTRICT")
                     .ValueGeneratedNever();
-
-                entity.Property(e => e.BoActive)
-                    .IsRequired()
-                    .HasColumnName("BO_ACTIVE")
-                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.DsDistrict)
                     .HasColumnName("DS_DISTRICT")
@@ -190,7 +209,7 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
 
                 entity.Property(e => e.DsEmail)
                     .HasColumnName("DS_EMAIL")
-                    .HasMaxLength(50);
+                    .HasMaxLength(40);
 
                 entity.Property(e => e.BoActive)
                     .IsRequired()
@@ -267,11 +286,6 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
                     .WithMany(p => p.Producer)
                     .HasForeignKey(d => d.IdCity)
                     .HasConstraintName("FK_PRODUCER_CITY");
-
-                entity.HasOne(d => d.IdDistrictNavigation)
-                    .WithMany(p => p.Producer)
-                    .HasForeignKey(d => d.IdDistrict)
-                    .HasConstraintName("FK_PRODUCER_DISTRICT");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -320,11 +334,6 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
                 entity.Property(e => e.NmValue)
                     .HasColumnName("NM_VALUE")
                     .HasColumnType("decimal(12, 2)");
-
-                entity.HasOne(d => d.IdUnitNavigation)
-                    .WithMany(p => p.Product)
-                    .HasForeignKey(d => d.IdUnit)
-                    .HasConstraintName("FK_PRODUCT_UNIT");
             });
 
             modelBuilder.Entity<State>(entity =>
@@ -358,12 +367,7 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
 
                 entity.Property(e => e.IdUnit)
                     .HasColumnName("ID_UNIT")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.BoActive)
-                    .IsRequired()
-                    .HasColumnName("BO_ACTIVE")
-                    .HasDefaultValueSql("((1))");
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.DsAbreviation)
                     .HasColumnName("DS_ABREVIATION")
@@ -393,7 +397,7 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
 
                 entity.Property(e => e.DsLogin)
                     .HasColumnName("DS_LOGIN")
-                    .HasMaxLength(15);
+                    .HasMaxLength(40);
 
                 entity.Property(e => e.BoActive)
                     .IsRequired()
@@ -403,7 +407,7 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
                 entity.Property(e => e.DsPassword)
                     .IsRequired()
                     .HasColumnName("DS_PASSWORD")
-                    .HasMaxLength(15);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.DtAtualization)
                     .HasColumnName("DT_ATUALIZATION")

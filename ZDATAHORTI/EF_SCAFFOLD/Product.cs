@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace Z_DATAHORTI.EF_SCAFFOLD
+namespace Z_DATAHORTI.EF_SCAFOLD
 {
     public partial class Product
     {
@@ -12,9 +13,7 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
         public decimal NmValue { get; set; }
         public byte? NmDiscount { get; set; }
         public DateTime? DtDiscount { get; set; }
-        public Guid? IdUnit { get; set; }
+        public byte? IdUnit { get; set; }
         public bool? BoStock { get; set; }
-
-        public virtual Unit IdUnitNavigation { get; set; }
     }
 }

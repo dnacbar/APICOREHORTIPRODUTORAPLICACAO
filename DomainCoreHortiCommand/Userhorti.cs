@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DOMAINCOREHORTICOMMAND
 {
-    public partial class Userhorti
+    public class Userhorti
     {
         public Userhorti()
         {

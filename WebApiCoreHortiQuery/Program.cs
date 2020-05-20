@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace WebApiCoreHortiQuery
+namespace WEBAPICOREHORTIQUERY
 {
     public sealed class Program
     {

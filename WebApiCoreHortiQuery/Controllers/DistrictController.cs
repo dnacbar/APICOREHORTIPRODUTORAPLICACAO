@@ -1,17 +1,17 @@
-﻿using APPCOREHORTIQUERY.INTERFACES;
+﻿using APPCOREHORTIQUERY.IAPP;
 using APPDTOCOREHORTIQUERY.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace WebApiCoreHortiQuery.Controllers
+namespace WEBAPICOREHORTIQUERY.Controllers
 {
-    [Route("horti/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public sealed class DistrictController : ControllerBase
     {
-        private readonly IConsultDistrictApp _consultDistrictApp;
+        private readonly IDistrictQueryApp _consultDistrictApp;
 
-        public DistrictController(IConsultDistrictApp consultDistrictApp)
+        public DistrictController(IDistrictQueryApp consultDistrictApp)
         {
             _consultDistrictApp = consultDistrictApp;
         }

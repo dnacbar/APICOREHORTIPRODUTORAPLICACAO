@@ -1,5 +1,5 @@
 ﻿using APPDTOCOREHORTIQUERY.SIGNATURE;
-using DataAccessCoreHortiCommand;
+using DATACOREHORTICOMMAND;
 using DATACOREHORTIQUERY.IQUERIES;
 using DOMAINCOREHORTICOMMAND;
 using System.Collections.Generic;
@@ -20,6 +20,7 @@ namespace DATACOREHORTIQUERY.QUERIES
                                             DsClient = p.DsClient,
                                             DsEmail = p.DsEmail,
                                             DsPhone = p.DsPhone,
+                                            DsFederalInscription = p.DsFederalInscription,
                                             IdCityNavigation = new City
                                             {
                                                 IdCity = p.IdCityNavigation.IdCity,
@@ -46,6 +47,7 @@ namespace DATACOREHORTIQUERY.QUERIES
                 DsClient = x.DsClient,
                 DsEmail = x.DsEmail,
                 DsPhone = x.DsPhone,
+                DsFederalInscription = x.DsFederalInscription,
                 IdCityNavigation = new City
                 {
                     IdCity = x.IdCityNavigation.IdCity,
@@ -76,6 +78,7 @@ namespace DATACOREHORTIQUERY.QUERIES
                                             DsClient = x.DsClient,
                                             DsEmail = x.DsEmail,
                                             DsPhone = x.DsPhone,
+                                            DsFederalInscription = x.DsFederalInscription,
                                             IdCityNavigation = new City
                                             {
                                                 IdCity = x.IdCityNavigation.IdCity,

@@ -1,8 +1,8 @@
-﻿using CrossCuttingCoreHortiCommand.ENUM;
+﻿using CROSSCUTTINGCOREHORTI.ENUM;
 using System;
 using System.Net;
 
-namespace CrossCuttingCoreHortiCommand.LOG
+namespace CROSSCUTTINGCOREHORTI.LOG
 {
     public class LogObject
     {

@@ -2,7 +2,7 @@
 
 namespace DOMAINCOREHORTICOMMAND
 {
-    public partial class State
+    public class State
     {
         public State()
         {

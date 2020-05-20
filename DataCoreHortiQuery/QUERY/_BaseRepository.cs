@@ -1,4 +1,4 @@
-﻿using DataAccessCoreHortiCommand;
+﻿using DATACOREHORTICOMMAND;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace DATACOREHORTIQUERY.QUERIES
             _DBHORTICONTEXT = DBHORTICONTEXT;
         }
 
-        public async Task<T> EntityByFilter(Expression<Func<T, bool>> Where, Expression<Func<T, T>> Select)
+        protected async Task<T> EntityByFilter(Expression<Func<T, bool>> Where, Expression<Func<T, T>> Select)
         {
             var varT = Activator.CreateInstance<T>();
 
@@ -34,7 +34,7 @@ namespace DATACOREHORTIQUERY.QUERIES
             return varT;
         }
 
-        public async Task<IEnumerable<T>> FullListOfEntities<TResult>(Expression<Func<T, T>> Select, Expression<Func<T, TResult>> OrderBy)
+        protected async Task<IEnumerable<T>> FullListOfEntities<TResult>(Expression<Func<T, T>> Select, Expression<Func<T, TResult>> OrderBy)
         {
             var varT = Activator.CreateInstance<List<T>>();
 
@@ -51,7 +51,7 @@ namespace DATACOREHORTIQUERY.QUERIES
             return varT;
         }
 
-        public async Task<IEnumerable<T>> ListOfEntities<TResult>(Expression<Func<T, bool>> Where, Expression<Func<T, T>> Select,
+        protected async Task<IEnumerable<T>> ListOfEntities<TResult>(Expression<Func<T, bool>> Where, Expression<Func<T, T>> Select,
                                                          int Page, int Quantity, Expression<Func<T, TResult>> OrderBy)
         {
             var varT = Activator.CreateInstance<List<T>>();

@@ -1,9 +1,9 @@
-﻿using DOMAINCOREHORTICOMMAND.DOMAIN_OBJECT;
+﻿using DOMAINCOREHORTICOMMAND.DOMAINOBJECT;
 using System;
 
 namespace DOMAINCOREHORTICOMMAND
 {
-    public partial class Producer
+    public class Producer
     {
         public Guid IdProducer { get; set; }
         public string DsProducer { get; set; }
@@ -17,14 +17,15 @@ namespace DOMAINCOREHORTICOMMAND
         public string DsAddress { get; set; }
         public string DsNumber { get; set; }
         public string DsComplement { get; set; }
-        public string DsFederalinscription { get; set; }
-        public string DsStateinscription { get; set; }
-        public string DsMunicipalinscription { get; set; }
+        public string DsFederalInscription { get; set; }
+        public string DsStateInscription { get; set; }
+        public string DsMunicipalInscription { get; set; }
         public string DsDescription { get; set; }
         public string DsEmail { get; set; }
         public string DsPhone { get; set; }
 
-        public PhoneObject Phone => new PhoneObject(DsPhone, "pt-Br");
+        public PhoneObject Phone => new PhoneObject(DsPhone);
+        public EmailObject Email => new EmailObject(DsEmail);
 
         public virtual City IdCityNavigation { get; set; }
         public virtual District IdDistrictNavigation { get; set; }

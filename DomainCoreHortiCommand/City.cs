@@ -2,7 +2,7 @@
 
 namespace DOMAINCOREHORTICOMMAND
 {
-    public partial class City
+    public class City
     {
         public City()
         {
