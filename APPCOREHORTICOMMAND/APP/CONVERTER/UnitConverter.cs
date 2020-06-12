@@ -10,25 +10,24 @@ namespace APPCOREHORTICOMMAND.APP.CONVERTER
         {
             return new Unit
             {
-                DsUnit = signature.DsUnit,
-                DsAbreviation = signature.DsAbreviation
+                DsUnit = signature.Unit,
+                DsAbreviation = signature.Abreviation,
+                DtCreation = DateTime.Now
             };
         }
 
         public static Unit ToDeleteUnitDomain(this UnitCommandSignature signature)
         {
-            return new Unit { IdUnit = signature.IdUnit };
+            return new Unit { IdUnit = signature.Id };
         }
 
         public static Unit ToUpdateUnitDomain(this UnitCommandSignature signature)
         {
             return new Unit
             {
-                IdUnit = signature.IdUnit,
-                DsUnit = signature.DsUnit,
-                DsAbreviation = signature.DsAbreviation,
-                DtAtualization = DateTime.Now,
-                DtCreation = DateTime.Now
+                IdUnit = signature.Id,
+                DsUnit = signature.Unit,
+                DsAbreviation = signature.Abreviation
             };
         }
     }

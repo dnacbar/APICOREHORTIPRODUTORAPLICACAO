@@ -30,7 +30,7 @@ namespace APPCOREHORTICOMMAND.APP
         {
             _createUnitSignatureValidation.ValidateHorti(signature);
 
-            await _unitDomainService.UnitServiceAdd(signature.ToCreateUnitDomain());
+            await _unitDomainService.UnitServiceCreate(signature.ToCreateUnitDomain());
         }
 
         public async Task DeleteUnit(UnitCommandSignature signature)

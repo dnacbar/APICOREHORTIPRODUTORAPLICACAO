@@ -11,7 +11,7 @@ namespace DATACOREHORTIQUERY.QUERIES
 {
     public abstract class _BaseRepository<T> where T : class
     {
-        protected readonly DBHORTICONTEXT _DBHORTICONTEXT;
+        private readonly DBHORTICONTEXT _DBHORTICONTEXT;
         protected _BaseRepository(DBHORTICONTEXT DBHORTICONTEXT)
         {
             _DBHORTICONTEXT = DBHORTICONTEXT;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Z_DATAHORTI.EF_SCAFOLD
+namespace Z_DATAHORTI.EF_SCAFFOLD
 {
     public partial class Client
     {

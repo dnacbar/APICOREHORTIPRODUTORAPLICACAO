@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\APPCOREHORTICOMMAND\APPCOREHORTICOMMAND.csproj" />
-    <ProjectReference Include="..\CONTEXTCOREHORTICOMMAND\DATAACCESSCOREHORTICOMMAND.csproj" />
     <ProjectReference Include="..\CROSSCUTTINGCOREHORTICOMMAND\CROSSCUTTINGCOREHORTI.csproj" />
     <ProjectReference Include="..\DATACOREHORTICOMMAND\DATACOREHORTICOMMAND.csproj" />
   </ItemGroup>

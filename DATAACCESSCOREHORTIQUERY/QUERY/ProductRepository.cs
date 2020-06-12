@@ -19,7 +19,7 @@ namespace DATACOREHORTIQUERY.QUERIES
                 DsProduct = x.DsProduct,
                 BoStock = x.BoStock,
                 DtDiscount = x.DtDiscount,
-                NmDiscount = x.NmDiscount,
+                NmPercentDiscount = x.NmPercentDiscount,
                 NmValue = x.NmValue
             },
             OrderBy: p => p.DsProduct);
@@ -34,7 +34,7 @@ namespace DATACOREHORTIQUERY.QUERIES
                     DsProduct = p.DsProduct,
                     BoStock = p.BoStock,
                     DtDiscount = p.DtDiscount,
-                    NmDiscount = p.NmDiscount,
+                    NmPercentDiscount = p.NmPercentDiscount,
                     NmValue = p.NmValue
                 },
                 Page: signature.Page,
@@ -51,7 +51,7 @@ namespace DATACOREHORTIQUERY.QUERIES
                     DsProduct = p.DsProduct,
                     BoStock = p.BoStock,
                     DtDiscount = p.DtDiscount,
-                    NmDiscount = p.NmDiscount,
+                    NmPercentDiscount = p.NmPercentDiscount,
                     NmValue = p.NmValue
                 });
         }

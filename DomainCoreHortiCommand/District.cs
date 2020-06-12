@@ -16,7 +16,7 @@ namespace DOMAINCOREHORTICOMMAND
         public DateTime DtCreation { get; set; }
         public DateTime DtAtualization { get; set; }
 
-        public virtual ICollection<Producer> Producer { get; set; }
         public virtual ICollection<Client> Client { get; set; }
+        public virtual ICollection<Producer> Producer { get; set; }
     }
 }

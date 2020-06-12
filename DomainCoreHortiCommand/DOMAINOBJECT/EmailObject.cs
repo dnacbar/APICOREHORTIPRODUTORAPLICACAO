@@ -4,19 +4,19 @@
     {
         public EmailObject(string emailObject)
         {
-            Email = emailObject;
-            ValidateEmail();
+            Email = emailObject.Trim();
         }
 
         public string Email { get; private set; }
-
-        private void ValidateEmail()
+        public bool IsValid()
         {
             if (!Email.Contains("@") || !Email.Contains(".com"))
-                Email = null;
+                return false;
 
             if (Email.Length <= 6)
-                Email = null;
+                return false;
+
+            return true;
         }
     }
 }

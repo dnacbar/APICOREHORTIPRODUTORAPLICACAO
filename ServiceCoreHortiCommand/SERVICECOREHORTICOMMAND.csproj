@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CONTEXTCOREHORTICOMMAND\DATAACCESSCOREHORTICOMMAND.csproj" />
+    <ProjectReference Include="..\DATAACCESSCOREHORTICOMMAND\DATAACCESSCOREHORTICOMMAND.csproj" />
     <ProjectReference Include="..\VALIDATIONCOREHORTICOMMAND\VALIDATIONCOREHORTICOMMAND.csproj" />
   </ItemGroup>
 

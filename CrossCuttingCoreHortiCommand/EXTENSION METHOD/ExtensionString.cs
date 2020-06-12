@@ -18,7 +18,7 @@
             return true;
         }
 
-        public static bool IsOnlyTextNumber(this string strValue)
+        public static bool IsOnlyTextAndNumber(this string strValue)
         {
             foreach (var item in strValue)
             {
@@ -26,6 +26,19 @@
                     return false;
             }
             return true;
+        }
+
+        public static string RemoveSpecialCharacter(this string strValue)
+        {
+            var strResult = string.Empty;
+
+            foreach (var item in strValue)
+            {
+                if (char.IsNumber(item) || char.IsLetter(item))
+                    strResult += item;
+            }
+
+            return strResult;
         }
     }
 }

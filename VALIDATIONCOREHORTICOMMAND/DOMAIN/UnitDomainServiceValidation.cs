@@ -7,7 +7,8 @@ namespace VALIDATIONCOREHORTICOMMAND.DOMAIN
     {
         public UnitDomainServiceValidation()
         {
-            RuleFor(x => x).NotNull().Must(x => !string.IsNullOrEmpty(x.DsUnit));
+            RuleFor(x => x).NotEmpty();
+            RuleFor(x => x.DsUnit).NotEmpty();
         }
     }
 }

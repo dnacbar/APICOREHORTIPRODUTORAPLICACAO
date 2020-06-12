@@ -11,7 +11,7 @@ namespace DATAACCESSCOREHORTICOMMAND.COMMAND
 
         public async Task CreateUnit(Unit unit)
         {
-            await CreateEntity(TEntity: unit);
+            await CreateEntity(unit);
         }
 
         public async Task DeleteUnit(Unit unit)

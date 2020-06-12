@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Z_DATAHORTI.EF_SCAFOLD
+namespace Z_DATAHORTI.EF_SCAFFOLD
 {
     public partial class HORTICONTEXT : DbContext
     {
@@ -25,6 +25,7 @@ namespace Z_DATAHORTI.EF_SCAFOLD
         public virtual DbSet<State> State { get; set; }
         public virtual DbSet<Unit> Unit { get; set; }
         public virtual DbSet<Userhorti> Userhorti { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -101,8 +102,7 @@ namespace Z_DATAHORTI.EF_SCAFOLD
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
-                    .HasColumnType("datetime2(3)")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime2(3)");
 
                 entity.Property(e => e.IdCity).HasColumnName("ID_CITY");
 
@@ -163,8 +163,7 @@ namespace Z_DATAHORTI.EF_SCAFOLD
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
-                    .HasColumnType("datetime2(3)")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime2(3)");
             });
 
             modelBuilder.Entity<Log>(entity =>
@@ -275,17 +274,27 @@ namespace Z_DATAHORTI.EF_SCAFOLD
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
-                    .HasColumnType("datetime2(3)")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime2(3)");
 
                 entity.Property(e => e.IdCity).HasColumnName("ID_CITY");
 
                 entity.Property(e => e.IdDistrict).HasColumnName("ID_DISTRICT");
 
+                entity.HasOne(d => d.DsEmailNavigation)
+                    .WithMany(p => p.Producer)
+                    .HasForeignKey(d => d.DsEmail)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PRODUCER_USERHORTI");
+
                 entity.HasOne(d => d.IdCityNavigation)
                     .WithMany(p => p.Producer)
                     .HasForeignKey(d => d.IdCity)
                     .HasConstraintName("FK_PRODUCER_CITY");
+
+                entity.HasOne(d => d.IdDistrictNavigation)
+                    .WithMany(p => p.Producer)
+                    .HasForeignKey(d => d.IdDistrict)
+                    .HasConstraintName("FK_PRODUCER_DISTRICT");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -320,8 +329,7 @@ namespace Z_DATAHORTI.EF_SCAFOLD
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
-                    .HasColumnType("datetime2(3)")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime2(3)");
 
                 entity.Property(e => e.DtDiscount)
                     .HasColumnName("DT_DISCOUNT")
@@ -329,11 +337,16 @@ namespace Z_DATAHORTI.EF_SCAFOLD
 
                 entity.Property(e => e.IdUnit).HasColumnName("ID_UNIT");
 
-                entity.Property(e => e.NmDiscount).HasColumnName("NM_DISCOUNT");
+                entity.Property(e => e.NmPercentdiscount).HasColumnName("NM_PERCENTDISCOUNT");
 
                 entity.Property(e => e.NmValue)
                     .HasColumnName("NM_VALUE")
                     .HasColumnType("decimal(12, 2)");
+
+                entity.HasOne(d => d.IdUnitNavigation)
+                    .WithMany(p => p.Product)
+                    .HasForeignKey(d => d.IdUnit)
+                    .HasConstraintName("FK_PRODUCT_UNITY");
             });
 
             modelBuilder.Entity<State>(entity =>
@@ -385,8 +398,7 @@ namespace Z_DATAHORTI.EF_SCAFOLD
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
-                    .HasColumnType("datetime2(3)")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime2(3)");
             });
 
             modelBuilder.Entity<Userhorti>(entity =>
@@ -416,8 +428,7 @@ namespace Z_DATAHORTI.EF_SCAFOLD
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
-                    .HasColumnType("datetime2(3)")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime2(3)");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -5,11 +5,12 @@ namespace APPDTOCOREHORTICOMMAND.SIGNATURE
 {
     public sealed class UserCommandSignature
     {
-        public bool BoProducer { get; set; }
-        public string DsLogin { get; set; }
-        public string DsPassword { get; set; }
+        public bool IsProducer { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string UserName { get; set; } 
 
         [JsonIgnore]
-        public EmailObject Email => new EmailObject(DsLogin);
+        public EmailObject Email => new EmailObject(Login);
     }
 }

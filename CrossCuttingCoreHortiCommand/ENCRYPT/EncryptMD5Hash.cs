@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -7,16 +6,6 @@ namespace CROSSCUTTINGCOREHORTI.ENCRYPTING
 {
     public static class EncryptMD5Hash
     {
-        public static async Task<bool> VerifyHash(string strMd5Hash, string strToCompare)
-        {
-            var strMd5HashToCompare = await CreateMd5Hash(strToCompare);
-
-            // CREATE A STRINGCOMPARER TO COMPARE THE HASHES
-            var comparer = StringComparer.OrdinalIgnoreCase;
-
-            return Convert.ToBoolean(comparer.Compare(strMd5Hash, strMd5HashToCompare));
-        }
-
         public static async Task<string> CreateMd5Hash(string strMd5Hash)
         {
             using (var md5Hash = MD5.Create())
@@ -39,3 +28,13 @@ namespace CROSSCUTTINGCOREHORTI.ENCRYPTING
         }
     }
 }
+
+//public static async Task<bool> VerifyHash(string strMd5Hash, string strToCompare)
+//{
+//    var strMd5HashToCompare = await CreateMd5Hash(strToCompare);
+//
+//    // CREATE A STRINGCOMPARER TO COMPARE THE HASHES
+//    var comparer = StringComparer.OrdinalIgnoreCase;
+//
+//    return Convert.ToBoolean(comparer.Compare(strMd5Hash, strMd5HashToCompare));
+//}

@@ -18,11 +18,8 @@ namespace DATACOREHORTICOMMAND
         public virtual DbSet<Unit> Unit { get; set; }
         public virtual DbSet<Userhorti> Userhorti { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<City>(entity =>
             {
                 entity.HasKey(e => e.IdCity);
@@ -67,7 +64,7 @@ namespace DATACOREHORTICOMMAND
 
                 entity.Property(e => e.DsEmail)
                     .HasColumnName("DS_EMAIL")
-                    .HasMaxLength(50);
+                    .HasMaxLength(40);
 
                 entity.Property(e => e.BoActive)
                     .IsRequired()
@@ -78,6 +75,11 @@ namespace DATACOREHORTICOMMAND
                     .IsRequired()
                     .HasColumnName("DS_CLIENT")
                     .HasMaxLength(100);
+
+                entity.Property(e => e.DsFederalInscription)
+                    .HasColumnName("DS_FEDERALINSCRIPTION")
+                    .HasMaxLength(16)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.DsPhone)
                     .HasColumnName("DS_PHONE")
@@ -91,28 +93,27 @@ namespace DATACOREHORTICOMMAND
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
-                    .HasColumnType("datetime2(3)")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime2(3)");
 
                 entity.Property(e => e.IdCity).HasColumnName("ID_CITY");
+
+                entity.Property(e => e.IdDistrict).HasColumnName("ID_DISTRICT");
+
+                entity.HasOne(d => d.DsEmailNavigation)
+                    .WithMany(p => p.Client)
+                    .HasForeignKey(d => d.DsEmail)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CLIENT_USERHORTI");
 
                 entity.HasOne(d => d.IdCityNavigation)
                     .WithMany(p => p.Client)
                     .HasForeignKey(d => d.IdCity)
                     .HasConstraintName("FK_CLIENT_CITY");
 
-                entity.Property(e => e.IdDistrict).HasColumnName("ID_DISTRICT");
-
                 entity.HasOne(d => d.IdDistrictNavigation)
                     .WithMany(p => p.Client)
                     .HasForeignKey(d => d.IdDistrict)
                     .HasConstraintName("FK_CLIENT_DISTRICT");
-
-                entity.Property(e => e.DsFederalInscription)
-                    .HasColumnName("DS_FEDERALINSCRIPTION")
-                    .HasMaxLength(16)
-                    .IsUnicode(false);
-
             });
 
             modelBuilder.Entity<Country>(entity =>
@@ -153,8 +154,7 @@ namespace DATACOREHORTICOMMAND
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
-                    .HasColumnType("datetime2(3)")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime2(3)");
             });
 
             modelBuilder.Entity<Log>(entity =>
@@ -199,7 +199,7 @@ namespace DATACOREHORTICOMMAND
 
                 entity.Property(e => e.DsEmail)
                     .HasColumnName("DS_EMAIL")
-                    .HasMaxLength(50);
+                    .HasMaxLength(40);
 
                 entity.Property(e => e.BoActive)
                     .IsRequired()
@@ -265,12 +265,17 @@ namespace DATACOREHORTICOMMAND
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
-                    .HasColumnType("datetime2(3)")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime2(3)");
 
                 entity.Property(e => e.IdCity).HasColumnName("ID_CITY");
 
                 entity.Property(e => e.IdDistrict).HasColumnName("ID_DISTRICT");
+
+                entity.HasOne(d => d.DsEmailNavigation)
+                    .WithMany(p => p.Producer)
+                    .HasForeignKey(d => d.DsEmail)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PRODUCER_USERHORTI");
 
                 entity.HasOne(d => d.IdCityNavigation)
                     .WithMany(p => p.Producer)
@@ -315,8 +320,7 @@ namespace DATACOREHORTICOMMAND
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
-                    .HasColumnType("datetime2(3)")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime2(3)");
 
                 entity.Property(e => e.DtDiscount)
                     .HasColumnName("DT_DISCOUNT")
@@ -324,7 +328,7 @@ namespace DATACOREHORTICOMMAND
 
                 entity.Property(e => e.IdUnit).HasColumnName("ID_UNIT");
 
-                entity.Property(e => e.NmDiscount).HasColumnName("NM_DISCOUNT");
+                entity.Property(e => e.NmPercentDiscount).HasColumnName("NM_PERCENTDISCOUNT");
 
                 entity.Property(e => e.NmValue)
                     .HasColumnName("NM_VALUE")
@@ -333,7 +337,7 @@ namespace DATACOREHORTICOMMAND
                 entity.HasOne(d => d.IdUnitNavigation)
                     .WithMany(p => p.Product)
                     .HasForeignKey(d => d.IdUnit)
-                    .HasConstraintName("FK_PRODUCT_UNIT");
+                    .HasConstraintName("FK_PRODUCT_UNITY");
             });
 
             modelBuilder.Entity<State>(entity =>
@@ -385,8 +389,7 @@ namespace DATACOREHORTICOMMAND
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
-                    .HasColumnType("datetime2(3)")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime2(3)");
             });
 
             modelBuilder.Entity<Userhorti>(entity =>
@@ -397,7 +400,7 @@ namespace DATACOREHORTICOMMAND
 
                 entity.Property(e => e.DsLogin)
                     .HasColumnName("DS_LOGIN")
-                    .HasMaxLength(15);
+                    .HasMaxLength(40);
 
                 entity.Property(e => e.BoActive)
                     .IsRequired()
@@ -407,7 +410,7 @@ namespace DATACOREHORTICOMMAND
                 entity.Property(e => e.DsPassword)
                     .IsRequired()
                     .HasColumnName("DS_PASSWORD")
-                    .HasMaxLength(15);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.DtAtualization)
                     .HasColumnName("DT_ATUALIZATION")
@@ -416,8 +419,7 @@ namespace DATACOREHORTICOMMAND
 
                 entity.Property(e => e.DtCreation)
                     .HasColumnName("DT_CREATION")
-                    .HasColumnType("datetime2(3)")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime2(3)");
             });
 
             OnModelCreatingPartial(modelBuilder);

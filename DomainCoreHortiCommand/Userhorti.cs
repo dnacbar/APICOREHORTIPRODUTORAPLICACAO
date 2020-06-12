@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DOMAINCOREHORTICOMMAND.DOMAINOBJECT;
+using System;
 using System.Collections.Generic;
 
 namespace DOMAINCOREHORTICOMMAND
@@ -16,6 +17,8 @@ namespace DOMAINCOREHORTICOMMAND
         public bool BoActive { get; set; }
         public DateTime DtCreation { get; set; }
         public DateTime DtAtualization { get; set; }
+
+        public EmailObject Email => new EmailObject(DsLogin);
 
         public virtual ICollection<Client> Client { get; set; }
         public virtual ICollection<Producer> Producer { get; set; }

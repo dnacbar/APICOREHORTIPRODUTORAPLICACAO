@@ -2,8 +2,8 @@
 {
     public class UnitCommandSignature
     {
-        public byte IdUnit { get; set; }
-        public string DsUnit { get; set; }
-        public string DsAbreviation { get; set; }
+        public byte Id { get; set; }
+        public string Unit { get; set; }
+        public string Abreviation { get; set; }
     }
 }

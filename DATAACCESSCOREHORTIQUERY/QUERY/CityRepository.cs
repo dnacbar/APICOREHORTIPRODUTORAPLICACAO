@@ -9,7 +9,8 @@ namespace DATACOREHORTIQUERY.QUERIES
 {
     public sealed class CityRepository : _BaseRepository<City>, ICityRepository
     {
-        public CityRepository(DBHORTICONTEXT dBHORTICONTEXT) : base(dBHORTICONTEXT) { }
+        public CityRepository(DBHORTICONTEXT DBHORTICONTEXT) : base(DBHORTICONTEXT) { }
+        
         public async Task<City> CityById(ConsultCitySignature signature)
         {
             return await EntityByFilter(Where: p => signature.IdCity == p.IdCity,

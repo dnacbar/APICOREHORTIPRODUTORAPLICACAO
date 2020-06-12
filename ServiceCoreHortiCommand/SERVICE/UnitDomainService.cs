@@ -19,7 +19,7 @@ namespace SERVICECOREHORTICOMMAND.SERVICE
             _unitRepository = unitRepository;
         }
 
-        public async Task UnitServiceAdd(Unit unit)
+        public async Task UnitServiceCreate(Unit unit)
         {
             _unitDomainServiceValidation.ValidateHorti(unit);
 

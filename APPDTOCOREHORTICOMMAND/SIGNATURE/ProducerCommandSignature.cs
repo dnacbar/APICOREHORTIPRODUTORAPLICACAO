@@ -1,25 +1,27 @@
 ﻿using DOMAINCOREHORTICOMMAND.DOMAINOBJECT;
+using System;
 using System.Text.Json.Serialization;
 
 namespace APPDTOCOREHORTICOMMAND.SIGNATURE
 {
     public sealed class ProducerCommandSignature
     {
-        public string DsProducer { get; set; }
-        public string DsFantasyName { get; set; }
-        public int IdCity { get; set; }
-        public int IdDistrict { get; set; }
-        public string DsZip { get; set; }
-        public string DsAddress { get; set; }
-        public string DsNumber { get; set; }
-        public string DsComplement { get; set; }
-        public string DsFederalInscription { get; set; }
-        public string DsStateInscription { get; set; }
-        public string DsMunicipalInscription { get; set; }
-        public string DsDescription { get; set; }
-        public string DsPhone { get; set; }
+        public Guid Id { get; set; } 
+        public string Producer { get; set; }
+        public string FantasyName { get; set; }
+        public int City { get; set; }
+        public int District { get; set; }
+        public string Zip { get; set; }
+        public string Address { get; set; }
+        public string Number { get; set; }
+        public string Complement { get; set; }
+        public string FederalInscription { get; set; }
+        public string StateInscription { get; set; }
+        public string MunicipalInscription { get; set; }
+        public string Description { get; set; }
+        public string Phone { get; set; }
 
         [JsonIgnore]
-        public PhoneObject Phone => new PhoneObject(DsPhone);
+        public PhoneObject PhoneObject => new PhoneObject(Phone);
     }
 }

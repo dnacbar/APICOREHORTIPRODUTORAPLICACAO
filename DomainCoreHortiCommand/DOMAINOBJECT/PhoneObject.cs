@@ -1,33 +1,46 @@
-﻿using CROSSCUTTINGCOREHORTI.EXTENSION;
+﻿using CROSSCUTTINGCOREHORTI.ENUM;
+using CROSSCUTTINGCOREHORTI.EXTENSION;
 
 namespace DOMAINCOREHORTICOMMAND.DOMAINOBJECT
 {
     public sealed class PhoneObject
     {
-        public PhoneObject(string phoneObject, string cultureName = "pt-Br")
+        public PhoneObject(string phoneObject, EnumCultureInfo cultureInfo = EnumCultureInfo.Brazilian)
         {
             Phone = phoneObject;
-            CultureName = cultureName;
-            ValidatePhone();
+            CultureInfo = cultureInfo;
         }
 
-        private string CultureName { get; set; }
         public string Phone { get; private set; }
-        public bool IsCellPhone => Phone.Length == 11;
+        public bool IsCellPhone => VerifyCellPhone();
 
-        private void ValidatePhone()
+        public bool IsValid()
         {
-            if (CultureName.Equals("pt-Br"))
-                ValidateBrazilianPhone();
+            if (CultureInfo == EnumCultureInfo.Brazilian)
+                return ValidateBrazilianPhone();
+
+            return false;
         }
 
-        private void ValidateBrazilianPhone()
+        private EnumCultureInfo CultureInfo { get; set; }
+
+        private bool ValidateBrazilianPhone()
         {
             if (Phone.Length != 11 || Phone.Length != 10)
-                Phone = null;
+                return false;
 
             if (!Phone.IsOnlyNumber())
-                Phone = null;
+                return false;
+
+            return true;
+        }
+
+        private bool VerifyCellPhone()
+        {
+            if (CultureInfo == EnumCultureInfo.Brazilian)
+                return Phone.Length == 11;
+
+            return false;
         }
     }
 }

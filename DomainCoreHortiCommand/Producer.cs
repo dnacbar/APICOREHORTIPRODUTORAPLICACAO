@@ -1,10 +1,21 @@
-﻿using DOMAINCOREHORTICOMMAND.DOMAINOBJECT;
+﻿using CROSSCUTTINGCOREHORTI.ENUM;
+using DOMAINCOREHORTICOMMAND.DOMAINOBJECT;
 using System;
 
 namespace DOMAINCOREHORTICOMMAND
 {
     public class Producer
     {
+        public Producer()
+        {
+                
+        }
+
+        public Producer(EnumCultureInfo cultureInfo = EnumCultureInfo.Brazilian)
+        {
+            CultureInfo = cultureInfo;
+        }
+
         public Guid IdProducer { get; set; }
         public string DsProducer { get; set; }
         public bool? BoActive { get; set; }
@@ -24,11 +35,14 @@ namespace DOMAINCOREHORTICOMMAND
         public string DsEmail { get; set; }
         public string DsPhone { get; set; }
 
-        public PhoneObject Phone => new PhoneObject(DsPhone);
-        public EmailObject Email => new EmailObject(DsEmail);
-
+        public virtual Userhorti DsEmailNavigation { get; set; }
         public virtual City IdCityNavigation { get; set; }
         public virtual District IdDistrictNavigation { get; set; }
-        public virtual Userhorti DsEmailNavigation { get; set; }
+
+        public PhoneObject Phone => new PhoneObject(DsPhone, CultureInfo);
+        public EmailObject Email => new EmailObject(DsEmail);
+        public DocumentObject FederalDocument => new DocumentObject(DsFederalInscription, CultureInfo);
+
+        private EnumCultureInfo CultureInfo { get; set; }
     }
 }

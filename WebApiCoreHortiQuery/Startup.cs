@@ -96,11 +96,12 @@ namespace WEBAPICOREHORTIQUERY
         // CONTAINER DI - APP LAYER
         private void HortiQueryApplicationServices(IServiceCollection services)
         {
-            services.AddScoped<IUserAccessApp, UserAccessApp>();
             services.AddScoped<ICityQueryApp, CityQueryApp>();
-            services.AddScoped<IDistrictQueryApp, DistrictQueryApp>();
             services.AddScoped<IClientQueryApp, ClientQueryApp>();
+            services.AddScoped<IDistrictQueryApp, DistrictQueryApp>();
             services.AddScoped<IProducerQueryApp, ProducerQueryApp>();
+            services.AddScoped<IUnitQueryApp, UnitQueryApp>();
+            services.AddScoped<IUserAccessApp, UserAccessApp>();
         }
 
         // CONTAINER DI - REPOSITORY LAYER
@@ -110,12 +111,14 @@ namespace WEBAPICOREHORTIQUERY
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IDiscrictRepository, DistrictRepository>();
             services.AddScoped<IProducerRepository, ProducerRepository>();
+            services.AddScoped<IUnitRepository, UnitRepository>();
             services.AddScoped<IUserAccessRepository, UserAccessRepository>();
         }
 
         // CONTAINER DI - VALIDATION
         private void HortiQueryValidationServices(IServiceCollection services)
         {
+            // TALVEZ MUDAR PARA SCOPED
             services.AddSingleton<UserAccessSignatureValidation>();
         }
     }

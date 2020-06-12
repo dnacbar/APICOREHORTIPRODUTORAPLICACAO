@@ -21,7 +21,7 @@ using VALIDATIONCOREHORTICOMMAND.DOMAIN;
 
 namespace WEBAPICOREHORTICOMMAND
 {
-    public class Startup
+    public sealed class Startup
     {
         private IConfiguration iConfiguration { get; }
         private readonly string strCorsConfig = "hortiCorsConfig";
@@ -62,6 +62,10 @@ namespace WEBAPICOREHORTICOMMAND
                 Version = "V1",
             }));
 
+            // QUERY SERVICES
+            HortiQueryRepository(services);
+
+            // COMMAND SERVICES
             HortiCommandApplicationServices(services);
             HortiCommandRepositoryServices(services);
             HortiCommandDomainServices(services);
@@ -99,13 +103,19 @@ namespace WEBAPICOREHORTICOMMAND
         // CONTAINER DI - APP LAYER
         private void HortiCommandApplicationServices(IServiceCollection services)
         {
+            services.AddScoped<IClientCommandApp, ClientCommandApp>();
+            services.AddScoped<IProductCommandApp, ProductCommandApp>();
             services.AddScoped<IUnitCommandApp, UnitCommandApp>();
+            services.AddScoped<IUserCommandApp, UserCommandApp>();   
         }
 
         // CONTAINER DI - DOMAIN SERVICE
         private void HortiCommandDomainServices(IServiceCollection services)
         {
+            services.AddScoped<IClientDomainService, ClientDomainService>();
+            services.AddScoped<IProductDomainService, ProductDomainService>();
             services.AddScoped<IUnitDomainService, UnitDomainService>();
+            services.AddScoped<IUserDomainService, UserDomainService>();
         }
 
         // CONTAINER DI - REPOSITORY LAYER
@@ -114,6 +124,7 @@ namespace WEBAPICOREHORTICOMMAND
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IDistrictRepository, DistrictRepository>();
             services.AddScoped<IProducerRepository, ProducerRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUnitRepository, UnitRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
         }
@@ -122,13 +133,29 @@ namespace WEBAPICOREHORTICOMMAND
         private void HortiCommandValidationServices(IServiceCollection services)
         {
             // APPLICATION
+            services.AddSingleton<CreateProductSignatureValidation>();
+            services.AddSingleton<DeleteProductSignatureValidation>();
+            services.AddSingleton<UpdateProductSignatureValidation>();
+
             services.AddSingleton<CreateUnitSignatureValidation>();
             services.AddSingleton<DeleteUnitSignatureValidation>();
             services.AddSingleton<UpdateUnitSignatureValidation>();
 
-            //DOMAIN SERVICE
-            services.AddSingleton<UnitDomainServiceValidation>();
+            services.AddScoped<CreateUserSignatureValidation>();
+            services.AddScoped<DeleteUserSignatureValidation>();
+            services.AddScoped<UpdateUserSignatureValidation>();
 
+            //DOMAIN SERVICE
+            services.AddSingleton<ProductDomainServiceValidation>();
+            services.AddSingleton<UnitDomainServiceValidation>();
+            services.AddSingleton<UserDomainServiceValidation>();
+        }
+
+        // CONTAINER DI - QUERY SERVICES
+        private void HortiQueryRepository(IServiceCollection services)
+        {
+            // REPOSITORY
+            services.AddScoped<DATACOREHORTIQUERY.IQUERIES.IUserAccessRepository, DATACOREHORTIQUERY.QUERIES.UserAccessRepository>();
         }
     }
 }

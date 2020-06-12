@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Z_DATAHORTI.EF_SCAFOLD
+namespace Z_DATAHORTI.EF_SCAFFOLD
 {
     public partial class Userhorti
     {
         public Userhorti()
         {
             Client = new HashSet<Client>();
+            Producer = new HashSet<Producer>();
         }
 
         public string DsLogin { get; set; }
@@ -17,5 +18,6 @@ namespace Z_DATAHORTI.EF_SCAFOLD
         public DateTime DtAtualization { get; set; }
 
         public virtual ICollection<Client> Client { get; set; }
+        public virtual ICollection<Producer> Producer { get; set; }
     }
 }
