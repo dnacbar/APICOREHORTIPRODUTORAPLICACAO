@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppDtoCoreHortiQuery\APPDTOCOREHORTIQUERY.csproj" />
-    <ProjectReference Include="..\CROSSCUTTINGCOREHORTICOMMAND\CROSSCUTTINGCOREHORTI.csproj" />
+    <ProjectReference Include="..\HORTICROSSCUTTINGCORE\HORTI.CROSSCUTTING.CORE.csproj" />
   </ItemGroup>
 
 </Project>

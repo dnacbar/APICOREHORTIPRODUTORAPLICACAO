@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\APPCOREHORTIQUERY\APPCOREHORTIQUERY.csproj" />
-    <ProjectReference Include="..\CrossCuttingCoreHortiCommand\CROSSCUTTINGCOREHORTI.csproj" />
+    <ProjectReference Include="..\HORTICROSSCUTTINGCORE\HORTI.CROSSCUTTING.CORE.csproj" />
     <ProjectReference Include="..\DATACOREHORTICOMMAND\DATACOREHORTICOMMAND.csproj" />
     <ProjectReference Include="..\VALIDATIONCOREHORTIQUERY\VALIDATIONCOREHORTIQUERY.csproj" />
   </ItemGroup>

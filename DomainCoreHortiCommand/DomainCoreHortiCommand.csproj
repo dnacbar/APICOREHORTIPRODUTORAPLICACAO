@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CrossCuttingCoreHortiCommand\CROSSCUTTINGCOREHORTI.csproj" />
+    <ProjectReference Include="..\HORTICROSSCUTTINGCORE\HORTI.CROSSCUTTING.CORE.csproj" />
   </ItemGroup>
 
 </Project>
