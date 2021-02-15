@@ -6,6 +6,6 @@ namespace DATACOREHORTIQUERY.IQUERIES
 {
     public interface IUserAccessRepository
     {
-        Task<Userhorti> GetUserAccessHorti(UserAccessSignature signature);
+        Task<Userhorti> GetUserHortiAccess(UserAccessSignature signature);
     }
 }

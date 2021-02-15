@@ -23,10 +23,10 @@ namespace WEBAPICOREHORTICOMMAND.Controllers
             return Created(string.Empty, null);
         }
 
-        [HttpDelete(nameof(DeleteUser))]
-        public async Task<IActionResult> DeleteUser([FromBody] UserCommandSignature signature)
+        [HttpDelete(nameof(InactiveUser))]
+        public async Task<IActionResult> InactiveUser([FromBody] UserCommandSignature signature)
         {
-            await _userCommandApp.DeleteUser(signature);
+            await _userCommandApp.InactiveUser(signature);
             return NoContent();
         }
 

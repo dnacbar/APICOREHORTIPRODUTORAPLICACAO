@@ -4,7 +4,7 @@
     {
         public EmailObject(string emailObject)
         {
-            Email = emailObject.Trim();
+            Email = emailObject?.Trim();
         }
 
         public string Email { get; private set; }

@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace Z_DATAHORTI.EF_SCAFFOLD
 {
     public partial class City
     {
         public City()
         {
-            Client = new HashSet<Client>();
-            Producer = new HashSet<Producer>();
+            Clients = new HashSet<Client>();
+            Producers = new HashSet<Producer>();
         }
 
         public int IdCity { get; set; }
@@ -18,7 +20,7 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
         public string CdCity { get; set; }
 
         public virtual State Id { get; set; }
-        public virtual ICollection<Client> Client { get; set; }
-        public virtual ICollection<Producer> Producer { get; set; }
+        public virtual ICollection<Client> Clients { get; set; }
+        public virtual ICollection<Producer> Producers { get; set; }
     }
 }

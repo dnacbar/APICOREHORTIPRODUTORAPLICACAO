@@ -14,11 +14,6 @@ namespace DATAACCESSCOREHORTICOMMAND.COMMAND
             await CreateEntity(client);
         }
 
-        public async Task DeleteClient(Client client)
-        {
-            await DeleteEntity(client, true);
-        }
-
         public async Task UpdateClient(Client client)
         {
             await UpdateEntity(client);

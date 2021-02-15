@@ -1,15 +1,27 @@
 ﻿using DOMAINCOREHORTICOMMAND;
 using FluentValidation;
+using System;
 
 namespace VALIDATIONCOREHORTICOMMAND.DOMAIN
 {
-    public class UserDomainServiceValidation : AbstractValidator<Userhorti>
+    public class CreateUserDomainServiceValidation : AbstractValidator<Userhorti>
     {
-        public UserDomainServiceValidation()
+        public CreateUserDomainServiceValidation()
         {
             RuleFor(x => x).NotEmpty();
             RuleFor(x => x.Email).NotNull().Must(x => x.IsValid());
             RuleFor(x => x.DsPassword).NotEmpty();
+        }
+    }
+
+    public class UpdateUserDomainServiceValidation : AbstractValidator<Userhorti>
+    {
+        public UpdateUserDomainServiceValidation()
+        {
+            RuleFor(x => x).NotEmpty();
+            RuleFor(x => x.Email).NotNull().Must(x => x.IsValid());
+            RuleFor(x => x.DsPassword).NotEmpty();
+            RuleFor(x => x.DtAtualization.Date).Equal(DateTime.Today);
         }
     }
 }

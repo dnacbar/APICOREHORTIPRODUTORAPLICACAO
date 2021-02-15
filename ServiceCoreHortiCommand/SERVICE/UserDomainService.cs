@@ -1,6 +1,7 @@
 ﻿using CROSSCUTTINGCOREHORTI.EXTENSION;
 using DATAACCESSCOREHORTICOMMAND.ICOMMAND;
 using DOMAINCOREHORTICOMMAND;
+using FluentValidation;
 using SERVICECOREHORTICOMMAND.ISERVICE;
 using System;
 using System.Threading.Tasks;
@@ -10,31 +11,38 @@ namespace SERVICECOREHORTICOMMAND.SERVICE
 {
     public class UserDomainService : IUserDomainService
     {
-        private readonly UserDomainServiceValidation _userDomainServiceValidation;
+        private readonly CreateUserDomainServiceValidation _createUserDomainServiceValidation;
+        private readonly UpdateUserDomainServiceValidation _updateUserDomainServiceValidation;
+
         private readonly IUserRepository _userRepository;
         
-        public UserDomainService(UserDomainServiceValidation userDomainServiceValidation,
+        public UserDomainService(CreateUserDomainServiceValidation createUserDomainServiceValidation,
+                                 UpdateUserDomainServiceValidation updateUserDomainServiceValidation,
                                  IUserRepository userRepository)
         {
-            _userDomainServiceValidation = userDomainServiceValidation;
+            _createUserDomainServiceValidation = createUserDomainServiceValidation;
+            _updateUserDomainServiceValidation = updateUserDomainServiceValidation;
             _userRepository = userRepository;
         }
 
         public async Task UserServiceCreate(Userhorti userhorti)
         {
-            _userDomainServiceValidation.ValidateHorti(userhorti);
+            _createUserDomainServiceValidation.ValidateHorti(userhorti);
 
             await _userRepository.CreateUser(userhorti);
         }
 
         public async Task UserServiceDelete(Userhorti userhorti)
         {
+            if (string.IsNullOrEmpty(userhorti.DsLogin))
+                throw new ValidationException("USER NOT EXISTS!");
+
             await _userRepository.DeleteUser(userhorti);
         }
 
         public async Task UserServiceUpdate(Userhorti userhorti)
         {
-            _userDomainServiceValidation.ValidateHorti(userhorti);
+            _updateUserDomainServiceValidation.ValidateHorti(userhorti);
 
             await _userRepository.UpdateUser(userhorti);
         }

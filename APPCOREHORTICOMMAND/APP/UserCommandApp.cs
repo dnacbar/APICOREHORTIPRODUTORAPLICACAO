@@ -6,7 +6,6 @@ using CROSSCUTTINGCOREHORTI.EXTENSION;
 using DATACOREHORTIQUERY.IQUERIES;
 using FluentValidation;
 using SERVICECOREHORTICOMMAND.ISERVICE;
-using System;
 using System.Threading.Tasks;
 using VALIDATIONCOREHORTICOMMAND.APPLICATION;
 
@@ -19,14 +18,14 @@ namespace APPCOREHORTICOMMAND.APP
         private readonly UpdateUserSignatureValidation _updateUserSignatureValidation;
 
         private readonly IClientCommandApp _clientCommandApp;
-        private readonly IUserAccessRepository _userAccessRepository;
+        private readonly IProducerCommandApp _producerCommandApp;
         private readonly IUserDomainService _userDomainService;
 
         public UserCommandApp(CreateUserSignatureValidation createUserSignatureValidation,
                               DeleteUserSignatureValidation deleteUserSignatureValidation,
                               UpdateUserSignatureValidation updateUserSignatureValidation,
                               IClientCommandApp clientCommandApp,
-                              IUserAccessRepository userAccessRepository,
+                              IProducerCommandApp producerCommandApp,
                               IUserDomainService userDomainService)
         {
             _createUserSignatureValidation = createUserSignatureValidation;
@@ -34,7 +33,7 @@ namespace APPCOREHORTICOMMAND.APP
             _updateUserSignatureValidation = updateUserSignatureValidation;
 
             _clientCommandApp = clientCommandApp;
-            _userAccessRepository = userAccessRepository;
+            _producerCommandApp = producerCommandApp;
             _userDomainService = userDomainService;
         }
 
@@ -42,46 +41,40 @@ namespace APPCOREHORTICOMMAND.APP
         {
             _createUserSignatureValidation.ValidateHorti(signature);
 
-            if (!await ValidateUserNotExists(signature))
-                throw new ValidationException("USER ALREADY EXISTS!");
-
-
             await _userDomainService.UserServiceCreate(signature.ToCreateUserDomain());
 
-            // PRODUCER OR CLIENT
             if (signature.IsProducer)
             {
-
+                await _producerCommandApp.CreateProducer(new ProducerCommandSignature
+                {
+                    Email = signature.Login,
+                    Producer = signature.UserName,
+                    Phone = signature.Phone
+                });
             }
             else
             {
-                await _clientCommandApp.CreateClient(new ClientCommandSignature { Email = signature.Login, Client = signature.UserName });
+                await _clientCommandApp.CreateClient(new ClientCommandSignature
+                {
+                    Email = signature.Login,
+                    Client = signature.UserName,
+                    Phone = signature.Phone
+                });
             }
         }
 
-        public async Task DeleteUser(UserCommandSignature signature)
+        public async Task InactiveUser(UserCommandSignature signature)
         {
             _deleteUserSignatureValidation.ValidateHorti(signature);
 
-            if (await ValidateUserNotExists(signature))
-                throw new ValidationException("USER NOT FOUND!");
-
-            await _userDomainService.UserServiceDelete(signature.ToCreateUserDomain());
+            await _userDomainService.UserServiceDelete(signature.ToDeleteUserDomain());
         }
 
         public async Task UpdateUser(UserCommandSignature signature)
         {
             _updateUserSignatureValidation.ValidateHorti(signature);
 
-            if (await ValidateUserNotExists(signature))
-                throw new ValidationException("USER NOT FOUND!");
-
-            await _userDomainService.UserServiceUpdate(signature.ToCreateUserDomain());
-        }
-
-        private async Task<bool> ValidateUserNotExists(UserCommandSignature signature)
-        {
-            return (await _userAccessRepository.GetUserAccessHorti(new UserAccessSignature { DsLogin = signature.Login })) == null;
+            await _userDomainService.UserServiceUpdate(signature.ToUpdateUserDomain());
         }
     }
 }

@@ -6,7 +6,6 @@ namespace DATAACCESSCOREHORTICOMMAND.ICOMMAND
     public interface IProducerRepository
     {
         Task CreateProducer(Producer producer);
-        Task DeleteProducer(Producer producer);
         Task UpdateProducer(Producer producer);
     }
 }

@@ -83,9 +83,9 @@
     <Build Include="DBHORTI TABLE\USER.sql" />
     <Build Include="DBHORTI TABLE\CLIENT.sql" />
     <None Include="DBHORTI DATA\HORTI_V.1\DML\INSERT_CITY.sql" />
+    <Build Include="DBHORTI DATA\HORTI_V.1\DML\INSERT_UNIT.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DBHORTI TABLE\LOG.sql" />
     <None Include="DBHORTI DATA\HORTI_V.1\DML\INSERT_DISTRICT.sql" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 ﻿using DATACOREHORTICOMMAND;
+using DOMAINCOREHORTICOMMAND;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
@@ -28,25 +29,20 @@ namespace DATAACCESSCOREHORTICOMMAND.COMMAND
 
                 throw ex;
             }
-            finally
-            {
-                _DBHORTICONTEXT.Dispose();
-            }
         }
 
         protected async Task DeleteEntity(T TEntity, bool bolLogicDeletion = false)
         {
             try
             {
-                using (_DBHORTICONTEXT)
+                if (bolLogicDeletion)
                 {
-                    if (bolLogicDeletion)
-                        _DBHORTICONTEXT.Set<T>().Update(TEntity);
-                    else
-                        _DBHORTICONTEXT.Set<T>().Remove(TEntity);
-
-                    await _DBHORTICONTEXT.SaveChangesAsync();
+                    _DBHORTICONTEXT.Entry(TEntity).Property("BoActive").IsModified = true;
                 }
+                else
+                    _DBHORTICONTEXT.Set<T>().Remove(TEntity);
+
+                await _DBHORTICONTEXT.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -54,7 +50,6 @@ namespace DATAACCESSCOREHORTICOMMAND.COMMAND
                     throw new DbUpdateException(ex.Message, ex);
 
                 throw ex;
-
             }
         }
 
@@ -62,12 +57,9 @@ namespace DATAACCESSCOREHORTICOMMAND.COMMAND
         {
             try
             {
-                using (_DBHORTICONTEXT)
-                {
-                    _DBHORTICONTEXT.Set<T>().Update(TEntity);
+                _DBHORTICONTEXT.Set<T>().Update(TEntity).Property("DtCreation").IsModified = false;
 
-                    await _DBHORTICONTEXT.SaveChangesAsync();
-                }
+                await _DBHORTICONTEXT.SaveChangesAsync();
             }
             catch (Exception ex)
             {

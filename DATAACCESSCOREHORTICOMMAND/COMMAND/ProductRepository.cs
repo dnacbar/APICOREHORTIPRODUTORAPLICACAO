@@ -16,7 +16,7 @@ namespace DATAACCESSCOREHORTICOMMAND.COMMAND
 
         public async Task DeleteProduct(Product product)
         {
-            await DeleteEntity(product, true);
+            await DeleteEntity(product);
         }
 
         public async Task UpdateProduct(Product product)

@@ -6,14 +6,14 @@ namespace APPDTOCOREHORTICOMMAND.SIGNATURE
 {
     public sealed class ClientCommandSignature
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string Email { get; set; }
         public string Client { get; set; }
         public int? City { get; set; }
         public Guid? District { get; set; }
         public string Phone { get; set; }
         public string FederalInscription { get; set; }
-        
+        public byte[] ImageByte { get; set; }
 
         [JsonIgnore]
         public EmailObject EmailObject => new EmailObject(Email);

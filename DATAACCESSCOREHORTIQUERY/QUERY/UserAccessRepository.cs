@@ -10,7 +10,7 @@ namespace DATACOREHORTIQUERY.QUERIES
     {
         public UserAccessRepository(DBHORTICONTEXT dBHORTICONTEXT) : base(dBHORTICONTEXT) { }
 
-        public async Task<Userhorti> GetUserAccessHorti(UserAccessSignature signature)
+        public async Task<Userhorti> GetUserHortiAccess(UserAccessSignature signature)
         {
             return await EntityByFilter(Where: x => x.DsLogin == signature.DsLogin && x.BoActive,
             Select: p => new Userhorti

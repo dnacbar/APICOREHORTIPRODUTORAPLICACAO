@@ -2,10 +2,9 @@
 using APPCOREHORTICOMMAND.IAPP;
 using APPDTOCOREHORTICOMMAND.SIGNATURE;
 using CROSSCUTTINGCOREHORTI.EXTENSION;
+using CROSSCUTTINGCOREHORTI.FILE;
 using SERVICECOREHORTICOMMAND.ISERVICE;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using VALIDATIONCOREHORTICOMMAND.APPLICATION;
 
@@ -14,18 +13,15 @@ namespace APPCOREHORTICOMMAND.APP
     public sealed class ClientCommandApp : IClientCommandApp
     {
         private readonly CreateClientSignatureValidation _createClientSignatureValidation;
-        private readonly DeleteClientSignatureValidation _deleteClientSignatureValidation;
         private readonly UpdateClientSignatureValidation _updateClientSignatureValidation;
 
         private readonly IClientDomainService _clientDomainService;
 
         public ClientCommandApp(CreateClientSignatureValidation createClientSignatureValidation,
-                                DeleteClientSignatureValidation deleteClientSignatureValidation,
                                 UpdateClientSignatureValidation updateClientSignatureValidation,
                                 IClientDomainService clientDomainService)
         {
             _createClientSignatureValidation = createClientSignatureValidation;
-            _deleteClientSignatureValidation = deleteClientSignatureValidation;
             _updateClientSignatureValidation = updateClientSignatureValidation;
 
             _clientDomainService = clientDomainService;
@@ -35,17 +31,30 @@ namespace APPCOREHORTICOMMAND.APP
         {
             _createClientSignatureValidation.ValidateHorti(signature);
 
-            await _clientDomainService.ClientServiceCreate(signature.ToCreateClientDomain());
+            var clientDomain = signature.ToCreateClientDomain();
+            await _clientDomainService.ClientServiceCreate(clientDomain);
+
+            Directory.CreateDirectory(Path.Combine(Path.GetPathRoot(Directory.GetCurrentDirectory()), "CLIENT", clientDomain.IdClient.ToString()));
         }
 
-        public Task DeleteClient(ClientCommandSignature signature)
+        public async Task UpdateClient(ClientCommandSignature signature)
         {
-            throw new NotImplementedException();
+            _updateClientSignatureValidation.ValidateHorti(signature);
+
+            await _clientDomainService.ClientServiceUpdate(signature.ToUpdateClientDomain());
+
+            CreateClientImage(signature);
         }
 
-        public Task UpdateClient(ClientCommandSignature signature)
+        private void CreateClientImage(ClientCommandSignature signature)
         {
-            throw new NotImplementedException();
+            if (signature.ImageByte == null)
+                return;
+
+            if (!Directory.Exists(Path.Combine(Path.GetPathRoot(Directory.GetCurrentDirectory()), "CLIENT", signature.Id.ToString())))
+                return;
+
+            FileIO.CreateImage(Path.Combine(Path.GetPathRoot(Directory.GetCurrentDirectory()), "CLIENT", signature.Id.ToString(), signature.Id + ".png"), signature.ImageByte);
         }
     }
 }

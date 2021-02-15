@@ -14,11 +14,6 @@ namespace DATAACCESSCOREHORTICOMMAND.COMMAND
             await CreateEntity(producer);
         }
 
-        public async Task DeleteProducer(Producer producer)
-        {
-            await DeleteEntity(producer, true);
-        }
-
         public async Task UpdateProducer(Producer producer)
         {
             await UpdateEntity(producer);

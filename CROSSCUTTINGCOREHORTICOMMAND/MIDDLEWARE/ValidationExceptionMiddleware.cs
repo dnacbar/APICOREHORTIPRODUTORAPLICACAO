@@ -33,7 +33,7 @@ namespace CROSSCUTTINGCOREHORTI.MIDDLEWARE
 
                 httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-                await httpContext.Response.WriteAsync(ex.Errors.ToString());
+                await httpContext.Response.WriteAsync(ex.ToString());
             }
         }
     }

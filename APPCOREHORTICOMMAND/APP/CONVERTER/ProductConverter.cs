@@ -16,31 +16,27 @@ namespace APPCOREHORTICOMMAND.APP.CONVERTER
                 DtDiscount = signature.DateDiscount,
                 NmPercentDiscount = signature.Discount,
                 IdUnit = signature.Unit,
-                BoStock = signature.Stock,
-                DtCreation = DateTime.Now
+                BoStock = signature.Stock
             };
         }
 
         public static Product ToDeleteProductDomain(this ProductCommandSignature signature)
         {
-            return new Product
-            {
-                IdProduct = signature.Id,
-                BoActive = false
-            };
+            return new Product { IdProduct = signature.Id.Value };
         }
 
         public static Product ToUpdateProductDomain(this ProductCommandSignature signature)
         {
             return new Product
             {
-                IdProduct = signature.Id,
+                IdProduct = signature.Id.Value,
                 DsProduct = signature.Product,
                 NmValue = signature.Value,
                 NmPercentDiscount = signature.Discount,
                 DtDiscount = signature.DateDiscount,
                 IdUnit = signature.Unit,
-                BoStock = signature.Stock
+                BoStock = signature.Stock,
+                DtAtualization = DateTime.Now
             };
         }
     }

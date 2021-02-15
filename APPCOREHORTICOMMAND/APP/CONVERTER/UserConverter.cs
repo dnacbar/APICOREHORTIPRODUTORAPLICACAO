@@ -12,8 +12,27 @@ namespace APPCOREHORTICOMMAND.APP.CONVERTER
             return new Userhorti
             {
                 DsLogin = signature.Login,
+                DsPassword = signature.Password.ToEncryptPasswordText()
+            };
+        }
+
+        public static Userhorti ToDeleteUserDomain(this UserCommandSignature signature)
+        {
+            return new Userhorti
+            {
+                DsLogin = signature.Login,
+                BoActive = false
+            };
+        }
+
+        public static Userhorti ToUpdateUserDomain(this UserCommandSignature signature)
+        {
+            return new Userhorti
+            { 
+                DsLogin = signature.Login,
                 DsPassword = signature.Password.ToEncryptPasswordText(),
-                DtCreation = DateTime.Now
+                DtAtualization = DateTime.Now,
+                BoActive = true
             };
         }
     }

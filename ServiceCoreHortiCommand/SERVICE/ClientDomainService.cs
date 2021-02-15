@@ -1,35 +1,40 @@
-﻿using DATAACCESSCOREHORTICOMMAND.ICOMMAND;
+﻿using CROSSCUTTINGCOREHORTI.EXTENSION;
+using DATAACCESSCOREHORTICOMMAND.ICOMMAND;
 using DOMAINCOREHORTICOMMAND;
 using SERVICECOREHORTICOMMAND.ISERVICE;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using VALIDATIONCOREHORTICOMMAND.DOMAIN;
 
 namespace SERVICECOREHORTICOMMAND.SERVICE
 {
     public sealed class ClientDomainService : IClientDomainService
     {
+        private readonly CreateClientDomainServiceValidation _createClientDomainServiceValidation;
+        private readonly UpdateClientDomainServiceValidation _updateClientDomainServiceValidation;
+
         private readonly IClientRepository _clientRepository;
 
-        public ClientDomainService(IClientRepository clientRepository)
+        public ClientDomainService(CreateClientDomainServiceValidation createClientDomainServiceValidation,
+                                   UpdateClientDomainServiceValidation updateClientDomainServiceValidation, 
+                                   IClientRepository clientRepository)
         {
+            _createClientDomainServiceValidation = createClientDomainServiceValidation;
+            _updateClientDomainServiceValidation = updateClientDomainServiceValidation;
             _clientRepository = clientRepository;
         }
 
         public async Task ClientServiceCreate(Client client)
         {
-            await _clientRepository.CreateClient(client);
-        }
+            _createClientDomainServiceValidation.ValidateHorti(client);
 
-        public async Task ClientServiceDelete(Client client)
-        {
-            throw new NotImplementedException();
+            await _clientRepository.CreateClient(client);
         }
 
         public async Task ClientServiceUpdate(Client client)
         {
-            throw new NotImplementedException();
+            _updateClientDomainServiceValidation.ValidateHorti(client);
+
+            await _clientRepository.UpdateClient(client);
         }
     }
 }

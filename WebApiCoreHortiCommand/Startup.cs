@@ -16,6 +16,8 @@ using Microsoft.OpenApi.Models;
 using SERVICECOREHORTICOMMAND.ISERVICE;
 using SERVICECOREHORTICOMMAND.SERVICE;
 using System.IO.Compression;
+using Utf8Json.AspNetCoreMvcFormatter;
+using Utf8Json.Resolvers;
 using VALIDATIONCOREHORTICOMMAND.APPLICATION;
 using VALIDATIONCOREHORTICOMMAND.DOMAIN;
 
@@ -40,12 +42,6 @@ namespace WEBAPICOREHORTICOMMAND
 
             services.AddCors(x => x.AddPolicy(strCorsConfig, p => { p.WithHeaders("DN-MR-WASATAIN-COMMAND"); }));
 
-            services.AddControllers().AddJsonOptions(x =>
-            {
-                x.JsonSerializerOptions.PropertyNamingPolicy = null;
-                x.JsonSerializerOptions.IgnoreNullValues = true;
-            });
-
             services.AddResponseCompression(x =>
             {
                 x.Providers.Add<BrotliCompressionProvider>();
@@ -61,6 +57,14 @@ namespace WEBAPICOREHORTICOMMAND
                 Title = "WS REST - WEB API HORTI",
                 Version = "V1",
             }));
+
+            services.AddControllers(x =>
+            {
+                x.OutputFormatters.Clear();
+                x.OutputFormatters.Add(new JsonOutputFormatter(StandardResolver.Default));
+                x.InputFormatters.Clear();
+                x.InputFormatters.Add(new JsonInputFormatter(StandardResolver.Default));
+            });
 
             // QUERY SERVICES
             HortiQueryRepository(services);
@@ -82,7 +86,7 @@ namespace WEBAPICOREHORTICOMMAND
             app.UseSwagger();
             app.UseSwaggerUI(opt =>
             {
-                opt.SwaggerEndpoint("/swagger/v1/swagger.json", "WS REST - HORTI COMMAND");
+                opt.SwaggerEndpoint("swagger/v1/swagger.json", "WS REST - HORTI COMMAND");
                 opt.RoutePrefix = string.Empty;
             });
 
@@ -104,17 +108,19 @@ namespace WEBAPICOREHORTICOMMAND
         private void HortiCommandApplicationServices(IServiceCollection services)
         {
             services.AddScoped<IClientCommandApp, ClientCommandApp>();
+            services.AddScoped<IDistrictCommandApp, DistrictCommandApp>();
+            services.AddScoped<IProducerCommandApp, ProducerCommandApp>();
             services.AddScoped<IProductCommandApp, ProductCommandApp>();
-            services.AddScoped<IUnitCommandApp, UnitCommandApp>();
-            services.AddScoped<IUserCommandApp, UserCommandApp>();   
+            services.AddScoped<IUserCommandApp, UserCommandApp>();
         }
 
         // CONTAINER DI - DOMAIN SERVICE
         private void HortiCommandDomainServices(IServiceCollection services)
         {
             services.AddScoped<IClientDomainService, ClientDomainService>();
+            services.AddScoped<IDistrictDomainService, DistrictDomainService>();
+            services.AddScoped<IProducerDomainService, ProducerDomainService>();
             services.AddScoped<IProductDomainService, ProductDomainService>();
-            services.AddScoped<IUnitDomainService, UnitDomainService>();
             services.AddScoped<IUserDomainService, UserDomainService>();
         }
 
@@ -125,7 +131,6 @@ namespace WEBAPICOREHORTICOMMAND
             services.AddScoped<IDistrictRepository, DistrictRepository>();
             services.AddScoped<IProducerRepository, ProducerRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IUnitRepository, UnitRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
         }
 
@@ -133,28 +138,44 @@ namespace WEBAPICOREHORTICOMMAND
         private void HortiCommandValidationServices(IServiceCollection services)
         {
             // APPLICATION
-            services.AddSingleton<CreateProductSignatureValidation>();
-            services.AddSingleton<DeleteProductSignatureValidation>();
-            services.AddSingleton<UpdateProductSignatureValidation>();
+            services.AddScoped<CreateClientSignatureValidation>();
+            services.AddScoped<UpdateClientSignatureValidation>();
 
-            services.AddSingleton<CreateUnitSignatureValidation>();
-            services.AddSingleton<DeleteUnitSignatureValidation>();
-            services.AddSingleton<UpdateUnitSignatureValidation>();
+            services.AddScoped<CreateProducerSignatureValidation>();
+            services.AddScoped<UpdateProducerSignatureValidation>();
+
+            services.AddScoped<CreateProductSignatureValidation>();
+            services.AddScoped<DeleteProductSignatureValidation>();
+            services.AddScoped<UpdateProductSignatureValidation>();
+
 
             services.AddScoped<CreateUserSignatureValidation>();
             services.AddScoped<DeleteUserSignatureValidation>();
             services.AddScoped<UpdateUserSignatureValidation>();
 
             //DOMAIN SERVICE
-            services.AddSingleton<ProductDomainServiceValidation>();
-            services.AddSingleton<UnitDomainServiceValidation>();
-            services.AddSingleton<UserDomainServiceValidation>();
+            services.AddScoped<CreateClientDomainServiceValidation>();
+            services.AddScoped<UpdateClientDomainServiceValidation>();
+
+            services.AddScoped<CreateDistrictDomainServiceValidation>();
+            services.AddScoped<UpdateDistrictDomainServiceValidation>();
+
+            services.AddScoped<CreateProducerDomainServiceValidation>();
+            services.AddScoped<UpdateProducerDomainServiceValidation>();
+
+            services.AddScoped<CreateProductDomainServiceValidation>();
+            services.AddScoped<UpdateProductDomainServiceValidation>();
+
+            services.AddScoped<CreateUserDomainServiceValidation>();
+            services.AddScoped<UpdateUserDomainServiceValidation>();
+
         }
 
         // CONTAINER DI - QUERY SERVICES
         private void HortiQueryRepository(IServiceCollection services)
         {
             // REPOSITORY
+            services.AddScoped<DATACOREHORTIQUERY.IQUERIES.IClientRepository, DATACOREHORTIQUERY.QUERIES.ClientRepository>();
             services.AddScoped<DATACOREHORTIQUERY.IQUERIES.IUserAccessRepository, DATACOREHORTIQUERY.QUERIES.UserAccessRepository>();
         }
     }

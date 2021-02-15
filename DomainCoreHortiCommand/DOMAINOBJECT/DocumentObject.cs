@@ -7,7 +7,7 @@ namespace DOMAINCOREHORTICOMMAND.DOMAINOBJECT
     {
         public DocumentObject(string documentObject, EnumCultureInfo cultureInfo = EnumCultureInfo.Brazilian)
         {
-			Document = documentObject.Trim();
+			Document = documentObject?.Trim();
             CultureInfo = cultureInfo;
         }
 
@@ -26,7 +26,7 @@ namespace DOMAINCOREHORTICOMMAND.DOMAINOBJECT
 
         private bool ValidateBrazilianDocument()
         {
-            if (!Document.IsOnlyNumber())
+            if (Document.IsOnlyNumber())
                 return false;
 
 			return JuridicDocument ? BrazilianJuridicDocument(Document) : BrazilianPhysicDocument(Document);

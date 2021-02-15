@@ -35,7 +35,7 @@ namespace APPCOREHORTIQUERY.APP
 
             var userClientReturn = new ClientResult();
 
-            var userHorti = await _userAccessRepository.GetUserAccessHorti(signature);
+            var userHorti = await _userAccessRepository.GetUserHortiAccess(signature);
 
             if (userHorti == null)
                 return null;
@@ -59,7 +59,7 @@ namespace APPCOREHORTIQUERY.APP
 
             var userProducerReturn = new ProducerResult();
 
-            var userHorti = await _userAccessRepository.GetUserAccessHorti(signature);
+            var userHorti = await _userAccessRepository.GetUserHortiAccess(signature);
 
             if (userHorti == null)
                 return userProducerReturn;

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace Z_DATAHORTI.EF_SCAFFOLD
 {
     public partial class State
     {
         public State()
         {
-            City = new HashSet<City>();
+            Cities = new HashSet<City>();
         }
 
         public string IdCountry { get; set; }
@@ -15,6 +17,6 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
         public string DsState { get; set; }
         public string DsUf { get; set; }
 
-        public virtual ICollection<City> City { get; set; }
+        public virtual ICollection<City> Cities { get; set; }
     }
 }

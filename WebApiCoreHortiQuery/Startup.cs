@@ -14,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.IO.Compression;
+using Utf8Json.AspNetCoreMvcFormatter;
+using Utf8Json.Resolvers;
 using VALIDATIONCOREHORTIQUERY;
 
 namespace WEBAPICOREHORTIQUERY
@@ -38,13 +40,6 @@ namespace WEBAPICOREHORTIQUERY
 
             services.AddCors(x => x.AddPolicy(strCorsConfig, p => { p.WithHeaders("DN-MR-WASATAIN-QUERY"); }));
 
-            services.AddControllers()
-                    .AddJsonOptions(x =>
-                    {
-                        x.JsonSerializerOptions.PropertyNamingPolicy = null;
-                        x.JsonSerializerOptions.IgnoreNullValues = true;
-                    });
-
             services.AddResponseCompression(x =>
             {
                 x.Providers.Add<BrotliCompressionProvider>();
@@ -61,6 +56,12 @@ namespace WEBAPICOREHORTIQUERY
                 Version = "V1",
             }));
 
+            services.AddControllers().AddJsonOptions(x =>
+            {
+                x.JsonSerializerOptions.PropertyNamingPolicy = null;
+                x.JsonSerializerOptions.IgnoreNullValues = true;
+            });
+
             HortiQueryApplicationServices(services);
             HortiQueryRepositoryServices(services);
             HortiQueryValidationServices(services);
@@ -76,7 +77,7 @@ namespace WEBAPICOREHORTIQUERY
             app.UseSwagger();
             app.UseSwaggerUI(opt =>
             {
-                opt.SwaggerEndpoint("/swagger/v1/swagger.json", "WS REST - HORTI QUERY");
+                opt.SwaggerEndpoint("swagger/v1/swagger.json", "WS REST - HORTI QUERY");
                 opt.RoutePrefix = string.Empty;
             });
 

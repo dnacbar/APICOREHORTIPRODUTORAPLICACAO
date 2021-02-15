@@ -1,5 +1,4 @@
-﻿using DOMAINCOREHORTICOMMAND.DOMAINOBJECT;
-using System;
+﻿using System;
 
 namespace DOMAINCOREHORTICOMMAND
 {
@@ -7,7 +6,6 @@ namespace DOMAINCOREHORTICOMMAND
     {
         public Guid IdProduct { get; set; }
         public string DsProduct { get; set; }
-        public bool? BoActive { get; set; }
         public DateTime DtCreation { get; set; }
         public DateTime DtAtualization { get; set; }
         public decimal NmValue { get; set; }

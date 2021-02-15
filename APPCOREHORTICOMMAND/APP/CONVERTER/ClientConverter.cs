@@ -11,21 +11,9 @@ namespace APPCOREHORTICOMMAND.APP.CONVERTER
             return new Client
             {
                 IdClient = Guid.NewGuid(),
-                DsClient = signature.Client,
                 DsEmail = signature.Email,
-                DsPhone = signature.Phone,
-                IdCity = signature.City,
-                DsFederalInscription = signature.FederalInscription,
-                DtCreation = DateTime.Now
-            };
-        }
-
-        public static Client ToDeleteClientDomain(this ClientCommandSignature signature)
-        {
-            return new Client
-            {
-                IdClient = signature.Id,
-                BoActive = false
+                DsClient = signature.Client,
+                DsPhone = signature.Phone
             };
         }
 
@@ -33,13 +21,14 @@ namespace APPCOREHORTICOMMAND.APP.CONVERTER
         {
             return new Client
             {
-                IdClient = signature.Id,
+                IdClient = signature.Id.Value,
                 DsClient = signature.Client,
                 DsEmail = signature.Email,
                 DsPhone = signature.Phone,
                 IdCity = signature.City,
+                IdDistrict = signature.District,
                 DsFederalInscription = signature.FederalInscription,
-                DtCreation = DateTime.Now
+                DtAtualization = DateTime.Now
             };
         }
     }

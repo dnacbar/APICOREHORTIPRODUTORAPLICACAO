@@ -35,7 +35,7 @@ namespace DATACOREHORTIQUERY.QUERIES
 
         public async Task<IEnumerable<City>> ListOfCities(ConsultCitySignature signature)
         {
-            return await ListOfEntities(Where: x => (signature.DsCity == null || signature.DsCity == x.DsCity)
+            return await ListOfEntities(Where: x => (signature.DsCity == null || x.DsCity.Contains(signature.DsCity))
                                                  && (signature.IdCity == null || signature.IdCity == x.IdCity)
                                                  && (signature.IdState == null || signature.IdState == x.IdState),
                                         Select: p => new City

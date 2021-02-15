@@ -18,7 +18,6 @@ namespace DOMAINCOREHORTICOMMAND
 
         public Guid IdProducer { get; set; }
         public string DsProducer { get; set; }
-        public bool? BoActive { get; set; }
         public DateTime DtCreation { get; set; }
         public DateTime DtAtualization { get; set; }
         public string DsFantasyname { get; set; }
@@ -39,8 +38,8 @@ namespace DOMAINCOREHORTICOMMAND
         public virtual City IdCityNavigation { get; set; }
         public virtual District IdDistrictNavigation { get; set; }
 
-        public PhoneObject Phone => new PhoneObject(DsPhone, CultureInfo);
-        public EmailObject Email => new EmailObject(DsEmail);
+        public PhoneObject PhoneObject => new PhoneObject(DsPhone, CultureInfo);
+        public EmailObject EmailObject => new EmailObject(DsEmail);
         public DocumentObject FederalDocument => new DocumentObject(DsFederalInscription, CultureInfo);
 
         private EnumCultureInfo CultureInfo { get; set; }

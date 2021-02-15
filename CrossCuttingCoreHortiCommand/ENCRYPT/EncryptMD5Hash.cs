@@ -17,10 +17,10 @@ namespace CROSSCUTTINGCOREHORTI.ENCRYPTING
 
                 // LOOP THROUGH EACH BYTE OF THE HASHED DATA 
                 // AND FORMAT EACH ONE AS A HEXADECIMAL STRING
-                Parallel.For(0, data.Length, (i) =>
+                for (int i = 0; i < data.Length; i++)
                 {
                     sBuilder.Append(data[i].ToString("x2"));
-                });
+                }
 
                 // RETURN THE HEXADECIMAL STRING
                 return sBuilder.ToString();

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace Z_DATAHORTI.EF_SCAFFOLD
 {
     public partial class Producer
@@ -8,9 +10,6 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
         public Guid IdProducer { get; set; }
         public string DsEmail { get; set; }
         public string DsProducer { get; set; }
-        public bool? BoActive { get; set; }
-        public DateTime DtCreation { get; set; }
-        public DateTime DtAtualization { get; set; }
         public string DsFantasyname { get; set; }
         public int? IdCity { get; set; }
         public Guid? IdDistrict { get; set; }

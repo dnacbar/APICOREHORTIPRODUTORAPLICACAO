@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace Z_DATAHORTI.EF_SCAFFOLD
 {
     public partial class Unit
     {
         public Unit()
         {
-            Product = new HashSet<Product>();
+            Products = new HashSet<Product>();
         }
 
         public byte IdUnit { get; set; }
@@ -16,6 +18,6 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
         public DateTime DtCreation { get; set; }
         public DateTime DtAtualization { get; set; }
 
-        public virtual ICollection<Product> Product { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

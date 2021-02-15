@@ -7,22 +7,27 @@ namespace CROSSCUTTINGCOREHORTI.ENCRYPTING
         public static string ToEncryptPasswordText(this string strPassword)
         {
             var strReturn = string.Empty;
+
             var strMd5Hash = EncryptMD5Hash.CreateMd5Hash(strPassword).Result;
-
             var strGuid = Guid.NewGuid().ToString().Replace("-", "").ToUpperInvariant();
-
-            for (int i = 0; i < strGuid.Length; i++)
+            try
             {
-                strReturn += strGuid.Substring(i, 1) + strMd5Hash.Substring(i, 1);
+                for (int i = 0; i < strGuid.Length; i++)
+                {
+                    strReturn += strGuid.Substring(i, 1) + strMd5Hash.Substring(i, 1);
+                }
+
+                var intInsert = (int)Math.Floor((decimal)strReturn.Length / strPassword.Length);
+
+                for (int i = 0; i < strPassword.Length; i++)
+                {
+                    strReturn = strReturn.Insert((intInsert * (i + 1)) + i, strPassword.Substring(i, 1));
+                }
             }
-
-            var intInsert = (int)Math.Floor((decimal)strReturn.Length / strPassword.Length);
-
-            for (int i = 0; i < strPassword.Length; i++)
+            catch (Exception ex)
             {
-                strReturn = strReturn.Insert((intInsert * (i + 1)) + i, strPassword.Substring(i, 1));
+                ex.Message.ToString();
             }
-
             return strReturn;
         }
 

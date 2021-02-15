@@ -6,7 +6,7 @@ namespace APPCOREHORTICOMMAND.IAPP
     public interface IUserCommandApp
     {
         Task CreateUser(UserCommandSignature signature);
-        Task DeleteUser(UserCommandSignature signature);
+        Task InactiveUser(UserCommandSignature signature);
         Task UpdateUser(UserCommandSignature signature);
     }
 }

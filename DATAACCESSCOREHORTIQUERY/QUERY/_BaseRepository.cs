@@ -25,10 +25,8 @@ namespace DATACOREHORTIQUERY.QUERIES
                                                     new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
                                                     TransactionScopeAsyncFlowOption.Enabled))
             {
-                using (_DBHORTICONTEXT)
-                {
-                    varT = await _DBHORTICONTEXT.Set<T>().Where(Where).Select(Select).AsNoTracking().FirstOrDefaultAsync();
-                }
+
+                varT = await _DBHORTICONTEXT.Set<T>().Where(Where).Select(Select).AsNoTracking().FirstOrDefaultAsync();
                 scope.Complete();
             }
             return varT;
@@ -42,10 +40,8 @@ namespace DATACOREHORTIQUERY.QUERIES
                                                     new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
                                                     TransactionScopeAsyncFlowOption.Enabled))
             {
-                using (_DBHORTICONTEXT)
-                {
-                    varT = await _DBHORTICONTEXT.Set<T>().Select(Select).AsNoTracking().OrderBy(OrderBy).ToListAsync();
-                }
+                varT = await _DBHORTICONTEXT.Set<T>().Select(Select).AsNoTracking().OrderBy(OrderBy).ToListAsync();
+
                 scope.Complete();
             }
             return varT;
@@ -60,12 +56,10 @@ namespace DATACOREHORTIQUERY.QUERIES
                                                     new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted },
                                                     TransactionScopeAsyncFlowOption.Enabled))
             {
-                using (_DBHORTICONTEXT)
-                {
-                    varT = await _DBHORTICONTEXT.Set<T>().Where(Where).Select(Select)
-                                                .AsNoTracking().Skip(Page * Quantity).Take(Quantity)
-                                                .OrderBy(OrderBy).ToListAsync();
-                }
+
+                varT = await _DBHORTICONTEXT.Set<T>().Where(Where).Select(Select)
+                                            .AsNoTracking().Skip(Page * Quantity).Take(Quantity)
+                                            .OrderBy(OrderBy).ToListAsync();
                 scope.Complete();
             }
             return varT;
