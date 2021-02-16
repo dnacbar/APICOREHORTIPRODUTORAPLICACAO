@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HORTICROSSCUTTINGCORE\HORTI.CROSSCUTTING.CORE.csproj" />
+    <ProjectReference Include="..\DATAACCESSCOREHORTIQUERY\DATAACCESSCOREHORTIQUERY.csproj" />
+  </ItemGroup>
+
+</Project>
