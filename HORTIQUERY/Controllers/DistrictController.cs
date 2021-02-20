@@ -1,9 +1,9 @@
-﻿using HORTIQUERY.DOMAIN.INTERFACES.APP;
+﻿using HORTIQUERY.DOMAIN.INTERFACE.APP;
 using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace WEBAPICOREHORTIQUERY.Controllers
+namespace HORTIQUERY.Controllers
 {
     [Route("[controller]")]
     [ApiController]
@@ -17,7 +17,7 @@ namespace WEBAPICOREHORTIQUERY.Controllers
         }
 
         [HttpPost(nameof(GetDistrictByIdOrName))]
-        public async Task<IActionResult> GetDistrictByIdOrName(ConsultDistrictSignature signature)
+        public async Task<IActionResult> GetDistrictByIdOrName(DistrictQuerySignature signature)
         {
             return Ok(await _consultDistrictApp.GetDistrictByIdOrName(signature));
         }
@@ -29,7 +29,7 @@ namespace WEBAPICOREHORTIQUERY.Controllers
         }
 
         [HttpPost(nameof(GetListOfDistricts))]
-        public async Task<IActionResult> GetListOfDistricts(ConsultDistrictSignature signature)
+        public async Task<IActionResult> GetListOfDistricts(DistrictQuerySignature signature)
         {
             return Ok(await _consultDistrictApp.GetListOfDistricts(signature));
         }

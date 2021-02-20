@@ -1,4 +1,4 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACES.MODEL;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL;
 using System.Collections.Generic;
 
 namespace HORTICOMMAND.DOMAIN.MODEL
@@ -7,7 +7,7 @@ namespace HORTICOMMAND.DOMAIN.MODEL
     {
         public State()
         {
-            City = new HashSet<ICity>();
+            City = new HashSet<City>();
         }
 
         public string IdCountry { get; set; }
@@ -15,6 +15,6 @@ namespace HORTICOMMAND.DOMAIN.MODEL
         public string DsState { get; set; }
         public string DsUf { get; set; }
 
-        public virtual ICollection<ICity> City { get; set; }
+        public virtual ICollection<City> City { get; set; }
     }
 }

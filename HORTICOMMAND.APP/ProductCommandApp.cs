@@ -1,10 +1,10 @@
-﻿using HORTICOMMAND.APP.CONVERTER;
-using HORTICOMMAND.DOMAIN.INTERFACES.APP;
-using APPDTOCOREHORTICOMMAND.SIGNATURE;
-using HORTICROSSCUTTINGCORE.EXTENSION;
-using SERVICECOREHORTICOMMAND.ISERVICE;
-using System.Threading.Tasks;
+﻿using HORTI.CORE.CROSSCUTTING.EXTENSION;
+using HORTICOMMAND.DOMAIN.INTERFACE.APP;
+using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTICOMMAND.DOMAIN.INTERFACE.SERVICE;
+using HORTICOMMAND.DOMAIN.MODEL.EXTENSION;
 using HORTICOMMAND.VALIDATION.APPLICATION;
+using System.Threading.Tasks;
 
 namespace HORTICOMMAND.APP
 {
@@ -31,21 +31,21 @@ namespace HORTICOMMAND.APP
         {
             _createProductSignatureValidation.ValidateHorti(signature);
 
-            await _productDomainService.ProductServiceCreate(signature.ToCreateProductDomain());
+            await _productDomainService.ProductServiceCreate(signature.GetProduct());
         }
 
         public async Task DeleteProduct(IProductCommandSignature signature)
         {
             _deleteProductSignatureValidation.ValidateHorti(signature);
 
-            await _productDomainService.ProductServiceDelete(signature.ToDeleteProductDomain());
+            await _productDomainService.ProductServiceDelete(signature.GetProduct());
         }
 
         public async Task UpdateProduct(IProductCommandSignature signature)
         {
             _updateProductSignatureValidation.ValidateHorti(signature);
 
-            await _productDomainService.ProductServiceUpdate(signature.ToUpdateProductDomain());
+            await _productDomainService.ProductServiceUpdate(signature.GetProduct());
         }
     }
 }

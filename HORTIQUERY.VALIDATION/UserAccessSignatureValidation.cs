@@ -1,14 +1,14 @@
-﻿using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
-using FluentValidation;
+﻿using FluentValidation;
+using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
 
 namespace VALIDATIONCOREHORTIQUERY
 {
-    public class UserAccessSignatureValidation : AbstractValidator<UserAccessSignature>
+    public class UserAccessSignatureValidation : AbstractValidator<IUserAccessQuerySignature>
     {
         public UserAccessSignatureValidation()
         {
-            RuleFor(x => x.DsLogin).NotNull().NotEmpty();
-            RuleFor(x => x.DsPassword).NotNull().NotEmpty();
+            RuleFor(x => x.Login).NotNull().NotEmpty();
+            RuleFor(x => x.Password).NotNull().NotEmpty();
         }
     }
 }

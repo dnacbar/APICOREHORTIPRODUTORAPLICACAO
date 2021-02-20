@@ -1,4 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using HORTICOMMAND.APP;
+using HORTICOMMAND.DOMAIN.INTERFACE.APP;
+using HORTICOMMAND.DOMAIN.INTERFACE.REPOSITORY;
+using HORTICOMMAND.DOMAIN.INTERFACE.SERVICE;
+using HORTICOMMAND.DOMAIN.SERVICE;
+using HORTICOMMAND.REPOSITORY;
+using HORTICOMMAND.VALIDATION.APPLICATION;
+using HORTICOMMAND.VALIDATION.DOMAIN;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HORTICOMMAND
 {
@@ -20,8 +28,8 @@ namespace HORTICOMMAND
         private static void ServiceQueryRepository(IServiceCollection services)
         {
             // REPOSITORY
-            services.AddScoped<DATACOREHORTIQUERY.IQUERIES.IClientRepository, DATACOREHORTIQUERY.QUERIES.ClientRepository>();
-            services.AddScoped<DATACOREHORTIQUERY.IQUERIES.IUserAccessRepository, DATACOREHORTIQUERY.QUERIES.UserAccessRepository>();
+            services.AddScoped<HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY.IClientRepository, HORTIQUERY.REPOSITORY.ClientRepository>();
+            services.AddScoped<HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY.IUserAccessRepository, HORTIQUERY.REPOSITORY.UserAccessRepository>();
         }
 
         // CONTAINER DI - APP LAYER
@@ -68,6 +76,9 @@ namespace HORTICOMMAND
             services.AddScoped<DeleteProductSignatureValidation>();
             services.AddScoped<UpdateProductSignatureValidation>();
 
+            services.AddScoped<CreateDistrictSignatureValidation>();
+            services.AddScoped<DeleteDistrictSignatureValidation>();
+            services.AddScoped<UpdateDistrictSignatureValidation>();
 
             services.AddScoped<CreateUserSignatureValidation>();
             services.AddScoped<DeleteUserSignatureValidation>();

@@ -1,5 +1,5 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACES.APP;
-using APPDTOCOREHORTICOMMAND.SIGNATURE;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.APP;
+using HORTICOMMAND.DOMAIN.MODEL.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -17,21 +17,21 @@ namespace HORTICOMMAND.Controllers
         }
 
         [HttpPost(nameof(CreateUser))]
-        public async Task<IActionResult> CreateUser([FromBody] IUserCommandSignature signature)
+        public async Task<IActionResult> CreateUser([FromBody] UserCommandSignature signature)
         {
             await _userCommandApp.CreateUser(signature);
             return Created(string.Empty, null);
         }
 
         [HttpDelete(nameof(InactiveUser))]
-        public async Task<IActionResult> InactiveUser([FromBody] IUserCommandSignature signature)
+        public async Task<IActionResult> InactiveUser([FromBody] UserCommandSignature signature)
         {
             await _userCommandApp.InactiveUser(signature);
             return NoContent();
         }
 
         [HttpPut(nameof(UpdateUser))]
-        public async Task<IActionResult> UpdateUser([FromBody] IUserCommandSignature signature)
+        public async Task<IActionResult> UpdateUser([FromBody] UserCommandSignature signature)
         {
             await _userCommandApp.UpdateUser(signature);
             return NoContent();

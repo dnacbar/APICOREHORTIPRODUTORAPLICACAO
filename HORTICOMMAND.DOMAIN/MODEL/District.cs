@@ -1,4 +1,4 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACES.MODEL;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL;
 using System;
 using System.Collections.Generic;
 

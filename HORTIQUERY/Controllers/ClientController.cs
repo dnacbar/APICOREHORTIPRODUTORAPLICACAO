@@ -1,9 +1,9 @@
-﻿using HORTIQUERY.DOMAIN.INTERFACES.APP;
+﻿using HORTIQUERY.DOMAIN.INTERFACE.APP;
 using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace WEBAPICOREHORTIQUERY.Controllers
+namespace HORTIQUERY.Controllers
 {
     [Route("[controller]")]
     [ApiController]
@@ -16,7 +16,7 @@ namespace WEBAPICOREHORTIQUERY.Controllers
         }
 
         [HttpPost(nameof(GetClientByIdOrEmail))]
-        public async Task<IActionResult> GetClientByIdOrEmail([FromBody] ConsultClientSignature signature)
+        public async Task<IActionResult> GetClientByIdOrEmail([FromBody] ClientQuerySignature signature)
         {
             return Ok(await _consultClientApp.GetClientByIdOrEmail(signature));
         }
@@ -28,7 +28,7 @@ namespace WEBAPICOREHORTIQUERY.Controllers
         }
 
         [HttpPost(nameof(GetListOfClients))]
-        public async Task<IActionResult> GetListOfClients([FromBody] ConsultClientSignature signature)
+        public async Task<IActionResult> GetListOfClients([FromBody] ClientQuerySignature signature)
         {
             return Ok(await _consultClientApp.GetListOfClients(signature));
         }

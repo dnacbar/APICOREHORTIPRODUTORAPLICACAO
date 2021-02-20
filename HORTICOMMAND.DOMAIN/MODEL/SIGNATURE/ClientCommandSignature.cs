@@ -1,9 +1,9 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACES.MODEL.SIGNATURE;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using HORTICOMMAND.DOMAIN.MODEL.DOMAINOBJECT;
 using System;
 using System.Text.Json.Serialization;
 
-namespace APPDTOCOREHORTICOMMAND.SIGNATURE
+namespace HORTICOMMAND.DOMAIN.MODEL.SIGNATURE
 {
     public sealed class ClientCommandSignature : IClientCommandSignature
     {

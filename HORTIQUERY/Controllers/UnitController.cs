@@ -1,9 +1,9 @@
-﻿using HORTIQUERY.DOMAIN.INTERFACES.APP;
+﻿using HORTIQUERY.DOMAIN.INTERFACE.APP;
 using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace WEBAPICOREHORTIQUERY.Controllers
+namespace HORTIQUERY.Controllers
 {
     [Route("[controller]")]
     [ApiController]
@@ -16,7 +16,7 @@ namespace WEBAPICOREHORTIQUERY.Controllers
         }
 
         [HttpPost(nameof(GetUnitById))]
-        public async Task<IActionResult> GetUnitById([FromBody] ConsultUnitSignature signature)
+        public async Task<IActionResult> GetUnitById([FromBody] UnitQuerySignature signature)
         {
             return Ok(await _consultUnitApp.GetUnitById(signature));
         }
@@ -28,7 +28,7 @@ namespace WEBAPICOREHORTIQUERY.Controllers
         }
 
         [HttpPost(nameof(GetListOfUnits))]
-        public async Task<IActionResult> GetListOfUnits([FromBody] ConsultUnitSignature signature)
+        public async Task<IActionResult> GetListOfUnits([FromBody] UnitQuerySignature signature)
         {
             return Ok(await _consultUnitApp.GetListOfUnits(signature));
         }

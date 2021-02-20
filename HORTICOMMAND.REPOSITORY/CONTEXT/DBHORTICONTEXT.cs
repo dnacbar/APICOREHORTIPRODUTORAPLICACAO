@@ -7,22 +7,21 @@ namespace HORTICOMMAND.REPOSITORY
     {
         public DBHORTICONTEXT(DbContextOptions<DBHORTICONTEXT> options) : base(options) { }
 
-        public virtual DbSet<ICity> City { get; set; }
-        public virtual DbSet<IClient> Client { get; set; }
-        public virtual DbSet<ICountry> Country { get; set; }
-        public virtual DbSet<IDistrict> District { get; set; }
-        public virtual DbSet<IProducer> Producer { get; set; }
-        public virtual DbSet<IProduct> Product { get; set; }
-        public virtual DbSet<IState> State { get; set; }
+        public virtual DbSet<City> City { get; set; }
+        public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
+        public virtual DbSet<District> District { get; set; }
+        public virtual DbSet<Producer> Producer { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<State> State { get; set; }
         public virtual DbSet<Unit> Unit { get; set; }
         public virtual DbSet<Userhorti> Userhorti { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
 
-            modelBuilder.Entity<ICity>(entity =>
+            modelBuilder.Entity<City>(entity =>
             {
                 entity.HasKey(e => e.IdCity);
 
@@ -56,7 +55,7 @@ namespace HORTICOMMAND.REPOSITORY
                     .HasConstraintName("FK_CITY_STATE");
             });
 
-            modelBuilder.Entity<IClient>(entity =>
+            modelBuilder.Entity<Client>(entity =>
             {
                 entity.HasKey(e => new { e.IdClient, e.DsEmail });
 
@@ -124,7 +123,7 @@ namespace HORTICOMMAND.REPOSITORY
                     .HasConstraintName("FK_CLIENT_DISTRICT");
             });
 
-            modelBuilder.Entity<ICountry>(entity =>
+            modelBuilder.Entity<Country>(entity =>
             {
                 entity.HasKey(e => e.IdCountry);
 
@@ -140,7 +139,7 @@ namespace HORTICOMMAND.REPOSITORY
                     .HasColumnName("DS_COUNTRY");
             });
 
-            modelBuilder.Entity<IDistrict>(entity =>
+            modelBuilder.Entity<District>(entity =>
             {
                 entity.HasKey(e => e.IdDistrict);
 
@@ -166,7 +165,7 @@ namespace HORTICOMMAND.REPOSITORY
                     .HasDefaultValueSql("(getdate())");
             });
 
-            modelBuilder.Entity<IProducer>(entity =>
+            modelBuilder.Entity<Producer>(entity =>
             {
                 entity.HasKey(e => new { e.IdProducer, e.DsEmail });
 
@@ -229,7 +228,7 @@ namespace HORTICOMMAND.REPOSITORY
                     .IsUnicode(false)
                     .HasColumnName("DS_ZIP")
                     .IsFixedLength(true);
-
+                
                 entity.Property(e => e.IdCity).HasColumnName("ID_CITY");
 
                 entity.Property(e => e.IdDistrict).HasColumnName("ID_DISTRICT");
@@ -251,7 +250,7 @@ namespace HORTICOMMAND.REPOSITORY
                     .HasConstraintName("FK_PRODUCER_DISTRICT");
             });
 
-            modelBuilder.Entity<IProduct>(entity =>
+            modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.IdProduct);
 
@@ -299,7 +298,7 @@ namespace HORTICOMMAND.REPOSITORY
                     .HasConstraintName("FK_PRODUCT_UNITY");
             });
 
-            modelBuilder.Entity<IState>(entity =>
+            modelBuilder.Entity<State>(entity =>
             {
                 entity.HasKey(e => new { e.IdCountry, e.IdState });
 

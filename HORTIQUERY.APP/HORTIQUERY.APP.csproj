@@ -6,8 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DATAACCESSCOREHORTIQUERY\DATAACCESSCOREHORTIQUERY.csproj" />
-    <ProjectReference Include="..\VALIDATIONCOREHORTIQUERY\VALIDATIONCOREHORTIQUERY.csproj" />
+    <ProjectReference Include="..\HORTI.CORE.CROSSCUTTING\HORTI.CORE.CROSSCUTTING.csproj" />
+    <ProjectReference Include="..\HORTICOMMAND.DOMAIN\HORTICOMMAND.DOMAIN.csproj" />
+    <ProjectReference Include="..\HORTICOMMAND.VALIDATION\HORTICOMMAND.VALIDATION.csproj" />
+    <ProjectReference Include="..\HORTIQUERY.VALIDATION\HORTIQUERY.VALIDATION.csproj" />
   </ItemGroup>
 
 </Project>

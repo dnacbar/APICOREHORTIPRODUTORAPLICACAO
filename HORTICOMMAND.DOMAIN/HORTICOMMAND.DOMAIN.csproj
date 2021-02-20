@@ -7,20 +7,17 @@
 
   <ItemGroup>
     <Compile Remove="APP\**" />
-    <Compile Remove="INTERFACE\**" />
     <EmbeddedResource Remove="APP\**" />
-    <EmbeddedResource Remove="INTERFACE\**" />
     <None Remove="APP\**" />
-    <None Remove="INTERFACE\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="INTERFACE\MODEL\RESULT\" />
     <Folder Include="MODEL\RESULT\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HORTI.CORE.CROSSCUTTING\HORTI.CORE.CROSSCUTTING.csproj" />
-    <ProjectReference Include="..\HORTICOMMAND.DOMAIN.INTERFACES\HORTICOMMAND.DOMAIN.INTERFACES.csproj" />
   </ItemGroup>
 
 </Project>

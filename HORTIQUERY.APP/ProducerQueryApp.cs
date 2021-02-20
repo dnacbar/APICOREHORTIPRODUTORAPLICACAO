@@ -1,12 +1,12 @@
-﻿using APPCOREHORTIQUERY.CONVERTER;
-using HORTIQUERY.DOMAIN.INTERFACES.APP;
-using HORTIQUERY.DOMAIN.MODEL.RESULT;
-using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
-using DATACOREHORTIQUERY.IQUERIES;
+﻿using HORTIQUERY.DOMAIN.INTERFACE.APP;
+using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
+using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
+using HORTIQUERY.DOMAIN.MODEL.EXTENSION;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace APPCOREHORTIQUERY.APP
+namespace HORTIQUERY.APP
 {
     public class ProducerQueryApp : IProducerQueryApp
     {
@@ -17,19 +17,19 @@ namespace APPCOREHORTIQUERY.APP
             _producerRepository = producerRepository;
         }
 
-        public async Task<IEnumerable<ProducerResult>> GetFullListOfProducers()
+        public async Task<IEnumerable<IProducerResult>> GetFullListOfProducers()
         {
-            return (await _producerRepository.FullListOfProducers()).ToHashSetProducerResult();
+            return (await _producerRepository.FullListOfProducers()).GetListOfProducerResult();
         }
 
-        public async Task<IEnumerable<ProducerResult>> GetListOfProducers(ConsultProducerSignature signature)
+        public async Task<IEnumerable<IProducerResult>> GetListOfProducers(IProducerQuerySignature signature)
         {
-            return (await _producerRepository.ListOfProducers(signature)).ToHashSetProducerResult();
+            return (await _producerRepository.ListOfProducers(signature)).GetListOfProducerResult();
         }
 
-        public async Task<ProducerResult> GetProducerByIdOrEmail(ConsultProducerSignature signature)
+        public async Task<IProducerResult> GetProducerByIdOrEmail(IProducerQuerySignature signature)
         {
-            return (await _producerRepository.ProducerByIdOrEmail(signature)).ToProducerResult();
+            return (await _producerRepository.ProducerByIdOrEmail(signature)).GetProducerResult();
         }
     }
 }

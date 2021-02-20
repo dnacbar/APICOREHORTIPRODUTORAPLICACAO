@@ -1,5 +1,4 @@
-﻿using HORTICOMMAND.DOMAIN.MODEL.DOMAINOBJECT;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace HORTICOMMAND.DOMAIN.MODEL

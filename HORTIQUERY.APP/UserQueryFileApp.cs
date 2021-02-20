@@ -1,13 +1,13 @@
-﻿using HORTIQUERY.DOMAIN.INTERFACES.APP;
-using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
+﻿using HORTIQUERY.DOMAIN.INTERFACE.APP;
+using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace APPCOREHORTIQUERY.APP
+namespace HORTIQUERY.APP
 {
     public class UserQueryFileApp : IUserQueryFileApp
     {
-        public async Task<byte[]> GetUserImage(ConsultUserSignature signature)
+        public async Task<byte[]> GetUserImage(IUserQuerySignature signature)
         {
             byte[] imageFile;
             if (signature.IsProducer)

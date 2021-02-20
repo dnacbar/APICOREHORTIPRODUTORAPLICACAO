@@ -1,9 +1,10 @@
-﻿using HORTICOMMAND.DOMAIN.MODEL.DOMAINOBJECT;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTICOMMAND.DOMAIN.MODEL.DOMAINOBJECT;
 using System.Text.Json.Serialization;
 
-namespace APPDTOCOREHORTICOMMAND.SIGNATURE
+namespace HORTICOMMAND.DOMAIN.MODEL.SIGNATURE
 {
-    public sealed class UserCommandSignature
+    public sealed class UserCommandSignature : IUserCommandSignature
     {
         public bool IsProducer { get; set; }
         public string Login { get; set; }

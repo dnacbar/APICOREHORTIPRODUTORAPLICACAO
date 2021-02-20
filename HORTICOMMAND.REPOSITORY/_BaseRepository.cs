@@ -1,10 +1,9 @@
 ﻿using HORTICOMMAND.REPOSITORY;
-using HORTICOMMAND.DOMAIN.MODEL;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
-namespace DATAACCESSCOREHORTICOMMAND.COMMAND
+namespace HORTICOMMAND.REPOSITORY
 {
     public abstract class _BaseRepository<T> where T : class
     {
@@ -27,7 +26,7 @@ namespace DATAACCESSCOREHORTICOMMAND.COMMAND
                 if (ex is DbUpdateException)
                     throw new DbUpdateException(ex.Message, ex);
 
-                throw ex;
+                throw;
             }
         }
 
@@ -49,7 +48,7 @@ namespace DATAACCESSCOREHORTICOMMAND.COMMAND
                 if (ex is DbUpdateException)
                     throw new DbUpdateException(ex.Message, ex);
 
-                throw ex;
+                throw;
             }
         }
 
@@ -66,7 +65,7 @@ namespace DATAACCESSCOREHORTICOMMAND.COMMAND
                 if (ex is DbUpdateException)
                     throw new DbUpdateException(ex.Message, ex);
 
-                throw ex;
+                throw;
             }
         }
     }

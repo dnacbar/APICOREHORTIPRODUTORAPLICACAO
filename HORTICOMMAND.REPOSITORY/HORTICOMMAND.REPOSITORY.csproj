@@ -6,7 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DATACOREHORTICOMMAND\HORTICOMMAND.DOMAIN.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HORTICOMMAND.DOMAIN\HORTICOMMAND.DOMAIN.csproj" />
   </ItemGroup>
 
 </Project>

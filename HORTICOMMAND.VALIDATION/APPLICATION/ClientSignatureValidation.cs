@@ -1,13 +1,13 @@
-﻿using APPDTOCOREHORTICOMMAND.SIGNATURE;
-using APPDTOCOREHORTIQUERY.SIGNATURE;
-using DATACOREHORTIQUERY.IQUERIES;
-using FluentValidation;
+﻿using FluentValidation;
+using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
+using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
 using System;
 using System.Threading.Tasks;
 
 namespace HORTICOMMAND.VALIDATION.APPLICATION
 {
-    public sealed class CreateClientSignatureValidation : AbstractValidator<ClientCommandSignature>
+    public sealed class CreateClientSignatureValidation : AbstractValidator<IClientCommandSignature>
     {
         public CreateClientSignatureValidation()
         {
@@ -17,7 +17,7 @@ namespace HORTICOMMAND.VALIDATION.APPLICATION
         }
     }
 
-    public sealed class UpdateClientSignatureValidation : AbstractValidator<ClientCommandSignature>
+    public sealed class UpdateClientSignatureValidation : AbstractValidator<IClientCommandSignature>
     {
         private readonly IClientRepository _clientRepository;
 
@@ -35,7 +35,7 @@ namespace HORTICOMMAND.VALIDATION.APPLICATION
 
         private async Task<bool> ValidateClientExists(Guid idClient, string dsEmail)
         {
-            return await _clientRepository.ClientByIdOrEmail(new ConsultClientSignature { IdClient = idClient, DsEmail = dsEmail }) != null;
+            return await _clientRepository.ClientByIdOrEmail(new ClientQuerySignature { Id = idClient, Email = dsEmail }) != null;
         }
     }
 }

@@ -1,14 +1,15 @@
-﻿using APPCOREHORTIQUERY.CONVERTER;
-using HORTIQUERY.DOMAIN.INTERFACES.APP;
+﻿using HORTI.CORE.CROSSCUTTING.ENCRYPTING;
+using HORTI.CORE.CROSSCUTTING.EXTENSION;
+using HORTIQUERY.DOMAIN.INTERFACE.APP;
+using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
+using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
+using HORTIQUERY.DOMAIN.MODEL.EXTENSION;
 using HORTIQUERY.DOMAIN.MODEL.RESULT;
 using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
-using HORTICROSSCUTTINGCORE.ENCRYPTING;
-using HORTICROSSCUTTINGCORE.EXTENSION;
-using DATACOREHORTIQUERY.IQUERIES;
 using System.Threading.Tasks;
 using VALIDATIONCOREHORTIQUERY;
 
-namespace APPCOREHORTIQUERY.APP
+namespace HORTIQUERY.APP
 {
     public sealed class UserAccessApp : IUserAccessApp
     {
@@ -29,52 +30,51 @@ namespace APPCOREHORTIQUERY.APP
             _userAccessSignatureValidation = userAccessSignatureValidation;
         }
 
-        public async Task<ClientResult> ValidateUserAccessClient(UserAccessSignature signature)
+        public async Task<IClientResult> ValidateUserAccessClient(IUserAccessQuerySignature signature)
         {
             _userAccessSignatureValidation.ValidateHorti(signature);
-
-            var userClientReturn = new ClientResult();
-
             var userHorti = await _userAccessRepository.GetUserHortiAccess(signature);
+            
+
+            IClientResult result = new ClientResult();
 
             if (userHorti == null)
-                return null;
+                return result;
 
-            var strDecryptPassword = signature.DsPassword.ToDecryptPassworText(userHorti.DsPassword);
+            var strDecryptPassword = signature.Password.ToDecryptPassworText(userHorti.DsPassword);
 
-            if (signature.DsPassword.Equals(strDecryptPassword))
+            if (signature.Password.Equals(strDecryptPassword))
             {
-                userClientReturn = (await _clientRepository.ClientByIdOrEmail(new ConsultClientSignature
+                result = (await _clientRepository.ClientByIdOrEmail(new ClientQuerySignature
                 {
-                    DsEmail = signature.DsLogin
-                }))?.ToClientResult();
+                    Email = signature.Login
+                }))?.GetClientResult();
             }
 
-            return userClientReturn;
+            return result;
         }
 
-        public async Task<ProducerResult> ValidateUserAccessProducer(UserAccessSignature signature)
+        public async Task<IProducerResult> ValidateUserAccessProducer(IUserAccessQuerySignature signature)
         {
-            _userAccessSignatureValidation.Validate(signature);
-
-            var userProducerReturn = new ProducerResult();
-
+            _userAccessSignatureValidation.ValidateHorti(signature);
             var userHorti = await _userAccessRepository.GetUserHortiAccess(signature);
 
+            IProducerResult result = new ProducerResult();
+
             if (userHorti == null)
-                return userProducerReturn;
+                return result;
 
-            var strDecryptPassword = signature.DsPassword.ToDecryptPassworText(userHorti.DsPassword);
+            var strDecryptPassword = signature.Password.ToDecryptPassworText(userHorti.DsPassword);
 
-            if (signature.DsPassword.Equals(strDecryptPassword))
+            if (signature.Password.Equals(strDecryptPassword))
             {
-                userProducerReturn = (await _producerRepository.ProducerByIdOrEmail(new ConsultProducerSignature
+                result = (await _producerRepository.ProducerByIdOrEmail(new ProducerQuerySignature
                 {
-                    DsEmail = signature.DsLogin
-                }))?.ToProducerResult();
+                    Email = signature.Login
+                }))?.GetProducerResult();
             }
 
-            return userProducerReturn;
+            return result;
         }
     }
 }

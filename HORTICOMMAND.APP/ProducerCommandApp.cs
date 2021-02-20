@@ -1,12 +1,12 @@
-﻿using HORTICOMMAND.APP.CONVERTER;
-using HORTICOMMAND.DOMAIN.INTERFACES.APP;
-using APPDTOCOREHORTICOMMAND.SIGNATURE;
-using HORTICROSSCUTTINGCORE.EXTENSION;
-using HORTICROSSCUTTINGCORE.FILE;
-using SERVICECOREHORTICOMMAND.ISERVICE;
+﻿using HORTI.CORE.CROSSCUTTING.EXTENSION;
+using HORTI.CORE.CROSSCUTTING.FILE;
+using HORTICOMMAND.DOMAIN.INTERFACE.APP;
+using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTICOMMAND.DOMAIN.INTERFACE.SERVICE;
+using HORTICOMMAND.DOMAIN.MODEL.EXTENSION;
+using HORTICOMMAND.VALIDATION.APPLICATION;
 using System.IO;
 using System.Threading.Tasks;
-using HORTICOMMAND.VALIDATION.APPLICATION;
 
 namespace HORTICOMMAND.APP
 {
@@ -30,7 +30,7 @@ namespace HORTICOMMAND.APP
         {
             _createProducerSignatureValidation.ValidateHorti(signature);
 
-            var producerDomain = signature.ToCreateProducerDomain();
+            var producerDomain = signature.GetProducer();
             await _producerDomainService.ProducerServiceCreate(producerDomain);
 
             Directory.CreateDirectory(Path.Combine(Path.GetPathRoot(Directory.GetCurrentDirectory()), "PRODUCER", producerDomain.IdProducer.ToString()));
@@ -40,7 +40,7 @@ namespace HORTICOMMAND.APP
         {
             _updateProducerSignatureValidation.ValidateHorti(signature);
 
-            await _producerDomainService.ProducerServiceUpdate(signature.ToUpdateProducerDomain());
+            await _producerDomainService.ProducerServiceUpdate(signature.GetProducer());
 
             CreateProducerImage(signature);
         }

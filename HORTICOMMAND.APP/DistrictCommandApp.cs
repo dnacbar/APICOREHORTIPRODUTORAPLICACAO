@@ -1,52 +1,51 @@
-﻿using HORTICOMMAND.APP.CONVERTER;
-using HORTICOMMAND.DOMAIN.INTERFACES.APP;
-using APPDTOCOREHORTICOMMAND.SIGNATURE;
-using HORTICROSSCUTTINGCORE.EXTENSION;
-using SERVICECOREHORTICOMMAND.ISERVICE;
-using System.Threading.Tasks;
+﻿using HORTI.CORE.CROSSCUTTING.EXTENSION;
+using HORTICOMMAND.DOMAIN.INTERFACE.APP;
+using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTICOMMAND.DOMAIN.INTERFACE.SERVICE;
+using HORTICOMMAND.DOMAIN.MODEL.EXTENSION;
 using HORTICOMMAND.VALIDATION.APPLICATION;
+using System.Threading.Tasks;
 
 namespace HORTICOMMAND.APP
 {
     public sealed class DistrictCommandApp : IDistrictCommandApp
     {
-        //private readonly CreateUnitSignatureValidation _createUnitSignatureValidation;
-        //private readonly DeleteUnitSignatureValidation _deleteUnitSignatureValidation;
-        //private readonly UpdateUnitSignatureValidation _updateUnitSignatureValidation;
+        private readonly CreateDistrictSignatureValidation _createDistrictSignatureValidation;
+        private readonly DeleteDistrictSignatureValidation _deleteDistrictSignatureValidation;
+        private readonly UpdateDistrictSignatureValidation _updateDistrictSignatureValidation;
 
         private readonly IDistrictDomainService _districtDomainService;
 
-        public DistrictCommandApp(//CreateUnitSignatureValidation createUnitSignatureValidation,
-                                  //DeleteUnitSignatureValidation deleteUnitSignatureValidation,
-                                  //UpdateUnitSignatureValidation updateUnitSignatureValidation,
+        public DistrictCommandApp(CreateDistrictSignatureValidation createDistrictSignatureValidation,
+                                  DeleteDistrictSignatureValidation deleteDistrictSignatureValidation,
+                                  UpdateDistrictSignatureValidation updateDistrictSignatureValidation,
                                   IDistrictDomainService districtDomainService)
         {
-            //_createUnitSignatureValidation = createUnitSignatureValidation;
-            //_deleteUnitSignatureValidation = deleteUnitSignatureValidation;
-            //_updateUnitSignatureValidation = updateUnitSignatureValidation;
-
+            _createDistrictSignatureValidation = createDistrictSignatureValidation;
+            _deleteDistrictSignatureValidation = deleteDistrictSignatureValidation;
+            _updateDistrictSignatureValidation = updateDistrictSignatureValidation;
             _districtDomainService = districtDomainService;
         }
 
         public async Task CreateDistrict(IDistrictCommandSignature signature)
         {
-            //_createUnitSignatureValidation.ValidateHorti(signature);
+            _createDistrictSignatureValidation.ValidateHorti(signature);
 
-            await _districtDomainService.DistrictServiceCreate(signature.ToCreateDistrictDomain());
+            await _districtDomainService.DistrictServiceCreate(signature.GetDistrict());
         }
 
         public async Task DeleteDistrict(IDistrictCommandSignature signature)
         {
-            //_deleteUnitSignatureValidation.ValidateHorti(signature);
+            _deleteDistrictSignatureValidation.ValidateHorti(signature);
 
-            await _districtDomainService.DistrictServiceDelete(signature.ToDeleteDistrictDomain());
+            await _districtDomainService.DistrictServiceDelete(signature.GetDistrict());
         }
 
         public async Task UpdateDistrict(IDistrictCommandSignature signature)
         {
-            //_updateUnitSignatureValidation.ValidateHorti(signature);
+            _updateDistrictSignatureValidation.ValidateHorti(signature);
 
-            await _districtDomainService.DistrictServiceUpdate(signature.ToUpdateDistrictDomain());
+            await _districtDomainService.DistrictServiceUpdate(signature.GetDistrict());
         }
     }
 }

@@ -1,13 +1,11 @@
-﻿using HORTICOMMAND.APP.CONVERTER;
-using HORTICOMMAND.DOMAIN.INTERFACES.APP;
-using APPDTOCOREHORTICOMMAND.SIGNATURE;
-using APPDTOCOREHORTIQUERY.SIGNATURE;
-using HORTICROSSCUTTINGCORE.EXTENSION;
-using DATACOREHORTIQUERY.IQUERIES;
-using FluentValidation;
-using SERVICECOREHORTICOMMAND.ISERVICE;
-using System.Threading.Tasks;
+﻿using HORTI.CORE.CROSSCUTTING.EXTENSION;
+using HORTICOMMAND.DOMAIN.INTERFACE.APP;
+using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTICOMMAND.DOMAIN.INTERFACE.SERVICE;
+using HORTICOMMAND.DOMAIN.MODEL.SIGNATURE;
 using HORTICOMMAND.VALIDATION.APPLICATION;
+using System.Threading.Tasks;
+using HORTICOMMAND.DOMAIN.MODEL.EXTENSION;
 
 namespace HORTICOMMAND.APP
 {
@@ -41,11 +39,11 @@ namespace HORTICOMMAND.APP
         {
             _createUserSignatureValidation.ValidateHorti(signature);
 
-            await _userDomainService.UserServiceCreate(signature.ToCreateUserDomain());
+            await _userDomainService.UserServiceCreate(signature.GetUserhorti());
 
             if (signature.IsProducer)
             {
-                await _producerCommandApp.CreateProducer(new IProducerCommandSignature
+                await _producerCommandApp.CreateProducer(new ProducerCommandSignature
                 {
                     Email = signature.Login,
                     Producer = signature.UserName,
@@ -67,14 +65,14 @@ namespace HORTICOMMAND.APP
         {
             _deleteUserSignatureValidation.ValidateHorti(signature);
 
-            await _userDomainService.UserServiceDelete(signature.ToDeleteUserDomain());
+            await _userDomainService.UserServiceDelete(signature.GetUserhorti());
         }
 
         public async Task UpdateUser(IUserCommandSignature signature)
         {
             _updateUserSignatureValidation.ValidateHorti(signature);
 
-            await _userDomainService.UserServiceUpdate(signature.ToUpdateUserDomain());
+            await _userDomainService.UserServiceUpdate(signature.GetUserhorti());
         }
     }
 }

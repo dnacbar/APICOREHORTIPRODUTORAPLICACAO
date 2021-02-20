@@ -1,7 +1,7 @@
-﻿using APPDTOCOREHORTICOMMAND.SIGNATURE;
-using APPDTOCOREHORTIQUERY.SIGNATURE;
-using DATACOREHORTIQUERY.IQUERIES;
-using FluentValidation;
+﻿using FluentValidation;
+using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
+using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
 using System.Threading.Tasks;
 
 namespace HORTICOMMAND.VALIDATION.APPLICATION
@@ -63,7 +63,7 @@ namespace HORTICOMMAND.VALIDATION.APPLICATION
 
         private async Task<bool> ValidateUserNotExists(IUserCommandSignature signature)
         {
-            return (await _userAccessRepository.GetUserHortiAccess(new UserAccessSignature { DsLogin = signature.Login })) == null;
+            return (await _userAccessRepository.GetUserHortiAccess(new UserAccessQuerySignature { Login = signature.Login })) == null;
         }
     }
 
@@ -81,7 +81,7 @@ namespace HORTICOMMAND.VALIDATION.APPLICATION
 
         private async Task<bool> ValidateUserExists(IUserCommandSignature signature)
         {
-            return (await _userAccessRepository.GetUserHortiAccess(new UserAccessSignature { DsLogin = signature.Login })) != null;
+            return (await _userAccessRepository.GetUserHortiAccess(new UserAccessQuerySignature { Login = signature.Login })) != null;
         }
     }
 
@@ -138,7 +138,7 @@ namespace HORTICOMMAND.VALIDATION.APPLICATION
 
         private async Task<bool> ValidateUserExists(IUserCommandSignature signature)
         {
-            return (await _userAccessRepository.GetUserHortiAccess(new UserAccessSignature { DsLogin = signature.Login })) != null;
+            return (await _userAccessRepository.GetUserHortiAccess(new UserAccessQuerySignature { Login = signature.Login })) != null;
         }
     }
 }

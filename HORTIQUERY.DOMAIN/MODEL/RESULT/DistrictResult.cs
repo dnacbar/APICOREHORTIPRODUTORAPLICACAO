@@ -1,10 +1,11 @@
-﻿using System;
+﻿using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
+using System;
 
 namespace HORTIQUERY.DOMAIN.MODEL.RESULT
 {
-    public class DistrictResult
+    public class DistrictResult : IDistrictResult
     {
-        public Guid IdDistrict { get; set; }
-        public string DsDistrict { get; set; }
+        public Guid Id { get; set; }
+        public string District { get; set; }
     }
 }

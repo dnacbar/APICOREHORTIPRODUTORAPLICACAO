@@ -1,12 +1,12 @@
-﻿using APPCOREHORTIQUERY.CONVERTER;
-using HORTIQUERY.DOMAIN.INTERFACES.APP;
-using HORTIQUERY.DOMAIN.MODEL.RESULT;
-using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
-using DATACOREHORTIQUERY.IQUERIES;
+﻿using HORTIQUERY.DOMAIN.INTERFACE.APP;
+using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
+using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
+using HORTIQUERY.DOMAIN.MODEL.EXTENSION;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace APPCOREHORTIQUERY.APP
+namespace HORTIQUERY.APP
 {
     public class DistrictQueryApp : IDistrictQueryApp
     {
@@ -17,19 +17,19 @@ namespace APPCOREHORTIQUERY.APP
             _discrictRepository = discrictRepository;
         }
 
-        public async Task<DistrictResult> GetDistrictByIdOrName(ConsultDistrictSignature signature)
+        public async Task<IDistrictResult> GetDistrictByIdOrName(IDistrictQuerySignature signature)
         {
-            return (await _discrictRepository.DistrictByIdOrName(signature)).ToDistrictResult();
+            return (await _discrictRepository.DistrictByIdOrName(signature)).GetDistrictResult();
         }
 
-        public async Task<IEnumerable<DistrictResult>> GetFullListOfDistricts()
+        public async Task<IEnumerable<IDistrictResult>> GetFullListOfDistricts()
         {
-            return (await _discrictRepository.FullListOfDistricts()).ToHashSetDistrictResult();
+            return (await _discrictRepository.FullListOfDistricts()).GetListOfDistrictResult();
         }
 
-        public async Task<IEnumerable<DistrictResult>> GetListOfDistricts(ConsultDistrictSignature signature)
+        public async Task<IEnumerable<IDistrictResult>> GetListOfDistricts(IDistrictQuerySignature signature)
         {
-            return (await _discrictRepository.ListOfDistricts(signature)).ToHashSetDistrictResult();
+            return (await _discrictRepository.ListOfDistricts(signature)).GetListOfDistrictResult();
         }
     }
 }

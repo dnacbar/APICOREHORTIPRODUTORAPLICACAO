@@ -1,25 +1,24 @@
-﻿using DATAACCESSCOREHORTICOMMAND.ICOMMAND;
-using HORTICOMMAND.REPOSITORY;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.REPOSITORY;
 using HORTICOMMAND.DOMAIN.MODEL;
 using System.Threading.Tasks;
 
-namespace DATAACCESSCOREHORTICOMMAND.COMMAND
+namespace HORTICOMMAND.REPOSITORY
 {
-    public sealed class DistrictRepository : _BaseRepository<IDistrict>, IDistrictRepository
+    public sealed class DistrictRepository : _BaseRepository<District>, IDistrictRepository
     {
         public DistrictRepository(DBHORTICONTEXT DBHORTICONTEXT) : base(DBHORTICONTEXT) { }
 
-        public async Task CreateDistrict(IDistrict district)
+        public async Task CreateDistrict(District district)
         {
             await CreateEntity(district);
         }
 
-        public async Task DeleteDistrict(IDistrict district)
+        public async Task DeleteDistrict(District district)
         {
             await DeleteEntity(district);
         }
 
-        public async Task UpdateDistrict(IDistrict district)
+        public async Task UpdateDistrict(District district)
         {
             await UpdateEntity(district);
         }

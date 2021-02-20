@@ -1,5 +1,5 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACES.APP;
-using APPDTOCOREHORTICOMMAND.SIGNATURE;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.APP;
+using HORTICOMMAND.DOMAIN.MODEL.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -17,21 +17,21 @@ namespace HORTICOMMAND.Controllers
         }
 
         [HttpPost(nameof(CreateProduct))]
-        public async Task<IActionResult> CreateProduct([FromBody] IProductCommandSignature signature)
+        public async Task<IActionResult> CreateProduct([FromBody] ProductCommandSignature signature)
         {
             await _productCommandApp.CreateProduct(signature);
             return Created(string.Empty, null);
         }
 
         [HttpDelete(nameof(DeleteProduct))]
-        public async Task<IActionResult> DeleteProduct([FromBody] IProductCommandSignature signature)
+        public async Task<IActionResult> DeleteProduct([FromBody] ProductCommandSignature signature)
         {
             await _productCommandApp.DeleteProduct(signature);
             return NoContent();
         }
 
         [HttpPut(nameof(UpdateProduct))]
-        public async Task<IActionResult> UpdateProduct([FromBody] IProductCommandSignature signature)
+        public async Task<IActionResult> UpdateProduct([FromBody] ProductCommandSignature signature)
         {
             await _productCommandApp.UpdateProduct(signature);
             return NoContent();

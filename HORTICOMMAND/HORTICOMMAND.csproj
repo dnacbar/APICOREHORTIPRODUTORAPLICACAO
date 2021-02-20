@@ -14,9 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\APPCOREHORTICOMMAND\HORTICOMMAND.APP.csproj" />
-    <ProjectReference Include="..\HORTICROSSCUTTINGCORE\HORTI.CROSSCUTTING.CORE.csproj" />
-    <ProjectReference Include="..\DATACOREHORTICOMMAND\HORTICOMMAND.DOMAIN.csproj" />
+    <ProjectReference Include="..\HORTI.CORE.CROSSCUTTING\HORTI.CORE.CROSSCUTTING.csproj" />
+    <ProjectReference Include="..\HORTICOMMAND.APP\HORTICOMMAND.APP.csproj" />
+    <ProjectReference Include="..\HORTICOMMAND.DOMAIN.SERVICE\HORTICOMMAND.DOMAIN.SERVICE.csproj" />
+    <ProjectReference Include="..\HORTICOMMAND.DOMAIN\HORTICOMMAND.DOMAIN.csproj" />
+    <ProjectReference Include="..\HORTICOMMAND.REPOSITORY\HORTICOMMAND.REPOSITORY.csproj" />
+    <ProjectReference Include="..\HORTIQUERY.DOMAIN\HORTIQUERY.DOMAIN.csproj" />
+    <ProjectReference Include="..\HORTIQUERY.REPOSITORY\HORTIQUERY.REPOSITORY.csproj" />
   </ItemGroup>
 
 </Project>

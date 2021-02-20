@@ -1,5 +1,5 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACES.APP;
-using APPDTOCOREHORTICOMMAND.SIGNATURE;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.APP;
+using HORTICOMMAND.DOMAIN.MODEL.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -17,7 +17,7 @@ namespace HORTICOMMAND.Controllers
         }
 
         [HttpPut(nameof(UpdateProducer))]
-        public async Task<IActionResult> UpdateProducer([FromBody] IProducerCommandSignature signature)
+        public async Task<IActionResult> UpdateProducer([FromBody] ProducerCommandSignature signature)
         {
             await _producerCommandApp.UpdateProducer(signature);
             return NoContent();

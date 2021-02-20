@@ -1,10 +1,11 @@
-﻿using HORTICOMMAND.DOMAIN.MODEL.DOMAINOBJECT;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTICOMMAND.DOMAIN.MODEL.DOMAINOBJECT;
 using System;
 using System.Text.Json.Serialization;
 
-namespace APPDTOCOREHORTICOMMAND.SIGNATURE
+namespace HORTICOMMAND.DOMAIN.MODEL.SIGNATURE
 {
-    public sealed class ProducerCommandSignature
+    public sealed class ProducerCommandSignature : IProducerCommandSignature
     {
         public Guid? Id { get; set; }
         public string Email { get; set; }

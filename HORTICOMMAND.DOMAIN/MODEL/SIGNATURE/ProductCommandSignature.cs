@@ -1,8 +1,9 @@
-﻿using System;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using System;
 
-namespace APPDTOCOREHORTICOMMAND.SIGNATURE
+namespace HORTICOMMAND.DOMAIN.MODEL.SIGNATURE
 {
-    public sealed class ProductCommandSignature
+    public sealed class ProductCommandSignature : IProductCommandSignature
     {
         public Guid? Id { get; set; }
         public string Product { get; set; }

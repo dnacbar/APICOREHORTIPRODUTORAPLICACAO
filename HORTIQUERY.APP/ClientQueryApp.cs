@@ -1,12 +1,12 @@
-﻿using APPCOREHORTIQUERY.CONVERTER;
-using HORTIQUERY.DOMAIN.INTERFACES.APP;
-using HORTIQUERY.DOMAIN.MODEL.RESULT;
-using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
-using DATACOREHORTIQUERY.IQUERIES;
+﻿using HORTIQUERY.DOMAIN.INTERFACE.APP;
+using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
+using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
+using HORTIQUERY.DOMAIN.MODEL.EXTENSION;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace APPCOREHORTIQUERY.APP
+namespace HORTIQUERY.APP
 {
     public sealed class ClientQueryApp : IClientQueryApp
     {
@@ -17,19 +17,19 @@ namespace APPCOREHORTIQUERY.APP
             _clientRepository = clientRepository;
         }
 
-        public async Task<UserResult> GetClientByIdOrEmail(ConsultClientSignature signature)
+        public async Task<IClientResult> GetClientByIdOrEmail(IClientQuerySignature signature)
         {
-            return (await _clientRepository.ClientByIdOrEmail(signature)).ToClientResult();
+            return (await _clientRepository.ClientByIdOrEmail(signature)).GetClientResult();
         }
 
-        public async Task<IEnumerable<ClientResult>> GetFullListOfClients()
+        public async Task<IEnumerable<IClientResult>> GetFullListOfClients()
         {
-            return (await _clientRepository.FullListOfClients()).ToHashSetClientResult();
+            return (await _clientRepository.FullListOfClients()).GetListOfClientResult();
         }
 
-        public async Task<IEnumerable<ClientResult>> GetListOfClients(ConsultClientSignature signature)
+        public async Task<IEnumerable<IClientResult>> GetListOfClients(IClientQuerySignature signature)
         {
-            return (await _clientRepository.ListOfClients(signature)).ToHashSetClientResult();
+            return (await _clientRepository.ListOfClients(signature)).GetListOfClientResult();
         }
     }
 }

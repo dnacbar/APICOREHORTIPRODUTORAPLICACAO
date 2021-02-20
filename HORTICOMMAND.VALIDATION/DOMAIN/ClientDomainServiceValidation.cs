@@ -4,7 +4,7 @@ using System;
 
 namespace HORTICOMMAND.VALIDATION.DOMAIN
 {
-    public sealed class CreateClientDomainServiceValidation : AbstractValidator<IClient>
+    public sealed class CreateClientDomainServiceValidation : AbstractValidator<Client>
     {
         public CreateClientDomainServiceValidation()
         {
@@ -17,7 +17,7 @@ namespace HORTICOMMAND.VALIDATION.DOMAIN
         }
     }
 
-    public sealed class UpdateClientDomainServiceValidation : AbstractValidator<IClient>
+    public sealed class UpdateClientDomainServiceValidation : AbstractValidator<Client>
     {
         public UpdateClientDomainServiceValidation()
         {

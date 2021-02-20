@@ -4,7 +4,7 @@ using System;
 
 namespace HORTICOMMAND.VALIDATION.APPLICATION
 {
-    public sealed class CreateDistrictDomainServiceValidation : AbstractValidator<IDistrict>
+    public sealed class CreateDistrictDomainServiceValidation : AbstractValidator<District>
     {
         public CreateDistrictDomainServiceValidation()
         {
@@ -14,7 +14,7 @@ namespace HORTICOMMAND.VALIDATION.APPLICATION
         }
     }
 
-    public sealed class UpdateDistrictDomainServiceValidation : AbstractValidator<IDistrict>
+    public sealed class UpdateDistrictDomainServiceValidation : AbstractValidator<District>
     {
         public UpdateDistrictDomainServiceValidation()
         {

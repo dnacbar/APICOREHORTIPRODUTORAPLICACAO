@@ -1,10 +1,11 @@
-﻿using System;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using System;
 
-namespace APPDTOCOREHORTICOMMAND.SIGNATURE
+namespace HORTICOMMAND.DOMAIN.MODEL.SIGNATURE
 {
-    public interface DistrictCommandSignature
+    public sealed class DistrictCommandSignature : IDistrictCommandSignature
     {
-        Guid? Id { get; set; }
-        string District { get; set; }
+        public Guid? Id { get; set; }
+        public string District { get; set; }
     }
 }

@@ -1,9 +1,5 @@
-using APPCOREHORTIQUERY.APP;
-using HORTIQUERY.DOMAIN.INTERFACES.APP;
-using HORTICROSSCUTTINGCORE.MIDDLEWARE;
+using HORTI.CORE.CROSSCUTTING.MIDDLEWARE;
 using HORTICOMMAND.REPOSITORY;
-using DATACOREHORTIQUERY.IQUERIES;
-using DATACOREHORTIQUERY.QUERIES;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -14,11 +10,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.IO.Compression;
-using Utf8Json.AspNetCoreMvcFormatter;
-using Utf8Json.Resolvers;
-using VALIDATIONCOREHORTIQUERY;
 
-namespace WEBAPICOREHORTIQUERY
+namespace HORTIQUERY
 {
     public sealed class Startup
     {
@@ -62,9 +55,7 @@ namespace WEBAPICOREHORTIQUERY
                 x.JsonSerializerOptions.IgnoreNullValues = true;
             });
 
-            HortiQueryApplicationServices(services);
-            HortiQueryRepositoryServices(services);
-            HortiQueryValidationServices(services);
+            StartupServices.Services(services);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -92,35 +83,6 @@ namespace WEBAPICOREHORTIQUERY
             {
                 endpoints.MapControllers();
             });
-        }
-
-        // CONTAINER DI - APP LAYER
-        private void HortiQueryApplicationServices(IServiceCollection services)
-        {
-            services.AddScoped<ICityQueryApp, CityQueryApp>();
-            services.AddScoped<IClientQueryApp, ClientQueryApp>();
-            services.AddScoped<IDistrictQueryApp, DistrictQueryApp>();
-            services.AddScoped<IProducerQueryApp, ProducerQueryApp>();
-            services.AddScoped<IUnitQueryApp, UnitQueryApp>();
-            services.AddScoped<IUserAccessApp, UserAccessApp>();
-        }
-
-        // CONTAINER DI - REPOSITORY LAYER
-        private void HortiQueryRepositoryServices(IServiceCollection services)
-        {
-            services.AddScoped<ICityRepository, CityRepository>();
-            services.AddScoped<IClientRepository, ClientRepository>();
-            services.AddScoped<IDiscrictRepository, DistrictRepository>();
-            services.AddScoped<IProducerRepository, ProducerRepository>();
-            services.AddScoped<IUnitRepository, UnitRepository>();
-            services.AddScoped<IUserAccessRepository, UserAccessRepository>();
-        }
-
-        // CONTAINER DI - VALIDATION
-        private void HortiQueryValidationServices(IServiceCollection services)
-        {
-            // TALVEZ MUDAR PARA SCOPED
-            services.AddSingleton<UserAccessSignatureValidation>();
         }
     }
 }

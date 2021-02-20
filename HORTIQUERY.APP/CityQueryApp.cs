@@ -1,13 +1,13 @@
-﻿using APPCOREHORTIQUERY.CONVERTER;
-using HORTIQUERY.DOMAIN.INTERFACES.APP;
-using HORTIQUERY.DOMAIN.MODEL.RESULT;
-using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
-using HORTICROSSCUTTINGCORE.ENUM;
-using DATACOREHORTIQUERY.IQUERIES;
+﻿using HORTI.CORE.CROSSCUTTING.ENUM;
+using HORTIQUERY.DOMAIN.INTERFACE.APP;
+using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
+using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
+using HORTIQUERY.DOMAIN.MODEL.EXTENSION;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace APPCOREHORTIQUERY.APP
+namespace HORTIQUERY.APP
 {
     public sealed class CityQueryApp : ICityQueryApp
     {
@@ -18,25 +18,25 @@ namespace APPCOREHORTIQUERY.APP
             _cityRepository = cityRepository;
         }
 
-        public async Task<CityResult> GetCityById(ConsultCitySignature signature)
+        public async Task<ICityResult> GetCityById(ICityQuerySignature signature)
         {
             if (signature is null)
                 throw new FluentValidation.ValidationException(((int)EnumException.City).ToString());
 
-            return (await _cityRepository.CityById(signature)).ToCityResult();
+            return (await _cityRepository.CityById(signature)).GetCityResult();
         }
 
-        public async Task<IEnumerable<CityResult>> GetFullListOfCities()
+        public async Task<IEnumerable<ICityResult>> GetFullListOfCities()
         {
-            return (await _cityRepository.FullListOfCities()).ToHashSetCityResult();
+            return (await _cityRepository.FullListOfCities()).GetListOfCityResult();
         }
 
-        public async Task<IEnumerable<CityResult>> GetListOfCities(ConsultCitySignature signature)
+        public async Task<IEnumerable<ICityResult>> GetListOfCities(ICityQuerySignature signature)
         {
             if (signature is null)
                 throw new FluentValidation.ValidationException(((int)EnumException.City).ToString());
 
-            return (await _cityRepository.ListOfCities(signature)).ToHashSetCityResult();
+            return (await _cityRepository.ListOfCities(signature)).GetListOfCityResult();
         }
     }
 }

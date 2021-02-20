@@ -1,13 +1,12 @@
-﻿using APPCOREHORTIQUERY.CONVERTER;
-using HORTIQUERY.DOMAIN.INTERFACES.APP;
-using HORTIQUERY.DOMAIN.MODEL.RESULT;
-using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
-using DATACOREHORTIQUERY.IQUERIES;
-using System;
+﻿using HORTIQUERY.DOMAIN.INTERFACE.APP;
+using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
+using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
+using HORTIQUERY.DOMAIN.MODEL.EXTENSION;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace APPCOREHORTIQUERY.APP
+namespace HORTIQUERY.APP
 {
     public class UnitQueryApp : IUnitQueryApp
     {
@@ -18,19 +17,19 @@ namespace APPCOREHORTIQUERY.APP
             _unitRepository = unitRepository;
         }
 
-        public async Task<IEnumerable<UnitResult>> GetFullListOfUnits()
+        public async Task<IEnumerable<IUnitResult>> GetFullListOfUnits()
         {
-            return (await _unitRepository.FullListOfUnits()).ToHashSetUnitResult();
+            return (await _unitRepository.FullListOfUnits()).GetListOfUnitResult();
         }
 
-        public Task<IEnumerable<UnitResult>> GetListOfUnits(ConsultUnitSignature signature)
+        public async Task<IEnumerable<IUnitResult>> GetListOfUnits(IUnitQuerySignature signature)
         {
-            throw new NotImplementedException();
+            return (await _unitRepository.ListOfUnits(signature)).GetListOfUnitResult();
         }
 
-        public Task<UnitResult> GetUnitById(ConsultUnitSignature signature)
+        public async Task<IUnitResult> GetUnitById(IUnitQuerySignature signature)
         {
-            throw new NotImplementedException();
+            return (await _unitRepository.UnitById(signature)).GetUnitResult();
         }
     }
 }

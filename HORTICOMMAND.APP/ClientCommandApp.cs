@@ -1,12 +1,12 @@
-﻿using HORTICOMMAND.APP.CONVERTER;
-using HORTICOMMAND.DOMAIN.INTERFACES.APP;
-using APPDTOCOREHORTICOMMAND.SIGNATURE;
-using HORTICROSSCUTTINGCORE.EXTENSION;
-using HORTICROSSCUTTINGCORE.FILE;
-using SERVICECOREHORTICOMMAND.ISERVICE;
+﻿using HORTI.CORE.CROSSCUTTING.EXTENSION;
+using HORTI.CORE.CROSSCUTTING.FILE;
+using HORTICOMMAND.DOMAIN.INTERFACE.APP;
+using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTICOMMAND.DOMAIN.INTERFACE.SERVICE;
+using HORTICOMMAND.DOMAIN.MODEL.EXTENSION;
+using HORTICOMMAND.VALIDATION.APPLICATION;
 using System.IO;
 using System.Threading.Tasks;
-using HORTICOMMAND.VALIDATION.APPLICATION;
 
 namespace HORTICOMMAND.APP
 {
@@ -27,26 +27,26 @@ namespace HORTICOMMAND.APP
             _clientDomainService = clientDomainService;
         }
 
-        public async Task CreateClient(ClientCommandSignature signature)
+        public async Task CreateClient(IClientCommandSignature signature)
         {
             _createClientSignatureValidation.ValidateHorti(signature);
 
-            var clientDomain = signature.ToCreateClientDomain();
+            var clientDomain = signature.GetClient();
             await _clientDomainService.ClientServiceCreate(clientDomain);
 
             Directory.CreateDirectory(Path.Combine(Path.GetPathRoot(Directory.GetCurrentDirectory()), "CLIENT", clientDomain.IdClient.ToString()));
         }
 
-        public async Task UpdateClient(ClientCommandSignature signature)
+        public async Task UpdateClient(IClientCommandSignature signature)
         {
             _updateClientSignatureValidation.ValidateHorti(signature);
 
-            await _clientDomainService.ClientServiceUpdate(signature.ToUpdateClientDomain());
+            await _clientDomainService.ClientServiceUpdate(signature.GetClient());
 
             CreateClientImage(signature);
         }
 
-        private void CreateClientImage(ClientCommandSignature signature)
+        private void CreateClientImage(IClientCommandSignature signature)
         {
             if (signature.ImageByte == null)
                 return;

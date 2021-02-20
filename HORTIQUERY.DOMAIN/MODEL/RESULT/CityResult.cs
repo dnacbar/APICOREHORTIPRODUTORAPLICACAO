@@ -1,9 +1,11 @@
-﻿namespace HORTIQUERY.DOMAIN.MODEL.RESULT
+﻿using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
+
+namespace HORTIQUERY.DOMAIN.MODEL.RESULT
 {
-    public sealed class CityResult
+    public sealed class CityResult : ICityResult
     {
-        public string DsCity { get; set; }
-        public int IdCity { get; set; }
+        public int Id { get; set; }
+        public string City { get; set; }
         public int IdState { get; set; }
     }
 }

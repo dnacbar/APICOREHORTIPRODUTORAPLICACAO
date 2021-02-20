@@ -1,11 +1,11 @@
-﻿using HORTICROSSCUTTINGCORE.EXTENSION;
+﻿using FluentValidation;
+using HORTI.CORE.CROSSCUTTING.EXTENSION;
 using HORTICOMMAND.DOMAIN.MODEL;
-using FluentValidation;
 using System;
 
 namespace HORTICOMMAND.VALIDATION.DOMAIN
 {
-    public sealed class CreateProducerDomainServiceValidation : AbstractValidator<IProducer>
+    public sealed class CreateProducerDomainServiceValidation : AbstractValidator<Producer>
     {
         public CreateProducerDomainServiceValidation()
         {
@@ -19,7 +19,7 @@ namespace HORTICOMMAND.VALIDATION.DOMAIN
         }
     }
 
-    public sealed class UpdateProducerDomainServiceValidation : AbstractValidator<IProducer>
+    public sealed class UpdateProducerDomainServiceValidation : AbstractValidator<Producer>
     {
         public UpdateProducerDomainServiceValidation()
         {

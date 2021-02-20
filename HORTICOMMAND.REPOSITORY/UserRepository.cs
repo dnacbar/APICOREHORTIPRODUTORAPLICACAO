@@ -1,9 +1,8 @@
-﻿using DATAACCESSCOREHORTICOMMAND.ICOMMAND;
-using HORTICOMMAND.REPOSITORY;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.REPOSITORY;
 using HORTICOMMAND.DOMAIN.MODEL;
 using System.Threading.Tasks;
 
-namespace DATAACCESSCOREHORTICOMMAND.COMMAND
+namespace HORTICOMMAND.REPOSITORY
 {
     public sealed class UserRepository : _BaseRepository<Userhorti>, IUserRepository
     {

@@ -1,9 +1,11 @@
-﻿namespace HORTIQUERY.DOMAIN.MODEL.RESULT
+﻿using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
+
+namespace HORTIQUERY.DOMAIN.MODEL.RESULT
 {
-    public sealed class UnitResult
+    public sealed class UnitResult : IUnitResult
     {
-        public string DsAbreviation { get; set; }
-        public string DsUnit { get; set; }
-        public int IdUnit { get; set; }
+        public int Id { get; set; }
+        public string Unit { get; set; }
+        public string Abreviation { get; set; }
     }
 }
