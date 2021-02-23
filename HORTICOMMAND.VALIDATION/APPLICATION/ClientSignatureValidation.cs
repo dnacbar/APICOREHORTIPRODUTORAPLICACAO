@@ -35,7 +35,7 @@ namespace HORTICOMMAND.VALIDATION.APPLICATION
 
         private async Task<bool> ValidateClientExists(Guid idClient, string dsEmail)
         {
-            return await _clientRepository.ClientByIdOrEmail(new ClientQuerySignature { Id = idClient, Email = dsEmail }) != null;
+            return await _clientRepository.ClientByIdOrName(new ClientQuerySignature { Id = idClient, Email = dsEmail }) != null;
         }
     }
 }

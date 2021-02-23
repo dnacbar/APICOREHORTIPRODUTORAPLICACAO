@@ -89,9 +89,9 @@ namespace HORTIQUERY.REPOSITORY
                                         OrderBy: o => o.DsProducer);
         }
 
-        public async Task<Producer> ProducerByIdOrEmail(IProducerQuerySignature signature)
+        public async Task<Producer> ProducerByIdOrName(IProducerQuerySignature signature)
         {
-            return await EntityByFilter(Where: x => x.IdProducer == signature.Id || x.DsEmail == signature.Email,
+            return await EntityByFilter(Where: x => x.IdProducer == signature.Id || x.DsProducer == signature.Producer,
             Select: p => new Producer
             {
                 IdProducer = p.IdProducer,

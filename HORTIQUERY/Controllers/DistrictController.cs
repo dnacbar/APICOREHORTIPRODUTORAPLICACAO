@@ -9,29 +9,29 @@ namespace HORTIQUERY.Controllers
     [ApiController]
     public sealed class DistrictController : ControllerBase
     {
-        private readonly IDistrictQueryApp _consultDistrictApp;
+        private readonly IDistrictQueryApp _districtQueryApp;
 
-        public DistrictController(IDistrictQueryApp consultDistrictApp)
+        public DistrictController(IDistrictQueryApp districtQueryApp)
         {
-            _consultDistrictApp = consultDistrictApp;
+            _districtQueryApp = districtQueryApp;
         }
 
         [HttpPost(nameof(GetDistrictByIdOrName))]
         public async Task<IActionResult> GetDistrictByIdOrName(DistrictQuerySignature signature)
         {
-            return Ok(await _consultDistrictApp.GetDistrictByIdOrName(signature));
+            return Ok(await _districtQueryApp.GetDistrictByIdOrName(signature));
         }
 
         [HttpGet(nameof(GetFullListOfDistricts))]
         public async Task<IActionResult> GetFullListOfDistricts()
         {
-            return Ok(await _consultDistrictApp.GetFullListOfDistricts());
+            return Ok(await _districtQueryApp.GetFullListOfDistricts());
         }
 
         [HttpPost(nameof(GetListOfDistricts))]
         public async Task<IActionResult> GetListOfDistricts(DistrictQuerySignature signature)
         {
-            return Ok(await _consultDistrictApp.GetListOfDistricts(signature));
+            return Ok(await _districtQueryApp.GetListOfDistricts(signature));
         }
     }
 }

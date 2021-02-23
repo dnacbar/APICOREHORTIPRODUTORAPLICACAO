@@ -9,28 +9,28 @@ namespace HORTIQUERY.Controllers
     [ApiController]
     public sealed class ClientController : ControllerBase
     {
-        private readonly IClientQueryApp _consultClientApp;
-        public ClientController(IClientQueryApp consultClientApp)
+        private readonly IClientQueryApp _clientQueryApp;
+        public ClientController(IClientQueryApp clientQueryApp)
         {
-            _consultClientApp = consultClientApp;
+            _clientQueryApp = clientQueryApp;
         }
 
-        [HttpPost(nameof(GetClientByIdOrEmail))]
-        public async Task<IActionResult> GetClientByIdOrEmail([FromBody] ClientQuerySignature signature)
+        [HttpPost(nameof(GetClientByIdOrName))]
+        public async Task<IActionResult> GetClientByIdOrName([FromBody] ClientQuerySignature signature)
         {
-            return Ok(await _consultClientApp.GetClientByIdOrEmail(signature));
+            return Ok(await _clientQueryApp.GetClientByIdOrName(signature));
         }
 
         [HttpGet(nameof(GetFullListOfClients))]
         public async Task<IActionResult> GetFullListOfClients()
         {
-            return Ok(await _consultClientApp.GetFullListOfClients());
+            return Ok(await _clientQueryApp.GetFullListOfClients());
         }
 
         [HttpPost(nameof(GetListOfClients))]
         public async Task<IActionResult> GetListOfClients([FromBody] ClientQuerySignature signature)
         {
-            return Ok(await _consultClientApp.GetListOfClients(signature));
+            return Ok(await _clientQueryApp.GetListOfClients(signature));
         }
     }
 }

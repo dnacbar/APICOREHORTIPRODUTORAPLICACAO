@@ -11,9 +11,9 @@ namespace HORTIQUERY.REPOSITORY
     {
         public CityRepository(DBHORTICONTEXT DBHORTICONTEXT) : base(DBHORTICONTEXT) { }
 
-        public async Task<City> CityById(ICityQuerySignature signature)
+        public async Task<City> CityByIdOrName(ICityQuerySignature signature)
         {
-            return await EntityByFilter(Where: p => signature.Id == p.IdCity,
+            return await EntityByFilter(Where: p => signature.Id == p.IdCity || signature.City == p.DsCity,
                                         Select: x => new City
                                         {
                                             IdCity = x.IdCity,

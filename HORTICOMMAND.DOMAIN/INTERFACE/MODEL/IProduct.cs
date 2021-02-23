@@ -13,9 +13,9 @@ namespace HORTICOMMAND.DOMAIN.INTERFACE.MODEL
         DateTime? DtDiscount { get; set; }
         byte? IdUnit { get; set; }
         bool? BoStock { get; set; }
+        string DsDescription { get; set; }
 
         decimal ProductValueWithDiscount();
         bool ValidatePercentDiscount();
-        decimal CalculateDiscount();
     }
 }

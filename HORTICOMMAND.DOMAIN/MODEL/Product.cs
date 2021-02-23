@@ -1,9 +1,9 @@
-﻿using HORTICOMMAND.DOMAIN.MODEL.SIGNATURE;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL;
 using System;
 
 namespace HORTICOMMAND.DOMAIN.MODEL
 {
-    public class Product
+    public class Product : IProduct
     {
         public Guid IdProduct { get; set; }
         public string DsProduct { get; set; }
@@ -14,6 +14,7 @@ namespace HORTICOMMAND.DOMAIN.MODEL
         public DateTime? DtDiscount { get; set; }
         public byte? IdUnit { get; set; }
         public bool? BoStock { get; set; }
+        public string DsDescription { get; set; }
 
         public virtual Unit IdUnitNavigation { get; set; }
 

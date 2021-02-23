@@ -9,6 +9,6 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY
     {
         Task<IEnumerable<Unit>> FullListOfUnits();
         Task<IEnumerable<Unit>> ListOfUnits(IUnitQuerySignature signature);
-        Task<Unit> UnitById(IUnitQuerySignature signature);
+        Task<Unit> UnitByIdOrName(IUnitQuerySignature signature);
     }
 }

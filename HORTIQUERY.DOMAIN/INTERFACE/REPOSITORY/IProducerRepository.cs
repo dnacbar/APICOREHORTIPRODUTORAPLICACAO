@@ -9,6 +9,6 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY
     {
         Task<IEnumerable<Producer>> FullListOfProducers();
         Task<IEnumerable<Producer>> ListOfProducers(IProducerQuerySignature signature);
-        Task<Producer> ProducerByIdOrEmail(IProducerQuerySignature signature);
+        Task<Producer> ProducerByIdOrName(IProducerQuerySignature signature);
     }
 }

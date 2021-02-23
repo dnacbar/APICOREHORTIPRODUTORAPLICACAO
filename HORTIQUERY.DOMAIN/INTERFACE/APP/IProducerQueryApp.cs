@@ -7,7 +7,7 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.APP
 {
     public interface IProducerQueryApp
     {
-        Task<IProducerResult> GetProducerByIdOrEmail(IProducerQuerySignature signature);
+        Task<IProducerResult> GetProducerByIdOrName(IProducerQuerySignature signature);
         Task<IEnumerable<IProducerResult>> GetFullListOfProducers();
         Task<IEnumerable<IProducerResult>> GetListOfProducers(IProducerQuerySignature signature);
 

@@ -7,7 +7,7 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY
 {
     public interface ICityRepository
     {
-        Task<City> CityById(ICityQuerySignature signature);
+        Task<City> CityByIdOrName(ICityQuerySignature signature);
         Task<IEnumerable<City>> FullListOfCities();
         Task<IEnumerable<City>> ListOfCities(ICityQuerySignature signature);
     }

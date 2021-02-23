@@ -27,9 +27,9 @@ namespace HORTIQUERY.APP
             return (await _unitRepository.ListOfUnits(signature)).GetListOfUnitResult();
         }
 
-        public async Task<IUnitResult> GetUnitById(IUnitQuerySignature signature)
+        public async Task<IUnitResult> GetUnitByIdOrName(IUnitQuerySignature signature)
         {
-            return (await _unitRepository.UnitById(signature)).GetUnitResult();
+            return (await _unitRepository.UnitByIdOrName(signature)).GetUnitResult();
         }
     }
 }

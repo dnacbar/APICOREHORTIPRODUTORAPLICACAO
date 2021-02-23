@@ -17,9 +17,9 @@ namespace HORTIQUERY.APP
             _clientRepository = clientRepository;
         }
 
-        public async Task<IClientResult> GetClientByIdOrEmail(IClientQuerySignature signature)
+        public async Task<IClientResult> GetClientByIdOrName(IClientQuerySignature signature)
         {
-            return (await _clientRepository.ClientByIdOrEmail(signature)).GetClientResult();
+            return (await _clientRepository.ClientByIdOrName(signature)).GetClientResult();
         }
 
         public async Task<IEnumerable<IClientResult>> GetFullListOfClients()

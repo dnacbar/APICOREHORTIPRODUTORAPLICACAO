@@ -45,7 +45,7 @@ namespace HORTIQUERY.APP
 
             if (signature.Password.Equals(strDecryptPassword))
             {
-                result = (await _clientRepository.ClientByIdOrEmail(new ClientQuerySignature
+                result = (await _clientRepository.ClientByIdOrName(new ClientQuerySignature
                 {
                     Email = signature.Login
                 }))?.GetClientResult();
@@ -68,7 +68,7 @@ namespace HORTIQUERY.APP
 
             if (signature.Password.Equals(strDecryptPassword))
             {
-                result = (await _producerRepository.ProducerByIdOrEmail(new ProducerQuerySignature
+                result = (await _producerRepository.ProducerByIdOrName(new ProducerQuerySignature
                 {
                     Email = signature.Login
                 }))?.GetProducerResult();

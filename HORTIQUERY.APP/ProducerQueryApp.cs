@@ -27,9 +27,9 @@ namespace HORTIQUERY.APP
             return (await _producerRepository.ListOfProducers(signature)).GetListOfProducerResult();
         }
 
-        public async Task<IProducerResult> GetProducerByIdOrEmail(IProducerQuerySignature signature)
+        public async Task<IProducerResult> GetProducerByIdOrName(IProducerQuerySignature signature)
         {
-            return (await _producerRepository.ProducerByIdOrEmail(signature)).GetProducerResult();
+            return (await _producerRepository.ProducerByIdOrName(signature)).GetProducerResult();
         }
     }
 }

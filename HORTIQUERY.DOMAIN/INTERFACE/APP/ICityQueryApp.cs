@@ -7,7 +7,7 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.APP
 {
     public interface ICityQueryApp
     {
-        Task<ICityResult> GetCityById(ICityQuerySignature signature);
+        Task<ICityResult> GetCityByIdOrName(ICityQuerySignature signature);
         Task<IEnumerable<ICityResult>> GetFullListOfCities();
         Task<IEnumerable<ICityResult>> GetListOfCities(ICityQuerySignature signature);
 

@@ -36,9 +36,9 @@ namespace HORTIQUERY.REPOSITORY
             OrderBy: p => p.DsUnit);
         }
 
-        public async Task<Unit> UnitById(IUnitQuerySignature signature)
+        public async Task<Unit> UnitByIdOrName(IUnitQuerySignature signature)
         {
-            return await EntityByFilter(Where: x => x.IdUnit == signature.Id,
+            return await EntityByFilter(Where: x => x.IdUnit == signature.Id || x.DsUnit == signature.DsUnit,
             Select: x => new Unit
             {
                 IdUnit = x.IdUnit,

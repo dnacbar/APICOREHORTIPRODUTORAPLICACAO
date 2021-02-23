@@ -9,6 +9,6 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY
     {
         Task<IEnumerable<Product>> FullListOfProducts();
         Task<IEnumerable<Product>> ListOfProducts(IProductQuerySignature signature);
-        Task<Product> ProductById(IProductQuerySignature signature);
+        Task<Product> ProductByIdOrName(IProductQuerySignature signature);
     }
 }

@@ -270,6 +270,8 @@ namespace HORTICOMMAND.REPOSITORY
                     .IsUnicode(false)
                     .HasColumnName("DS_PRODUCT");
 
+                entity.Property(e => e.DsDescription).HasColumnName("DS_DESCRIPTION");
+
                 entity.Property(e => e.DtAtualization)
                     .HasPrecision(3)
                     .HasColumnName("DT_ATUALIZATION")

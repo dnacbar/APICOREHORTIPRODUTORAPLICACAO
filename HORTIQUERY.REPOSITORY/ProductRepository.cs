@@ -42,9 +42,9 @@ namespace HORTIQUERY.REPOSITORY
                 OrderBy: o => o.DsProduct);
         }
 
-        public async Task<Product> ProductById(IProductQuerySignature signature)
+        public async Task<Product> ProductByIdOrName(IProductQuerySignature signature)
         {
-            return await EntityByFilter(Where: x => signature.Id == x.IdProduct,
+            return await EntityByFilter(Where: x => signature.Id == x.IdProduct || signature.Product == x.DsProduct,
                 Select: p => new Product
                 {
                     IdProduct = p.IdProduct,

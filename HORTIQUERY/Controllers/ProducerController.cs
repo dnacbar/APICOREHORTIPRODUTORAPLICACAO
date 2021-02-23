@@ -9,28 +9,28 @@ namespace HORTIQUERY.Controllers
     [ApiController]
     public sealed class ProducerController : ControllerBase
     {
-        private readonly IProducerQueryApp _consultProducerApp;
-        public ProducerController(IProducerQueryApp consultProducerApp)
+        private readonly IProducerQueryApp _producerQueryApp;
+        public ProducerController(IProducerQueryApp producerQueryApp)
         {
-            _consultProducerApp = consultProducerApp;
+            _producerQueryApp = producerQueryApp;
         }
 
         [HttpPost(nameof(GetProducerByIdOrEmail))]
         public async Task<IActionResult> GetProducerByIdOrEmail([FromBody] ProducerQuerySignature signature)
         {
-            return Ok(await _consultProducerApp.GetProducerByIdOrEmail(signature));
+            return Ok(await _producerQueryApp.GetProducerByIdOrName(signature));
         }
 
         [HttpGet(nameof(GetFullListOfProducers))]
         public async Task<IActionResult> GetFullListOfProducers()
         {
-            return Ok(await _consultProducerApp.GetFullListOfProducers());
+            return Ok(await _producerQueryApp.GetFullListOfProducers());
         }
 
         [HttpPost(nameof(GetListOfProducers))]
         public async Task<IActionResult> GetListOfProducers([FromBody] ProducerQuerySignature signature)
         {
-            return Ok(await _consultProducerApp.GetListOfProducers(signature));
+            return Ok(await _producerQueryApp.GetListOfProducers(signature));
         }
     }
 }

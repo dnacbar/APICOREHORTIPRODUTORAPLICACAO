@@ -11,9 +11,9 @@ namespace HORTIQUERY.REPOSITORY
     {
         public ClientRepository(DBHORTICONTEXT dBHORTICONTEXT) : base(dBHORTICONTEXT) { }
 
-        public async Task<Client> ClientByIdOrEmail(IClientQuerySignature signature)
+        public async Task<Client> ClientByIdOrName(IClientQuerySignature signature)
         {
-            return await EntityByFilter(Where: x => x.IdClient == signature.Id || x.DsEmail == signature.Email,
+            return await EntityByFilter(Where: x => x.IdClient == signature.Id || x.DsClient == signature.Client,
                                         Select: p => new Client
                                         {
                                             IdClient = p.IdClient,

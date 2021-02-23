@@ -7,7 +7,7 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.APP
 {
     public interface IClientQueryApp
     {
-        Task<IClientResult> GetClientByIdOrEmail(IClientQuerySignature signature);
+        Task<IClientResult> GetClientByIdOrName(IClientQuerySignature signature);
         Task<IEnumerable<IClientResult>> GetFullListOfClients();
         Task<IEnumerable<IClientResult>> GetListOfClients(IClientQuerySignature signature);
     }

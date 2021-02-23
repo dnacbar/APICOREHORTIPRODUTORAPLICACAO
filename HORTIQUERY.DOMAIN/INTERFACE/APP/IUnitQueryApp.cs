@@ -9,6 +9,6 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.APP
     {
         Task<IEnumerable<IUnitResult>> GetFullListOfUnits();
         Task<IEnumerable<IUnitResult>> GetListOfUnits(IUnitQuerySignature signature);
-        Task<IUnitResult> GetUnitById(IUnitQuerySignature signature);
+        Task<IUnitResult> GetUnitByIdOrName(IUnitQuerySignature signature);
     }
 }

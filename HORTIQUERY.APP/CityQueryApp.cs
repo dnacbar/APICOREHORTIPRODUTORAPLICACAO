@@ -18,12 +18,12 @@ namespace HORTIQUERY.APP
             _cityRepository = cityRepository;
         }
 
-        public async Task<ICityResult> GetCityById(ICityQuerySignature signature)
+        public async Task<ICityResult> GetCityByIdOrName(ICityQuerySignature signature)
         {
             if (signature is null)
                 throw new FluentValidation.ValidationException(((int)EnumException.City).ToString());
 
-            return (await _cityRepository.CityById(signature)).GetCityResult();
+            return (await _cityRepository.CityByIdOrName(signature)).GetCityResult();
         }
 
         public async Task<IEnumerable<ICityResult>> GetFullListOfCities()
