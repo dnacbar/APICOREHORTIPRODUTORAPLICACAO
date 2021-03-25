@@ -6,6 +6,6 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY
 {
     public interface IUserAccessRepository
     {
-        Task<Userhorti> GetUserHortiAccess(IUserAccessQuerySignature signature);
+        //Task<Userhorti> GetUserHortiAccess(IUserAccessQuerySignature signature);
     }
 }

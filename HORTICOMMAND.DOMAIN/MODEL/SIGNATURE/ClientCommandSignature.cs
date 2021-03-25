@@ -1,5 +1,5 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
-using HORTICOMMAND.DOMAIN.MODEL.DOMAINOBJECT;
+﻿using HORTI.CORE.CROSSCUTTING.VALUEOBJECT;
+using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using System;
 using System.Text.Json.Serialization;
 
@@ -18,10 +18,8 @@ namespace HORTICOMMAND.DOMAIN.MODEL.SIGNATURE
 
         [JsonIgnore]
         public EmailObject EmailObject => new EmailObject(Email);
-
         [JsonIgnore]
         public PhoneObject PhoneObject => new PhoneObject(Phone);
-
         [JsonIgnore]
         public DocumentObject FederalDocument => new DocumentObject(FederalInscription);
     }

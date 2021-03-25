@@ -1,10 +1,9 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace HORTICOMMAND.DOMAIN.MODEL
 {
-    public class District : IDistrict
+    public class District
     {
         public District()
         {

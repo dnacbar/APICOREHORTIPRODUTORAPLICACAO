@@ -4,10 +4,11 @@ using System.Threading.Tasks;
 using HORTICOMMAND.REPOSITORY;
 using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
 using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using HORTI.CORE.CROSSCUTTING.DBBASEEF;
 
 namespace HORTIQUERY.REPOSITORY
 {
-    public sealed class CityRepository : _BaseRepository<City>, ICityRepository
+    public sealed class CityRepository : _BaseEFQueryRepository<City>, ICityRepository
     {
         public CityRepository(DBHORTICONTEXT DBHORTICONTEXT) : base(DBHORTICONTEXT) { }
 
@@ -24,7 +25,7 @@ namespace HORTIQUERY.REPOSITORY
 
         public async Task<IEnumerable<City>> FullListOfCities()
         {
-            return await FullListOfEntities(Select: x => new City
+            return await FullListOfEntity(Select: x => new City
             {
                 IdCity = x.IdCity,
                 DsCity = x.DsCity,
@@ -35,7 +36,7 @@ namespace HORTIQUERY.REPOSITORY
 
         public async Task<IEnumerable<City>> ListOfCities(ICityQuerySignature signature)
         {
-            return await ListOfEntities(Where: x => (signature.City == null || x.DsCity.Contains(signature.City))
+            return await ListOfEntity(Where: x => (signature.City == null || x.DsCity.Contains(signature.City))
                                                  && (signature.Id == null || signature.Id == x.IdCity)
                                                  && (signature.IdState == null || signature.IdState == x.IdState),
                                         Select: p => new City
@@ -44,7 +45,7 @@ namespace HORTIQUERY.REPOSITORY
                                             DsCity = p.DsCity,
                                             IdState = p.IdState
                                         },
-                                        Page: signature.Page, 
+                                        Page: signature.Page,
                                         Quantity: signature.Quantity,
                                         OrderBy: o => o.DsCity);
         }

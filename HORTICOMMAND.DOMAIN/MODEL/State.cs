@@ -1,9 +1,8 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace HORTICOMMAND.DOMAIN.MODEL
 {
-    public class State : IState
+    public class State
     {
         public State()
         {

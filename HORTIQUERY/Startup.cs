@@ -15,8 +15,8 @@ namespace HORTIQUERY
 {
     public sealed class Startup
     {
+        private const string HortiCorsConfig = "HORTICORSCONFIG";
         private IConfiguration iConfiguration { get; }
-        private readonly string strCorsConfig = "hortiCorsConfig";
 
         public Startup(IConfiguration configuration)
         {
@@ -31,7 +31,7 @@ namespace HORTIQUERY
                 opt.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
             });
 
-            services.AddCors(x => x.AddPolicy(strCorsConfig, p => { p.WithHeaders("DN-MR-WASATAIN-QUERY"); }));
+            services.AddCors(x => x.AddPolicy(HortiCorsConfig, p => { p.WithHeaders("DN-MR-WASATAIN-QUERY"); }));
 
             services.AddResponseCompression(x =>
             {
@@ -76,7 +76,7 @@ namespace HORTIQUERY
             app.UseValidationExceptionMiddleware();
 
             app.UseRouting();
-            app.UseCors(strCorsConfig);
+            app.UseCors(HortiCorsConfig);
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

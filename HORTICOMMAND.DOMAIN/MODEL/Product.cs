@@ -1,9 +1,8 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL;
-using System;
+﻿using System;
 
 namespace HORTICOMMAND.DOMAIN.MODEL
 {
-    public class Product : IProduct
+    public class Product
     {
         public Guid IdProduct { get; set; }
         public string DsProduct { get; set; }

@@ -1,9 +1,8 @@
 ﻿using FluentValidation;
-using System.Threading.Tasks;
 
 namespace HORTI.CORE.CROSSCUTTING.EXTENSION
 {
-    public static class ExtensionValidation
+    public static class ExtensionValidator
     {
         public static void ValidateHorti<T>(this IValidator<T> iValidator, T objValidation) where T : class
         {

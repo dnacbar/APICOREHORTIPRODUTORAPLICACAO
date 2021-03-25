@@ -19,7 +19,6 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
         public string DsComplement { get; set; }
         public string DsPhone { get; set; }
 
-        public virtual Userhorti DsEmailNavigation { get; set; }
         public virtual City IdCityNavigation { get; set; }
         public virtual District IdDistrictNavigation { get; set; }
     }

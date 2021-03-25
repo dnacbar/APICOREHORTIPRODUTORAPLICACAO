@@ -1,4 +1,5 @@
-﻿using HORTICOMMAND.DOMAIN.MODEL;
+﻿using HORTI.CORE.CROSSCUTTING.DBBASEEF;
+using HORTICOMMAND.DOMAIN.MODEL;
 using HORTICOMMAND.REPOSITORY;
 using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
@@ -7,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace HORTIQUERY.REPOSITORY
 {
-    public class ProductRepository : _BaseRepository<Product>, IProductRepository
+    public class ProductRepository : _BaseEFQueryRepository<Product>, IProductRepository
     {
         public ProductRepository(DBHORTICONTEXT DBHORTICONTEXT) : base(DBHORTICONTEXT) { }
 
         public async Task<IEnumerable<Product>> FullListOfProducts()
         {
-            return await FullListOfEntities(Select: x => new Product
+            return await FullListOfEntity(Select: x => new Product
             {
                 IdProduct = x.IdProduct,
                 DsProduct = x.DsProduct,
@@ -27,7 +28,7 @@ namespace HORTIQUERY.REPOSITORY
 
         public async Task<IEnumerable<Product>> ListOfProducts(IProductQuerySignature signature)
         {
-            return await ListOfEntities(Where: x => signature.Product == null || signature.Product.Contains(x.DsProduct),
+            return await ListOfEntity(Where: x => signature.Product == null || signature.Product.Contains(x.DsProduct),
                 Select: p => new Product
                 {
                     IdProduct = p.IdProduct,

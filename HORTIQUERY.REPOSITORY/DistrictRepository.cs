@@ -1,4 +1,5 @@
-﻿using HORTICOMMAND.DOMAIN.MODEL;
+﻿using HORTI.CORE.CROSSCUTTING.DBBASEEF;
+using HORTICOMMAND.DOMAIN.MODEL;
 using HORTICOMMAND.REPOSITORY;
 using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HORTIQUERY.REPOSITORY
 {
-    public class DistrictRepository : _BaseRepository<District>, IDiscrictRepository
+    public class DistrictRepository : _BaseEFQueryRepository<District>, IDiscrictRepository
     {
         public DistrictRepository(DBHORTICONTEXT dBHORTICONTEXT) : base(dBHORTICONTEXT) { }
 
@@ -25,7 +26,7 @@ namespace HORTIQUERY.REPOSITORY
 
         public async Task<IEnumerable<District>> FullListOfDistricts()
         {
-            return await FullListOfEntities(Select: x => new District
+            return await FullListOfEntity(Select: x => new District
             {
                 IdDistrict = x.IdDistrict,
                 DsDistrict = x.DsDistrict,
@@ -37,7 +38,7 @@ namespace HORTIQUERY.REPOSITORY
 
         public async Task<IEnumerable<District>> ListOfDistricts(IDistrictQuerySignature signature)
         {
-            return await ListOfEntities(Where: x => signature.District == null || x.DsDistrict.Contains(signature.District),
+            return await ListOfEntity(Where: x => signature.District == null || x.DsDistrict.Contains(signature.District),
             Select: p => new District
             {
                 IdDistrict = p.IdDistrict,

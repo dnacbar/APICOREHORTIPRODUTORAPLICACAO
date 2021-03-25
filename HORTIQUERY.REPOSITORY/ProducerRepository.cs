@@ -1,4 +1,5 @@
-﻿using HORTICOMMAND.DOMAIN.MODEL;
+﻿using HORTI.CORE.CROSSCUTTING.DBBASEEF;
+using HORTICOMMAND.DOMAIN.MODEL;
 using HORTICOMMAND.REPOSITORY;
 using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
@@ -7,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace HORTIQUERY.REPOSITORY
 {
-    public sealed class ProducerRepository : _BaseRepository<Producer>, IProducerRepository
+    public sealed class ProducerRepository : _BaseEFQueryRepository<Producer>, IProducerRepository
     {
         public ProducerRepository(DBHORTICONTEXT dBHORTICONTEXT) : base(dBHORTICONTEXT) { }
 
         public async Task<IEnumerable<Producer>> FullListOfProducers()
         {
-            return await FullListOfEntities(Select: x => new Producer
+            return await FullListOfEntity(Select: x => new Producer
             {
                 IdProducer = x.IdProducer,
                 DsProducer = x.DsProducer,
@@ -50,7 +51,7 @@ namespace HORTIQUERY.REPOSITORY
 
         public async Task<IEnumerable<Producer>> ListOfProducers(IProducerQuerySignature signature)
         {
-            return await ListOfEntities(Where: x => (signature.Id == null || signature.Id == x.IdProducer)
+            return await ListOfEntity(Where: x => (signature.Id == null || signature.Id == x.IdProducer)
                                                  && (signature.Email == null || signature.Email.Contains(x.DsEmail)),
                                         Select: p => new Producer
                                         {

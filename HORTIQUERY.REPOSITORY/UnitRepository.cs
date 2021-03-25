@@ -1,4 +1,5 @@
-﻿using HORTICOMMAND.DOMAIN.MODEL;
+﻿using HORTI.CORE.CROSSCUTTING.DBBASEEF;
+using HORTICOMMAND.DOMAIN.MODEL;
 using HORTICOMMAND.REPOSITORY;
 using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
@@ -7,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace HORTIQUERY.REPOSITORY
 {
-    public sealed class UnitRepository : _BaseRepository<Unit>, IUnitRepository
+    public sealed class UnitRepository : _BaseEFQueryRepository<Unit>, IUnitRepository
     {
         public UnitRepository(DBHORTICONTEXT dBHORTICONTEXT) : base(dBHORTICONTEXT) { }
 
         public async Task<IEnumerable<Unit>> ListOfUnits(IUnitQuerySignature signature)
         {
-            return await ListOfEntities(Where: x => (signature.DsUnit == null || signature.DsUnit.Contains(x.DsUnit)),
+            return await ListOfEntity(Where: x => (signature.DsUnit == null || signature.DsUnit.Contains(x.DsUnit)),
                 Select: p => new Unit
                 {
                     IdUnit = p.IdUnit,
@@ -27,7 +28,7 @@ namespace HORTIQUERY.REPOSITORY
 
         public async Task<IEnumerable<Unit>> FullListOfUnits()
         {
-            return await FullListOfEntities(Select: x => new Unit
+            return await FullListOfEntity(Select: x => new Unit
             {
                 IdUnit = x.IdUnit,
                 DsUnit = x.DsUnit,

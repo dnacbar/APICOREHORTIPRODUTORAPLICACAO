@@ -7,15 +7,14 @@ namespace HORTICOMMAND.REPOSITORY
     {
         public DBHORTICONTEXT(DbContextOptions<DBHORTICONTEXT> options) : base(options) { }
 
-        public virtual DbSet<City> City { get; set; }
-        public virtual DbSet<Client> Client { get; set; }
-        public virtual DbSet<Country> Country { get; set; }
-        public virtual DbSet<District> District { get; set; }
-        public virtual DbSet<Producer> Producer { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<State> State { get; set; }
-        public virtual DbSet<Unit> Unit { get; set; }
-        public virtual DbSet<Userhorti> Userhorti { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<District> Districts { get; set; }
+        public virtual DbSet<Producer> Producers { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<Unit> Units { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -105,12 +104,6 @@ namespace HORTICOMMAND.REPOSITORY
                 entity.Property(e => e.IdCity).HasColumnName("ID_CITY");
 
                 entity.Property(e => e.IdDistrict).HasColumnName("ID_DISTRICT");
-
-                entity.HasOne(d => d.DsEmailNavigation)
-                    .WithMany(p => p.Client)
-                    .HasForeignKey(d => d.DsEmail)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_CLIENT_USERHORTI");
 
                 entity.HasOne(d => d.IdCityNavigation)
                     .WithMany(p => p.Client)
@@ -228,16 +221,10 @@ namespace HORTICOMMAND.REPOSITORY
                     .IsUnicode(false)
                     .HasColumnName("DS_ZIP")
                     .IsFixedLength(true);
-                
+
                 entity.Property(e => e.IdCity).HasColumnName("ID_CITY");
 
                 entity.Property(e => e.IdDistrict).HasColumnName("ID_DISTRICT");
-
-                entity.HasOne(d => d.DsEmailNavigation)
-                    .WithMany(p => p.Producer)
-                    .HasForeignKey(d => d.DsEmail)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PRODUCER_USERHORTI");
 
                 entity.HasOne(d => d.IdCityNavigation)
                     .WithMany(p => p.Producer)
@@ -265,12 +252,12 @@ namespace HORTICOMMAND.REPOSITORY
                     .HasColumnName("BO_STOCK")
                     .HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.DsDescription).HasColumnName("DS_DESCRIPTION");
+
                 entity.Property(e => e.DsProduct)
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("DS_PRODUCT");
-
-                entity.Property(e => e.DsDescription).HasColumnName("DS_DESCRIPTION");
 
                 entity.Property(e => e.DtAtualization)
                     .HasPrecision(3)
@@ -341,37 +328,6 @@ namespace HORTICOMMAND.REPOSITORY
                 entity.Property(e => e.DsUnit)
                     .HasMaxLength(50)
                     .HasColumnName("DS_UNIT");
-
-                entity.Property(e => e.DtAtualization)
-                    .HasPrecision(3)
-                    .HasColumnName("DT_ATUALIZATION")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.DtCreation)
-                    .HasPrecision(3)
-                    .HasColumnName("DT_CREATION")
-                    .HasDefaultValueSql("(getdate())");
-            });
-
-            modelBuilder.Entity<Userhorti>(entity =>
-            {
-                entity.HasKey(e => e.DsLogin);
-
-                entity.ToTable("USERHORTI");
-
-                entity.Property(e => e.DsLogin)
-                    .HasMaxLength(40)
-                    .HasColumnName("DS_LOGIN");
-
-                entity.Property(e => e.BoActive)
-                    .IsRequired()
-                    .HasColumnName("BO_ACTIVE")
-                    .HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.DsPassword)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .HasColumnName("DS_PASSWORD");
 
                 entity.Property(e => e.DtAtualization)
                     .HasPrecision(3)

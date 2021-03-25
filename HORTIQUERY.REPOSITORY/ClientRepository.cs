@@ -1,4 +1,5 @@
-﻿using HORTICOMMAND.DOMAIN.MODEL;
+﻿using HORTI.CORE.CROSSCUTTING.DBBASEEF;
+using HORTICOMMAND.DOMAIN.MODEL;
 using HORTICOMMAND.REPOSITORY;
 using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HORTIQUERY.REPOSITORY
 {
-    public class ClientRepository : _BaseRepository<Client>, IClientRepository
+    public class ClientRepository : _BaseEFQueryRepository<Client>, IClientRepository
     {
         public ClientRepository(DBHORTICONTEXT dBHORTICONTEXT) : base(dBHORTICONTEXT) { }
 
@@ -41,7 +42,7 @@ namespace HORTIQUERY.REPOSITORY
 
         public async Task<IEnumerable<Client>> FullListOfClients()
         {
-            return await FullListOfEntities(Select: x => new Client
+            return await FullListOfEntity(Select: x => new Client
             {
                 IdClient = x.IdClient,
                 DsClient = x.DsClient,
@@ -69,7 +70,7 @@ namespace HORTIQUERY.REPOSITORY
 
         public async Task<IEnumerable<Client>> ListOfClients(IClientQuerySignature signature)
         {
-            return await ListOfEntities(Where: x => (signature.Id == null || signature.Id == x.IdClient)
+            return await ListOfEntity(Where: x => (signature.Id == null || signature.Id == x.IdClient)
                                                  && (signature.Email == null || signature.Email == x.DsEmail)
                                                  && (signature.Client == null || signature.Client == x.DsClient),
                                         Select: x => new Client

@@ -1,11 +1,9 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL;
-using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
-using HORTICOMMAND.DOMAIN.MODEL.DOMAINOBJECT;
+﻿using HORTI.CORE.CROSSCUTTING.VALUEOBJECT;
 using System;
 
 namespace HORTICOMMAND.DOMAIN.MODEL
 {
-    public class Client : IClient
+    public class Client
     {
         public Guid IdClient { get; set; }
         public string DsEmail { get; set; }
@@ -26,7 +24,6 @@ namespace HORTICOMMAND.DOMAIN.MODEL
         public DocumentObject FederalDocument => new DocumentObject(DsFederalInscription);
 
         public virtual City IdCityNavigation { get; set; }
-        public virtual Userhorti DsEmailNavigation { get; set; }
         public virtual District IdDistrictNavigation { get; set; }
     }
 }

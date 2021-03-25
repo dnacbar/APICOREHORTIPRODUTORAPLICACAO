@@ -1,21 +1,22 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACE.REPOSITORY;
+﻿using HORTI.CORE.CROSSCUTTING.DBBASEEF;
+using HORTICOMMAND.DOMAIN.INTERFACE.REPOSITORY;
 using HORTICOMMAND.DOMAIN.MODEL;
 using System.Threading.Tasks;
 
 namespace HORTICOMMAND.REPOSITORY
 {
-    public sealed class ClientRepository : _BaseRepository<Client>, IClientRepository
+    public sealed class ClientRepository : _BaseEFCommandRepository<Client>, IClientRepository
     {
         public ClientRepository(DBHORTICONTEXT DBHORTICONTEXT) : base(DBHORTICONTEXT) { }
 
-        public async Task CreateClient(Client client)
+        public Task CreateClient(Client client)
         {
-            await CreateEntity(client);
+            return CreateEntity(client);
         }
 
-        public async Task UpdateClient(Client client)
+        public Task UpdateClient(Client client)
         {
-            await UpdateEntity(client);
+            return UpdateEntity(client);
         }
     }
 }

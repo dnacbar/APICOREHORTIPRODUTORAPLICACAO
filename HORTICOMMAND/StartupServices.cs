@@ -29,7 +29,7 @@ namespace HORTICOMMAND
         {
             // REPOSITORY
             services.AddScoped<HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY.IClientRepository, HORTIQUERY.REPOSITORY.ClientRepository>();
-            services.AddScoped<HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY.IUserAccessRepository, HORTIQUERY.REPOSITORY.UserAccessRepository>();
+            //services.AddScoped<HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY.IUserAccessRepository, HORTIQUERY.REPOSITORY.UserAccessRepository>();
         }
 
         // CONTAINER DI - APP LAYER
@@ -39,7 +39,6 @@ namespace HORTICOMMAND
             services.AddScoped<IDistrictCommandApp, DistrictCommandApp>();
             services.AddScoped<IProducerCommandApp, ProducerCommandApp>();
             services.AddScoped<IProductCommandApp, ProductCommandApp>();
-            services.AddScoped<IUserCommandApp, UserCommandApp>();
         }
 
         // CONTAINER DI - DOMAIN SERVICE
@@ -49,7 +48,6 @@ namespace HORTICOMMAND
             services.AddScoped<IDistrictDomainService, DistrictDomainService>();
             services.AddScoped<IProducerDomainService, ProducerDomainService>();
             services.AddScoped<IProductDomainService, ProductDomainService>();
-            services.AddScoped<IUserDomainService, UserDomainService>();
         }
 
         // CONTAINER DI - REPOSITORY LAYER
@@ -59,7 +57,6 @@ namespace HORTICOMMAND
             services.AddScoped<IDistrictRepository, DistrictRepository>();
             services.AddScoped<IProducerRepository, ProducerRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // CONTAINER DI - VALIDATION
@@ -80,9 +77,6 @@ namespace HORTICOMMAND
             services.AddScoped<DeleteDistrictSignatureValidation>();
             services.AddScoped<UpdateDistrictSignatureValidation>();
 
-            services.AddScoped<CreateUserSignatureValidation>();
-            services.AddScoped<DeleteUserSignatureValidation>();
-            services.AddScoped<UpdateUserSignatureValidation>();
 
             //DOMAIN SERVICE
             services.AddScoped<CreateClientDomainServiceValidation>();
@@ -96,12 +90,6 @@ namespace HORTICOMMAND
 
             services.AddScoped<CreateProductDomainServiceValidation>();
             services.AddScoped<UpdateProductDomainServiceValidation>();
-
-            services.AddScoped<CreateUserDomainServiceValidation>();
-            services.AddScoped<UpdateUserDomainServiceValidation>();
-
         }
-
-        
     }
 }

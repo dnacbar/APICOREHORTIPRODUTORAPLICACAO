@@ -23,18 +23,18 @@ namespace HORTICOMMAND.DOMAIN.SERVICE
             _clientRepository = clientRepository;
         }
 
-        public async Task ClientServiceCreate(Client client)
+        public Task ClientServiceCreate(Client client)
         {
             _createClientDomainServiceValidation.ValidateHorti(client);
 
-            await _clientRepository.CreateClient(client);
+            return _clientRepository.CreateClient(client);
         }
 
-        public async Task ClientServiceUpdate(Client client)
+        public Task ClientServiceUpdate(Client client)
         {
             _updateClientDomainServiceValidation.ValidateHorti(client);
 
-            await _clientRepository.UpdateClient(client);
+            return _clientRepository.UpdateClient(client);
         }
     }
 }

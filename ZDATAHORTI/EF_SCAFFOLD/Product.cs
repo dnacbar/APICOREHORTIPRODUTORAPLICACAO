@@ -16,6 +16,7 @@ namespace Z_DATAHORTI.EF_SCAFFOLD
         public DateTime? DtDiscount { get; set; }
         public byte? IdUnit { get; set; }
         public bool? BoStock { get; set; }
+        public string DsDescription { get; set; }
 
         public virtual Unit IdUnitNavigation { get; set; }
     }

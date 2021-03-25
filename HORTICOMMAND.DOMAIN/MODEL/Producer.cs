@@ -1,16 +1,12 @@
 ﻿using HORTI.CORE.CROSSCUTTING.ENUM;
-using HORTICOMMAND.DOMAIN.INTERFACE.MODEL;
-using HORTICOMMAND.DOMAIN.MODEL.DOMAINOBJECT;
+using HORTI.CORE.CROSSCUTTING.VALUEOBJECT;
 using System;
 
 namespace HORTICOMMAND.DOMAIN.MODEL
 {
-    public class Producer : IProducer
+    public class Producer
     {
-        public Producer()
-        {
-                
-        }
+        public Producer() { }
 
         public Producer(EnumCultureInfo cultureInfo = EnumCultureInfo.Brazilian)
         {
@@ -35,7 +31,6 @@ namespace HORTICOMMAND.DOMAIN.MODEL
         public string DsEmail { get; set; }
         public string DsPhone { get; set; }
 
-        public virtual Userhorti DsEmailNavigation { get; set; }
         public virtual City IdCityNavigation { get; set; }
         public virtual District IdDistrictNavigation { get; set; }
 

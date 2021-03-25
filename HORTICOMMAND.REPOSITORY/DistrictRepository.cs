@@ -1,10 +1,11 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACE.REPOSITORY;
+﻿using HORTI.CORE.CROSSCUTTING.DBBASEEF;
+using HORTICOMMAND.DOMAIN.INTERFACE.REPOSITORY;
 using HORTICOMMAND.DOMAIN.MODEL;
 using System.Threading.Tasks;
 
 namespace HORTICOMMAND.REPOSITORY
 {
-    public sealed class DistrictRepository : _BaseRepository<District>, IDistrictRepository
+    public sealed class DistrictRepository : _BaseEFCommandRepository<District>, IDistrictRepository
     {
         public DistrictRepository(DBHORTICONTEXT DBHORTICONTEXT) : base(DBHORTICONTEXT) { }
 

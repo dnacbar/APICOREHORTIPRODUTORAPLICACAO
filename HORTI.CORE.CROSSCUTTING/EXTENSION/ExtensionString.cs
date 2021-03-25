@@ -1,31 +1,22 @@
-﻿namespace HORTI.CORE.CROSSCUTTING.EXTENSION
+﻿using System.Linq;
+
+namespace HORTI.CORE.CROSSCUTTING.EXTENSION
 {
     public static class ExtensionString
     {
         public static bool IsOnlyNumber(this string strValue)
         {
-            int i = 0;
-            return int.TryParse(strValue, out i);
+            return int.TryParse(strValue, out _);
         }
 
         public static bool IsOnlyText(this string strValue)
         {
-            foreach (var item in strValue)
-            {
-                if (!char.IsLetter(item))
-                    return false;
-            }
-            return true;
+            return strValue.All(char.IsLetter);
         }
 
         public static bool IsOnlyTextAndNumber(this string strValue)
         {
-            foreach (var item in strValue)
-            {
-                if (!char.IsLetterOrDigit(item))
-                    return false;
-            }
-            return true;
+            return strValue.All(char.IsLetterOrDigit);
         }
 
         public static string RemoveSpecialCharacter(this string strValue)

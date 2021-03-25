@@ -3,7 +3,6 @@ using HORTIQUERY.DOMAIN.INTERFACE.APP;
 using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
 using HORTIQUERY.REPOSITORY;
 using Microsoft.Extensions.DependencyInjection;
-using VALIDATIONCOREHORTIQUERY;
 
 namespace HORTIQUERY
 {
@@ -24,7 +23,7 @@ namespace HORTIQUERY
             services.AddScoped<IDistrictQueryApp, DistrictQueryApp>();
             services.AddScoped<IProducerQueryApp, ProducerQueryApp>();
             services.AddScoped<IUnitQueryApp, UnitQueryApp>();
-            services.AddScoped<IUserAccessApp, UserAccessApp>();
+            //services.AddScoped<IUserAccessApp, UserAccessApp>();
         }
 
         // CONTAINER DI - REPOSITORY LAYER
@@ -35,14 +34,14 @@ namespace HORTIQUERY
             services.AddScoped<IDiscrictRepository, DistrictRepository>();
             services.AddScoped<IProducerRepository, ProducerRepository>();
             services.AddScoped<IUnitRepository, UnitRepository>();
-            services.AddScoped<IUserAccessRepository, UserAccessRepository>();
+           // services.AddScoped<IUserAccessRepository, UserAccessRepository>();
         }
 
         // CONTAINER DI - VALIDATION
         private static void ServicesValidation(IServiceCollection services)
         {
             // TALVEZ MUDAR PARA SCOPED
-            services.AddSingleton<UserAccessSignatureValidation>();
+            //services.AddScoped<UserAccessSignatureValidation>();
         }
     }
 }
