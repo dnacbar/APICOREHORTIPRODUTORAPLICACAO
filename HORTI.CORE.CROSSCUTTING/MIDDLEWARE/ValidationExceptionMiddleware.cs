@@ -33,7 +33,7 @@ namespace HORTI.CORE.CROSSCUTTING.MIDDLEWARE
 
                 httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-                await httpContext.Response.WriteAsync(ex.ToString());
+                await httpContext.Response.WriteAsync(string.Empty);
             }
         }
     }

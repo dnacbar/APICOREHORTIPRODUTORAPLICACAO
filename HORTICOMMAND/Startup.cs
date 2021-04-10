@@ -16,13 +16,15 @@ namespace HORTICOMMAND
     public sealed class Startup
     {
         private const string HortiCorsConfig = "HORTICORSCONFIG";
+        private string[] HortiHeader = { "content-type", "DN-MR-WASATAIN-COMMAND-QUERY" };
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-        
+
         private IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DBHORTICONTEXT>(opt =>
@@ -31,7 +33,11 @@ namespace HORTICOMMAND
                 opt.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
             });
 
-            services.AddCors(x => x.AddPolicy(HortiCorsConfig, p => { p.WithHeaders("DN-MR-WASATAIN-COMMAND"); }));
+            services.AddCors(x => x.AddPolicy(HortiCorsConfig, p =>
+            {
+                p.WithOrigins("http://localhost:4200");
+                p.WithHeaders(HortiHeader);
+            }));
 
             services.AddResponseCompression(x =>
             {
@@ -42,8 +48,6 @@ namespace HORTICOMMAND
             services.Configure<BrotliCompressionProviderOptions>(x => x.Level = CompressionLevel.Optimal);
             services.Configure<GzipCompressionProviderOptions>(x => x.Level = CompressionLevel.Optimal);
 
-            services.AddControllers();
-
             services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new OpenApiInfo
             {
                 Description = "WS REST - WEB API HORTI COMMAND",
@@ -51,15 +55,16 @@ namespace HORTICOMMAND
                 Version = "V1",
             }));
 
+            services.AddControllers().AddJsonOptions(x => { x.JsonSerializerOptions.PropertyNamingPolicy = null; });
+
             StartupServices.Services(services);
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
-
-            app.UseResponseCompression();
 
             app.UseSwagger();
             app.UseSwaggerUI(opt =>
@@ -68,15 +73,17 @@ namespace HORTICOMMAND
                 opt.RoutePrefix = string.Empty;
             });
 
-            app.UseRouting();
-            app.UseCors(HortiCorsConfig);
-
-            app.UseAuthorization();
-
             app.UseFatalExceptionMiddleware();
             app.UseValidationExceptionMiddleware();
+            app.UseNotFoundExceptionMiddleware();
             app.UseEntityFrameworkExceptionMiddleware();
 
+
+            app.UseRouting();
+            app.UseCors(HortiCorsConfig);
+            app.UseAuthorization();
+
+            app.UseResponseCompression();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

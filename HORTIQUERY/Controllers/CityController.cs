@@ -16,16 +16,6 @@ namespace HORTIQUERY.Controllers
             _cityQueryApp = cityQueryApp;
         }
 
-        [HttpPost(nameof(GetCity))]
-        public IActionResult GetCity([FromBody] CityQuerySignature signature)
-        {
-            var res = ".,Death012345nac".ToEncryptPasswordText();
-            var result = signature.City.ToDecryptPasswordText(res);
-
-            return Ok(result);
-        }
-
-
         [HttpPost(nameof(GetCityByIdOrName))]
         public async Task<IActionResult> GetCityByIdOrName([FromBody] CityQuerySignature signature)
         {

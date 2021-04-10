@@ -16,6 +16,7 @@ namespace HORTIQUERY
     public sealed class Startup
     {
         private const string HortiCorsConfig = "HORTICORSCONFIG";
+        private string[] HortiHeader = { "content-type", "DN-MR-WASATAIN-COMMAND-QUERY" };
         private IConfiguration iConfiguration { get; }
 
         public Startup(IConfiguration configuration)
@@ -23,6 +24,7 @@ namespace HORTIQUERY
             iConfiguration = configuration;
         }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DBHORTICONTEXT>(opt =>
@@ -31,7 +33,11 @@ namespace HORTIQUERY
                 opt.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
             });
 
-            services.AddCors(x => x.AddPolicy(HortiCorsConfig, p => { p.WithHeaders("DN-MR-WASATAIN-QUERY"); }));
+            services.AddCors(x => x.AddPolicy(HortiCorsConfig, p =>
+            {
+                p.WithOrigins("http://localhost:4200");
+                p.WithHeaders(HortiHeader);
+            }));
 
             services.AddResponseCompression(x =>
             {
@@ -49,21 +55,16 @@ namespace HORTIQUERY
                 Version = "V1",
             }));
 
-            services.AddControllers().AddJsonOptions(x =>
-            {
-                x.JsonSerializerOptions.PropertyNamingPolicy = null;
-                x.JsonSerializerOptions.IgnoreNullValues = true;
-            });
+            services.AddControllers().AddJsonOptions(x => { x.JsonSerializerOptions.PropertyNamingPolicy = null; });
 
             StartupServices.Services(services);
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
-
-            app.UseResponseCompression();
 
             app.UseSwagger();
             app.UseSwaggerUI(opt =>
@@ -74,11 +75,14 @@ namespace HORTIQUERY
 
             app.UseFatalExceptionMiddleware();
             app.UseValidationExceptionMiddleware();
+            app.UseNotFoundExceptionMiddleware();
+            app.UseEntityFrameworkExceptionMiddleware();
 
             app.UseRouting();
             app.UseCors(HortiCorsConfig);
             app.UseAuthorization();
 
+            app.UseResponseCompression();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
