@@ -16,7 +16,7 @@ namespace HORTIQUERY
     public sealed class Startup
     {
         private const string HortiCorsConfig = "HORTICORSCONFIG";
-        private string[] HortiHeader = { "content-type", "DN-MR-WASATAIN-COMMAND-QUERY" };
+        private string[] HortiHeader = { "Content-Type", "Authorization", "DN-MR-WASATAIN-COMMAND-QUERY" };
         private IConfiguration iConfiguration { get; }
 
         public Startup(IConfiguration configuration)
@@ -77,6 +77,7 @@ namespace HORTIQUERY
             app.UseValidationExceptionMiddleware();
             app.UseNotFoundExceptionMiddleware();
             app.UseEntityFrameworkExceptionMiddleware();
+            app.UseBadGatewayExceptionMiddleware();
 
             app.UseRouting();
             app.UseCors(HortiCorsConfig);

@@ -7,6 +7,11 @@ namespace HORTICOMMAND.DOMAIN.MODEL.SIGNATURE
 {
     public sealed class ClientCommandSignature : IClientCommandSignature
     {
+        public ClientCommandSignature()
+        {
+            if (Id.GetValueOrDefault() == Guid.Empty)
+                Id = Guid.NewGuid();
+        }
         public Guid? Id { get; set; }
         public string Email { get; set; }
         public string Client { get; set; }

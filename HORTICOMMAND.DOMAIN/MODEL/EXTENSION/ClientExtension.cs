@@ -15,8 +15,7 @@ namespace HORTICOMMAND.DOMAIN.MODEL.EXTENSION
                 DsPhone = signature.Phone,
                 IdCity = signature.City,
                 IdDistrict = signature.District,
-                DsFederalInscription = signature.FederalInscription,
-                DtAtualization = DateTime.Now
+                DsFederalInscription = signature.FederalInscription
             };
         }
     }

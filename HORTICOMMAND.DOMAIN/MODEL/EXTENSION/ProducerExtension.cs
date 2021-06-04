@@ -23,8 +23,7 @@ namespace HORTICOMMAND.DOMAIN.MODEL.EXTENSION
                 DsZip = signature.Zip,
                 DsFederalInscription = signature.FederalInscription,
                 DsStateInscription = signature.StateInscription,
-                DsMunicipalInscription = signature.MunicipalInscription,
-                DtAtualization = DateTime.Now
+                DsMunicipalInscription = signature.MunicipalInscription
             };
         }
     }

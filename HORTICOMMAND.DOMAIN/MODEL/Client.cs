@@ -8,8 +8,6 @@ namespace HORTICOMMAND.DOMAIN.MODEL
         public Guid IdClient { get; set; }
         public string DsEmail { get; set; }
         public string DsClient { get; set; }
-        public DateTime DtCreation { get; set; }
-        public DateTime DtAtualization { get; set; }
         public int? IdCity { get; set; }
         public Guid? IdDistrict { get; set; }
         public string DsPhone { get; set; }

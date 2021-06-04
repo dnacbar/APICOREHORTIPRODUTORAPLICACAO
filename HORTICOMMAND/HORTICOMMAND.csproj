@@ -6,14 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HORTI.CORE.CROSSCUTTING\HORTI.CORE.CROSSCUTTING.csproj" />
     <ProjectReference Include="..\HORTICOMMAND.APP\HORTICOMMAND.APP.csproj" />
-    <ProjectReference Include="..\HORTICOMMAND.DOMAIN.SERVICE\HORTICOMMAND.DOMAIN.SERVICE.csproj" />
     <ProjectReference Include="..\HORTICOMMAND.DOMAIN\HORTICOMMAND.DOMAIN.csproj" />
     <ProjectReference Include="..\HORTICOMMAND.REPOSITORY\HORTICOMMAND.REPOSITORY.csproj" />
     <ProjectReference Include="..\HORTIQUERY.DOMAIN\HORTIQUERY.DOMAIN.csproj" />

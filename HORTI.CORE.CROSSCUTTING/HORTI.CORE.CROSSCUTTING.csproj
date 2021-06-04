@@ -4,21 +4,23 @@
     <TargetFramework>net5.0</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
     <Authors>HORTI DN</Authors>
-    <AssemblyVersion>1.0.14.0</AssemblyVersion>
-    <FileVersion>1.0.14.0</FileVersion>
-    <Version>1.0.14</Version>
+    <AssemblyVersion>1.0.15.0</AssemblyVersion>
+    <FileVersion>1.0.15.0</FileVersion>
+    <Version>1.0.15</Version>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
-    <PackageReference Include="MongoDB.Driver" Version="2.11.6" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.0.4" />
+    <PackageReference Include="Flurl" Version="3.0.1" />
+    <PackageReference Include="Flurl.Http" Version="3.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
+    <PackageReference Include="MongoDB.Driver" Version="2.12.2" />
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.2" />
   </ItemGroup>
 
 </Project>

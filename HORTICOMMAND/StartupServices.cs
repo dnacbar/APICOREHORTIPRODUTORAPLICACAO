@@ -5,7 +5,6 @@ using HORTICOMMAND.DOMAIN.INTERFACE.SERVICE;
 using HORTICOMMAND.DOMAIN.SERVICE;
 using HORTICOMMAND.REPOSITORY;
 using HORTICOMMAND.VALIDATION.APPLICATION;
-using HORTICOMMAND.VALIDATION.DOMAIN;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HORTICOMMAND
@@ -76,20 +75,6 @@ namespace HORTICOMMAND
             services.AddScoped<CreateDistrictSignatureValidation>();
             services.AddScoped<DeleteDistrictSignatureValidation>();
             services.AddScoped<UpdateDistrictSignatureValidation>();
-
-
-            //DOMAIN SERVICE
-            services.AddScoped<CreateClientDomainServiceValidation>();
-            services.AddScoped<UpdateClientDomainServiceValidation>();
-
-            services.AddScoped<CreateDistrictDomainServiceValidation>();
-            services.AddScoped<UpdateDistrictDomainServiceValidation>();
-
-            services.AddScoped<CreateProducerDomainServiceValidation>();
-            services.AddScoped<UpdateProducerDomainServiceValidation>();
-
-            services.AddScoped<CreateProductDomainServiceValidation>();
-            services.AddScoped<UpdateProductDomainServiceValidation>();
         }
     }
 }

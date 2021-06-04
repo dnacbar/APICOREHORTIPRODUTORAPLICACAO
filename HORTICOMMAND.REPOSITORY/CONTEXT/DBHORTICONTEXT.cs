@@ -7,15 +7,6 @@ namespace HORTICOMMAND.REPOSITORY
     {
         public DBHORTICONTEXT(DbContextOptions<DBHORTICONTEXT> options) : base(options) { }
 
-        public virtual DbSet<City> Cities { get; set; }
-        public virtual DbSet<Client> Clients { get; set; }
-        public virtual DbSet<Country> Countries { get; set; }
-        public virtual DbSet<District> Districts { get; set; }
-        public virtual DbSet<Producer> Producers { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<State> States { get; set; }
-        public virtual DbSet<Unit> Units { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");

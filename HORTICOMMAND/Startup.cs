@@ -16,7 +16,7 @@ namespace HORTICOMMAND
     public sealed class Startup
     {
         private const string HortiCorsConfig = "HORTICORSCONFIG";
-        private string[] HortiHeader = { "content-type", "DN-MR-WASATAIN-COMMAND-QUERY" };
+        private string[] HortiHeader = { "Content-Type", "Authorization", "DN-MR-WASATAIN-COMMAND-QUERY" };
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -77,6 +77,7 @@ namespace HORTICOMMAND
             app.UseValidationExceptionMiddleware();
             app.UseNotFoundExceptionMiddleware();
             app.UseEntityFrameworkExceptionMiddleware();
+            app.UseBadGatewayExceptionMiddleware();
 
 
             app.UseRouting();

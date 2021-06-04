@@ -15,8 +15,6 @@ namespace HORTICOMMAND.DOMAIN.MODEL
 
         public Guid IdProducer { get; set; }
         public string DsProducer { get; set; }
-        public DateTime DtCreation { get; set; }
-        public DateTime DtAtualization { get; set; }
         public string DsFantasyname { get; set; }
         public int? IdCity { get; set; }
         public Guid? IdDistrict { get; set; }
