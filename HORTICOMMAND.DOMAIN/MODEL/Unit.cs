@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
+using System;
 using System.Collections.Generic;
 
 namespace HORTICOMMAND.DOMAIN.MODEL
@@ -8,6 +9,16 @@ namespace HORTICOMMAND.DOMAIN.MODEL
         public Unit()
         {
             Product = new HashSet<Product>();
+        }
+
+        public Unit(IUnitCommandSignature signature)
+        {
+            Product = new HashSet<Product>();
+
+            IdUnit = signature.Id.GetValueOrDefault();
+            DsUnit = signature.Unit;
+            DsAbreviation = signature.Abreviation;
+            DtAtualization = DateTime.Now;
         }
 
         public byte IdUnit { get; set; }

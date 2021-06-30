@@ -2,7 +2,7 @@
 using HORTICOMMAND.DOMAIN.INTERFACE.APP;
 using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using HORTICOMMAND.DOMAIN.INTERFACE.SERVICE;
-using HORTICOMMAND.DOMAIN.MODEL.EXTENSION;
+using HORTICOMMAND.DOMAIN.MODEL;
 using HORTICOMMAND.VALIDATION.APPLICATION;
 using System.Threading.Tasks;
 
@@ -31,21 +31,21 @@ namespace HORTICOMMAND.APP
         {
             _createProductSignatureValidation.ValidateHorti(signature);
 
-            await _productDomainService.ProductServiceCreate(signature.GetProduct());
+            await _productDomainService.ProductServiceCreate(new Product(signature));
         }
 
         public async Task DeleteProduct(IProductCommandSignature signature)
         {
             _deleteProductSignatureValidation.ValidateHorti(signature);
 
-            await _productDomainService.ProductServiceDelete(signature.GetProduct());
+            await _productDomainService.ProductServiceDelete(new Product(signature));
         }
 
         public async Task UpdateProduct(IProductCommandSignature signature)
         {
             _updateProductSignatureValidation.ValidateHorti(signature);
 
-            await _productDomainService.ProductServiceUpdate(signature.GetProduct());
+            await _productDomainService.ProductServiceUpdate(new Product(signature));
         }
     }
 }

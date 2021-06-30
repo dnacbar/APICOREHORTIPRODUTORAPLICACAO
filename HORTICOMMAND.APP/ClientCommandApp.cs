@@ -3,7 +3,7 @@ using HORTI.CORE.CROSSCUTTING.FILE;
 using HORTICOMMAND.DOMAIN.INTERFACE.APP;
 using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using HORTICOMMAND.DOMAIN.INTERFACE.SERVICE;
-using HORTICOMMAND.DOMAIN.MODEL.EXTENSION;
+using HORTICOMMAND.DOMAIN.MODEL;
 using HORTICOMMAND.VALIDATION.APPLICATION;
 using System.IO;
 using System.Threading.Tasks;
@@ -31,7 +31,7 @@ namespace HORTICOMMAND.APP
         {
             _createClientSignatureValidation.ValidateHorti(signature);
 
-            var clientDomain = signature.GetClient();
+            var clientDomain = new Client(signature);
             await _clientDomainService.ClientServiceCreate(clientDomain);
 
             Directory.CreateDirectory(Path.Combine(Path.GetPathRoot(Directory.GetCurrentDirectory()), "CLIENT", clientDomain.IdClient.ToString()));
@@ -41,7 +41,7 @@ namespace HORTICOMMAND.APP
         {
             _updateClientSignatureValidation.ValidateHorti(signature);
 
-            await _clientDomainService.ClientServiceUpdate(signature.GetClient());
+            await _clientDomainService.ClientServiceUpdate(new Client(signature));
 
             CreateClientImage(signature);
         }

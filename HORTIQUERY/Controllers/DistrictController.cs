@@ -1,4 +1,5 @@
-﻿using HORTIQUERY.DOMAIN.INTERFACE.APP;
+﻿using HORTI.CORE.CROSSCUTTING.EXTENSION;
+using HORTIQUERY.DOMAIN.INTERFACE.APP;
 using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -19,19 +20,19 @@ namespace HORTIQUERY.Controllers
         [HttpPost(nameof(GetDistrictByIdOrName))]
         public async Task<IActionResult> GetDistrictByIdOrName(DistrictQuerySignature signature)
         {
-            return Ok(await _districtQueryApp.GetDistrictByIdOrName(signature));
+            return Ok((await _districtQueryApp.GetDistrictByIdOrName(signature)).Serialize());
         }
 
         [HttpGet(nameof(GetFullListOfDistricts))]
         public async Task<IActionResult> GetFullListOfDistricts()
         {
-            return Ok(await _districtQueryApp.GetFullListOfDistricts());
+            return Ok((await _districtQueryApp.GetFullListOfDistricts()).Serialize());
         }
 
         [HttpPost(nameof(GetListOfDistricts))]
         public async Task<IActionResult> GetListOfDistricts(DistrictQuerySignature signature)
         {
-            return Ok(await _districtQueryApp.GetListOfDistricts(signature));
+            return Ok((await _districtQueryApp.GetListOfDistricts(signature)).Serialize());
         }
     }
 }

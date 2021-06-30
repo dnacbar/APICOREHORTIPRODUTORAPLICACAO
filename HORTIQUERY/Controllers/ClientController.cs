@@ -1,4 +1,5 @@
-﻿using HORTIQUERY.DOMAIN.INTERFACE.APP;
+﻿using HORTI.CORE.CROSSCUTTING.EXTENSION;
+using HORTIQUERY.DOMAIN.INTERFACE.APP;
 using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -18,19 +19,19 @@ namespace HORTIQUERY.Controllers
         [HttpPost(nameof(GetClientByIdOrName))]
         public async Task<IActionResult> GetClientByIdOrName([FromBody] ClientQuerySignature signature)
         {
-            return Ok(await _clientQueryApp.GetClientByIdOrName(signature));
+            return Ok((await _clientQueryApp.GetClientByIdOrName(signature)).Serialize());
         }
 
         [HttpGet(nameof(GetFullListOfClients))]
         public async Task<IActionResult> GetFullListOfClients()
         {
-            return Ok(await _clientQueryApp.GetFullListOfClients());
+            return Ok((await _clientQueryApp.GetFullListOfClients()).Serialize());
         }
 
         [HttpPost(nameof(GetListOfClients))]
         public async Task<IActionResult> GetListOfClients([FromBody] ClientQuerySignature signature)
         {
-            return Ok(await _clientQueryApp.GetListOfClients(signature));
+            return Ok((await _clientQueryApp.GetListOfClients(signature)).Serialize());
         }
     }
 }

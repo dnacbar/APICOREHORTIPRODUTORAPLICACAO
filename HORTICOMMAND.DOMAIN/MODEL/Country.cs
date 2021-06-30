@@ -1,6 +1,4 @@
-﻿using HORTICOMMAND.DOMAIN.INTERFACE.MODEL;
-
-namespace HORTICOMMAND.DOMAIN.MODEL
+﻿namespace HORTICOMMAND.DOMAIN.MODEL
 {
     public class Country
     {

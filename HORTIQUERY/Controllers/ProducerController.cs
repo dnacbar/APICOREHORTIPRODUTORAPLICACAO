@@ -1,4 +1,5 @@
-﻿using HORTIQUERY.DOMAIN.INTERFACE.APP;
+﻿using HORTI.CORE.CROSSCUTTING.EXTENSION;
+using HORTIQUERY.DOMAIN.INTERFACE.APP;
 using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -18,19 +19,19 @@ namespace HORTIQUERY.Controllers
         [HttpPost(nameof(GetProducerByIdOrEmail))]
         public async Task<IActionResult> GetProducerByIdOrEmail([FromBody] ProducerQuerySignature signature)
         {
-            return Ok(await _producerQueryApp.GetProducerByIdOrName(signature));
+            return Ok((await _producerQueryApp.GetProducerByIdOrName(signature)).Serialize());
         }
 
         [HttpGet(nameof(GetFullListOfProducers))]
         public async Task<IActionResult> GetFullListOfProducers()
         {
-            return Ok(await _producerQueryApp.GetFullListOfProducers());
+            return Ok((await _producerQueryApp.GetFullListOfProducers()).Serialize());
         }
 
         [HttpPost(nameof(GetListOfProducers))]
         public async Task<IActionResult> GetListOfProducers([FromBody] ProducerQuerySignature signature)
         {
-            return Ok(await _producerQueryApp.GetListOfProducers(signature));
+            return Ok((await _producerQueryApp.GetListOfProducers(signature)).Serialize());
         }
     }
 }

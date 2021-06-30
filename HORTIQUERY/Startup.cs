@@ -55,7 +55,7 @@ namespace HORTIQUERY
                 Version = "V1",
             }));
 
-            services.AddControllers().AddJsonOptions(x => { x.JsonSerializerOptions.PropertyNamingPolicy = null; });
+            services.AddControllers();
 
             StartupServices.Services(services);
         }

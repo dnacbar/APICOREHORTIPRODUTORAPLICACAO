@@ -3,7 +3,7 @@ using HORTI.CORE.CROSSCUTTING.FILE;
 using HORTICOMMAND.DOMAIN.INTERFACE.APP;
 using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using HORTICOMMAND.DOMAIN.INTERFACE.SERVICE;
-using HORTICOMMAND.DOMAIN.MODEL.EXTENSION;
+using HORTICOMMAND.DOMAIN.MODEL;
 using HORTICOMMAND.VALIDATION.APPLICATION;
 using System.IO;
 using System.Threading.Tasks;
@@ -30,7 +30,7 @@ namespace HORTICOMMAND.APP
         {
             _createProducerSignatureValidation.ValidateHorti(signature);
 
-            var producerDomain = signature.GetProducer();
+            var producerDomain = new Producer(signature);
             await _producerDomainService.ProducerServiceCreate(producerDomain);
 
             Directory.CreateDirectory(Path.Combine(Path.GetPathRoot(Directory.GetCurrentDirectory()), "PRODUCER", producerDomain.IdProducer.ToString()));
@@ -40,7 +40,7 @@ namespace HORTICOMMAND.APP
         {
             _updateProducerSignatureValidation.ValidateHorti(signature);
 
-            await _producerDomainService.ProducerServiceUpdate(signature.GetProducer());
+            await _producerDomainService.ProducerServiceUpdate(new Producer(signature));
 
             CreateProducerImage(signature);
         }

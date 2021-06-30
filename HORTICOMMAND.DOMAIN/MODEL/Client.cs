@@ -1,10 +1,24 @@
 ﻿using HORTI.CORE.CROSSCUTTING.VALUEOBJECT;
+using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using System;
 
 namespace HORTICOMMAND.DOMAIN.MODEL
 {
     public class Client
     {
+        public Client() { }
+
+        public Client(IClientCommandSignature signature)
+        {
+            IdClient = signature.Id.GetValueOrDefault();
+            DsClient = signature.Client;
+            DsEmail = signature.Email;
+            DsPhone = signature.Phone;
+            IdCity = signature.City;
+            IdDistrict = signature.District;
+            DsFederalInscription = signature.FederalInscription;
+        }
+
         public Guid IdClient { get; set; }
         public string DsEmail { get; set; }
         public string DsClient { get; set; }

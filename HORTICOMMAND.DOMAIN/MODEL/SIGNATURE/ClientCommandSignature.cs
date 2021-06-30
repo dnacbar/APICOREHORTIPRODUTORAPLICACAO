@@ -1,7 +1,7 @@
 ﻿using HORTI.CORE.CROSSCUTTING.VALUEOBJECT;
 using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using System;
-using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
 
 namespace HORTICOMMAND.DOMAIN.MODEL.SIGNATURE
 {
@@ -9,9 +9,9 @@ namespace HORTICOMMAND.DOMAIN.MODEL.SIGNATURE
     {
         public ClientCommandSignature()
         {
-            if (Id.GetValueOrDefault() == Guid.Empty)
-                Id = Guid.NewGuid();
+            Id = Id.GetValueOrDefault() == Guid.Empty ? Guid.NewGuid() : Id;
         }
+
         public Guid? Id { get; set; }
         public string Email { get; set; }
         public string Client { get; set; }
@@ -21,11 +21,11 @@ namespace HORTICOMMAND.DOMAIN.MODEL.SIGNATURE
         public string FederalInscription { get; set; }
         public byte[] ImageByte { get; set; }
 
-        [JsonIgnore]
+        [IgnoreDataMember]
         public EmailObject EmailObject => new EmailObject(Email);
-        [JsonIgnore]
+        [IgnoreDataMember]
         public PhoneObject PhoneObject => new PhoneObject(Phone);
-        [JsonIgnore]
+        [IgnoreDataMember]
         public DocumentObject FederalDocument => new DocumentObject(FederalInscription);
     }
 }

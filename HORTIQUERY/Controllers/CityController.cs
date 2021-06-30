@@ -1,4 +1,4 @@
-﻿using HORTI.CORE.CROSSCUTTING.ENCRYPTING;
+﻿using HORTI.CORE.CROSSCUTTING.EXTENSION;
 using HORTIQUERY.DOMAIN.INTERFACE.APP;
 using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
 using Microsoft.AspNetCore.Mvc;
@@ -19,19 +19,19 @@ namespace HORTIQUERY.Controllers
         [HttpPost(nameof(GetCityByIdOrName))]
         public async Task<IActionResult> GetCityByIdOrName([FromBody] CityQuerySignature signature)
         {
-            return Ok(await _cityQueryApp.GetCityByIdOrName(signature));
+            return Ok((await _cityQueryApp.GetCityByIdOrName(signature)).Serialize());
         }
 
         [HttpGet(nameof(GetFullListOfCities))]
         public async Task<IActionResult> GetFullListOfCities()
         {
-            return Ok(await _cityQueryApp.GetFullListOfCities());
+            return Ok((await _cityQueryApp.GetFullListOfCities()).Serialize());
         }
 
         [HttpPost(nameof(GetListOfCities))]
         public async Task<IActionResult> GetListOfCities([FromBody] CityQuerySignature signature)
         {
-            return Ok(await _cityQueryApp.GetListOfCities(signature));
+            return Ok((await _cityQueryApp.GetListOfCities(signature)).Serialize());
         }
     }
 }

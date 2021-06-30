@@ -1,5 +1,6 @@
 ﻿using HORTI.CORE.CROSSCUTTING.ENUM;
 using HORTI.CORE.CROSSCUTTING.VALUEOBJECT;
+using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using System;
 
 namespace HORTICOMMAND.DOMAIN.MODEL
@@ -8,9 +9,24 @@ namespace HORTICOMMAND.DOMAIN.MODEL
     {
         public Producer() { }
 
-        public Producer(EnumCultureInfo cultureInfo = EnumCultureInfo.Brazilian)
+        public Producer(IProducerCommandSignature signature, EnumCultureInfo cultureInfo = EnumCultureInfo.Brazilian)
         {
             CultureInfo = cultureInfo;
+            IdProducer = signature.Id.GetValueOrDefault();
+            DsProducer = signature.Producer;
+            DsAddress = signature.Address;
+            DsComplement = signature.Complement;
+            DsDescription = signature.Description;
+            DsEmail = signature.Email;
+            DsFantasyname = signature.FantasyName;
+            DsNumber = signature.Number;
+            DsPhone = signature.Phone;
+            IdCity = signature.City;
+            IdDistrict = signature.District;
+            DsZip = signature.Zip;
+            DsFederalInscription = signature.FederalInscription;
+            DsStateInscription = signature.StateInscription;
+            DsMunicipalInscription = signature.MunicipalInscription;
         }
 
         public Guid IdProducer { get; set; }

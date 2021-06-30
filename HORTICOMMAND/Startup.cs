@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.IO.Compression;
+using SpanJson.Formatters;
 
 namespace HORTICOMMAND
 {
@@ -44,6 +45,7 @@ namespace HORTICOMMAND
                 x.Providers.Add<BrotliCompressionProvider>();
                 x.Providers.Add<GzipCompressionProvider>();
             });
+
 
             services.Configure<BrotliCompressionProviderOptions>(x => x.Level = CompressionLevel.Optimal);
             services.Configure<GzipCompressionProviderOptions>(x => x.Level = CompressionLevel.Optimal);

@@ -1,12 +1,17 @@
 ﻿using HORTI.CORE.CROSSCUTTING.VALUEOBJECT;
 using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using System;
-using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
 
 namespace HORTICOMMAND.DOMAIN.MODEL.SIGNATURE
 {
     public sealed class ProducerCommandSignature : IProducerCommandSignature
     {
+        public ProducerCommandSignature()
+        {
+            Id = Id.GetValueOrDefault() == Guid.Empty ? Guid.NewGuid() : Id;
+        }
+
         public Guid? Id { get; set; }
         public string Email { get; set; }
         public string Producer { get; set; }
@@ -24,11 +29,11 @@ namespace HORTICOMMAND.DOMAIN.MODEL.SIGNATURE
         public string Phone { get; set; }
         public byte[] ImageByte { get; set; }
 
-        [JsonIgnore]
+        [IgnoreDataMember]
         public PhoneObject PhoneObject => new PhoneObject(Phone);
-        [JsonIgnore]
+        [IgnoreDataMember]
         public EmailObject EmailObject => new EmailObject(Email);
-        [JsonIgnore]
+        [IgnoreDataMember]
         public DocumentObject FederalDocument => new DocumentObject(FederalInscription);
     }
 }
