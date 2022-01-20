@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 
-namespace HORTICOMMAND.VALIDATION.APPLICATION
+namespace HORTICOMMAND.APP.VALIDATION.APPLICATION
 {
     public sealed class CreateDistrictSignatureValidation : AbstractValidator<IDistrictCommandSignature>
     {

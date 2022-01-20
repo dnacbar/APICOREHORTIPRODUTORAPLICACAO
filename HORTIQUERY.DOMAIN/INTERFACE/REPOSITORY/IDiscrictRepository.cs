@@ -8,7 +8,7 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY
     public interface IDiscrictRepository
     {
         Task<District> DistrictByIdOrName(IDistrictQuerySignature signature);
-        Task<IEnumerable<District>> FullListOfDistricts();
-        Task<IEnumerable<District>> ListOfDistricts(IDistrictQuerySignature signature);
+        Task<List<District>> FullListOfDistricts();
+        Task<List<District>> ListOfDistricts(IDistrictQuerySignature signature);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace HORTI.CORE.CROSSCUTTING.ENUM
+﻿namespace HORTICOMMAND.DOMAIN.MODEL.ENUM
 {
     public enum EnumCultureInfo
     {

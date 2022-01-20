@@ -80,7 +80,6 @@
     <Build Include="DBHORTI TABLE\PRODUCT.sql" />
     <Build Include="DBHORTI TABLE\STATE.sql" />
     <Build Include="DBHORTI TABLE\UNIT.sql" />
-    <Build Include="DBHORTI TABLE\USER.sql" />
     <Build Include="DBHORTI TABLE\CLIENT.sql" />
     <None Include="DBHORTI DATA\HORTI_V.1\DML\INSERT_CITY.sql" />
     <Build Include="DBHORTI DATA\HORTI_V.1\DML\INSERT_UNIT.sql" />

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace HORTI.CORE.CROSSCUTTING.EXTENSION
+namespace HORTICOMMAND.APP.VALIDATION.EXTENSION
 {
     public static class ExtensionValidator
     {

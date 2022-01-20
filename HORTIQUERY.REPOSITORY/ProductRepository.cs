@@ -12,9 +12,9 @@ namespace HORTIQUERY.REPOSITORY
     {
         public ProductRepository(DBHORTICONTEXT DBHORTICONTEXT) : base(DBHORTICONTEXT) { }
 
-        public async Task<IEnumerable<Product>> FullListOfProducts()
+        public Task<List<Product>> FullListOfProducts()
         {
-            return await FullListOfEntity(Select: x => new Product
+            return FullListOfEntity(Select: x => new Product
             {
                 IdProduct = x.IdProduct,
                 DsProduct = x.DsProduct,
@@ -26,9 +26,9 @@ namespace HORTIQUERY.REPOSITORY
             OrderBy: p => p.DsProduct);
         }
 
-        public async Task<IEnumerable<Product>> ListOfProducts(IProductQuerySignature signature)
+        public Task<List<Product>> ListOfProducts(IProductQuerySignature signature)
         {
-            return await ListOfEntity(Where: x => signature.Product == null || signature.Product.Contains(x.DsProduct),
+            return ListOfEntity(Where: x => signature.Product == null || signature.Product.Contains(x.DsProduct),
                 Select: p => new Product
                 {
                     IdProduct = p.IdProduct,
@@ -43,9 +43,9 @@ namespace HORTIQUERY.REPOSITORY
                 OrderBy: o => o.DsProduct);
         }
 
-        public async Task<Product> ProductByIdOrName(IProductQuerySignature signature)
+        public Task<Product> ProductByIdOrName(IProductQuerySignature signature)
         {
-            return await EntityByFilter(Where: x => signature.Id == x.IdProduct || signature.Product == x.DsProduct,
+            return EntityByFilter(Where: x => signature.Id == x.IdProduct || signature.Product == x.DsProduct,
                 Select: p => new Product
                 {
                     IdProduct = p.IdProduct,

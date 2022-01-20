@@ -3,6 +3,7 @@ using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
 using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
 using HORTIQUERY.DOMAIN.MODEL.EXTENSION;
+using HORTIQUERY.DOMAIN.MODEL.RESULT;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace HORTIQUERY.APP
 
         public async Task<IDistrictResult> GetDistrictByIdOrName(IDistrictQuerySignature signature)
         {
-            return (await _discrictRepository.DistrictByIdOrName(signature)).GetDistrictResult();
+            return new DistrictResult(await _discrictRepository.DistrictByIdOrName(signature));
         }
 
         public async Task<IEnumerable<IDistrictResult>> GetFullListOfDistricts()

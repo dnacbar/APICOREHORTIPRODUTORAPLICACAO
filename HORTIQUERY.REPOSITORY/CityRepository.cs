@@ -12,9 +12,9 @@ namespace HORTIQUERY.REPOSITORY
     {
         public CityRepository(DBHORTICONTEXT DBHORTICONTEXT) : base(DBHORTICONTEXT) { }
 
-        public async Task<City> CityByIdOrName(ICityQuerySignature signature)
+        public Task<City> CityByIdOrName(ICityQuerySignature signature)
         {
-            return await EntityByFilter(Where: p => signature.Id == p.IdCity || signature.City == p.DsCity,
+            return EntityByFilter(Where: p => signature.Id == p.IdCity || signature.City == p.DsCity,
                                         Select: x => new City
                                         {
                                             IdCity = x.IdCity,
@@ -23,9 +23,9 @@ namespace HORTIQUERY.REPOSITORY
                                         });
         }
 
-        public async Task<IEnumerable<City>> FullListOfCities()
+        public Task<List<City>> FullListOfCities()
         {
-            return await FullListOfEntity(Select: x => new City
+            return FullListOfEntity(Select: x => new City
             {
                 IdCity = x.IdCity,
                 DsCity = x.DsCity,
@@ -34,9 +34,9 @@ namespace HORTIQUERY.REPOSITORY
             OrderBy: p => p.DsCity);
         }
 
-        public async Task<IEnumerable<City>> ListOfCities(ICityQuerySignature signature)
+        public Task<List<City>> ListOfCities(ICityQuerySignature signature)
         {
-            return await ListOfEntity(Where: x => (signature.City == null || x.DsCity.Contains(signature.City))
+            return ListOfEntity(Where: x => (signature.City == null || x.DsCity.Contains(signature.City))
                                                  && (signature.Id == null || signature.Id == x.IdCity)
                                                  && (signature.IdState == null || signature.IdState == x.IdState),
                                         Select: p => new City

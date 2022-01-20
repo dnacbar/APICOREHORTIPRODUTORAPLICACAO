@@ -5,7 +5,7 @@ using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
 using System;
 using System.Threading.Tasks;
 
-namespace HORTICOMMAND.VALIDATION.APPLICATION
+namespace HORTICOMMAND.APP.VALIDATION.APPLICATION
 {
     public sealed class CreateClientSignatureValidation : AbstractValidator<IClientCommandSignature>
     {

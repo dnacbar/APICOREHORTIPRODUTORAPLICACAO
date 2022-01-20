@@ -2,7 +2,7 @@
 using HORTICOMMAND.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using System;
 
-namespace HORTICOMMAND.VALIDATION.APPLICATION
+namespace HORTICOMMAND.APP.VALIDATION.APPLICATION
 {
     public sealed class CreateProductSignatureValidation : AbstractValidator<IProductCommandSignature>
     {

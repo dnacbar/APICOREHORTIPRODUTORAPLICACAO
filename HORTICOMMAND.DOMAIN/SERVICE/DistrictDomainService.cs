@@ -1,8 +1,6 @@
-﻿using FluentValidation;
-using HORTICOMMAND.DOMAIN.INTERFACE.REPOSITORY;
+﻿using HORTICOMMAND.DOMAIN.INTERFACE.REPOSITORY;
 using HORTICOMMAND.DOMAIN.INTERFACE.SERVICE;
 using HORTICOMMAND.DOMAIN.MODEL;
-using System;
 using System.Threading.Tasks;
 
 namespace HORTICOMMAND.DOMAIN.SERVICE
@@ -23,9 +21,6 @@ namespace HORTICOMMAND.DOMAIN.SERVICE
 
         public async Task DistrictServiceDelete(District district)
         {
-            if (district.IdDistrict == Guid.Empty)
-                throw new ValidationException("DISTRICT NOT EXISTS!");
-
             await _districtRepository.DeleteDistrict(district);
         }
 

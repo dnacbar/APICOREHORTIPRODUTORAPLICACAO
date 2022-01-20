@@ -8,7 +8,7 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY
     public interface IClientRepository
     {
         Task<Client> ClientByIdOrName(IClientQuerySignature signature);
-        Task<IEnumerable<Client>> FullListOfClients();
-        Task<IEnumerable<Client>> ListOfClients(IClientQuerySignature signature);
+        Task<List<Client>> FullListOfClients();
+        Task<List<Client>> ListOfClients(IClientQuerySignature signature);
     }
 }

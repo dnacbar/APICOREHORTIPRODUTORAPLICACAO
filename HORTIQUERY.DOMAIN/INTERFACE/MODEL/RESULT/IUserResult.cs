@@ -2,7 +2,7 @@
 
 namespace HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT
 {
-    public interface IUserResult
+    public interface IUserResult : IResult
     {
         string Name { get; set; }
         string Email { get; set; }

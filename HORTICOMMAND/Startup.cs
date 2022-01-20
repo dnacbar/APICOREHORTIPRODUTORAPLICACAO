@@ -37,6 +37,7 @@ namespace HORTICOMMAND
             services.AddCors(x => x.AddPolicy(HortiCorsConfig, p =>
             {
                 p.WithOrigins("http://localhost:4200");
+                p.WithMethods("POST", "PUT", "DELETE");
                 p.WithHeaders(HortiHeader);
             }));
 

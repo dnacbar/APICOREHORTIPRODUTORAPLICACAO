@@ -2,7 +2,7 @@
 
 namespace HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT
 {
-    public interface IProducerResult : IUserResult
+    public interface IProducerResult : IUserResult, IResult
     {
         Guid Id { get; set; }
         string FantasyName { get; set; }

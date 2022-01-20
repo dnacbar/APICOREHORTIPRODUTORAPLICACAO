@@ -9,14 +9,14 @@ namespace HORTICOMMAND.REPOSITORY
     {
         public ProducerRepository(DBHORTICONTEXT DBHORTICONTEXT) : base(DBHORTICONTEXT) { }
 
-        public async Task CreateProducer(Producer producer)
+        public Task CreateProducer(Producer producer)
         {
-            await CreateEntity(producer);
+            return CreateEntity(producer);
         }
 
-        public async Task UpdateProducer(Producer producer)
+        public Task UpdateProducer(Producer producer)
         {
-            await UpdateEntity(producer);
+            return UpdateEntity(producer);
         }
     }
 }

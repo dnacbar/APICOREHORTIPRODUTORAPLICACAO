@@ -1,6 +1,6 @@
 ﻿namespace HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT
 {
-    public interface IUnitResult
+    public interface IUnitResult : IResult
     {
         int Id { get; set; }
         string Unit { get; set; }

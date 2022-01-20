@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+﻿//using FluentValidation;
 using HORTICOMMAND.DOMAIN.INTERFACE.REPOSITORY;
 using HORTICOMMAND.DOMAIN.INTERFACE.SERVICE;
 using HORTICOMMAND.DOMAIN.MODEL;
@@ -25,8 +25,8 @@ namespace HORTICOMMAND.DOMAIN.SERVICE
 
         public async Task ProductServiceDelete(Product product)
         {
-            if (product.IdProduct == Guid.Empty)
-                throw new ValidationException("PRODUCT NOT EXISTS!");
+            //if (product.IdProduct == Guid.Empty)
+            //    throw new ValidationException("PRODUCT NOT EXISTS!");
 
             await _productRepository.DeleteProduct(product);
         }

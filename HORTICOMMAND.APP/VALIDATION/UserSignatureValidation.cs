@@ -4,7 +4,7 @@
 //using HORTIQUERY.DOMAIN.MODEL.SIGNATURE;
 //using System.Threading.Tasks;
 //
-//namespace HORTICOMMAND.VALIDATION.APPLICATION
+//namespace HORTICOMMAND.APP.VALIDATION.APPLICATION
 //{
 //    public sealed class CreateUserSignatureValidation : AbstractValidator<IUserCommandSignature>
 //    {

@@ -1,4 +1,6 @@
-﻿namespace HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE
+﻿using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
+
+namespace HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE
 {
     public interface IUnitQuerySignature : IBaseQuantitySignature
     {

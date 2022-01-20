@@ -36,6 +36,7 @@ namespace HORTIQUERY
             services.AddCors(x => x.AddPolicy(HortiCorsConfig, p =>
             {
                 p.WithOrigins("http://localhost:4200");
+                p.WithMethods("GET", "POST");
                 p.WithHeaders(HortiHeader);
             }));
 

@@ -3,6 +3,7 @@ using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
 using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
 using HORTIQUERY.DOMAIN.MODEL.EXTENSION;
+using HORTIQUERY.DOMAIN.MODEL.RESULT;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -29,7 +30,7 @@ namespace HORTIQUERY.APP
 
         public async Task<IProducerResult> GetProducerByIdOrName(IProducerQuerySignature signature)
         {
-            return (await _producerRepository.ProducerByIdOrName(signature)).GetProducerResult();
+            return new ProducerResult(await _producerRepository.ProducerByIdOrName(signature));
         }
     }
 }

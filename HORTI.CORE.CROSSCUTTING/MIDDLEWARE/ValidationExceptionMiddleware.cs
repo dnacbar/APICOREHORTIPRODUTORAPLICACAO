@@ -1,6 +1,5 @@
 ﻿using HORTI.CORE.CROSSCUTTING.ENUM;
 using HORTI.CORE.CROSSCUTTING.LOG;
-using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -19,7 +18,7 @@ namespace HORTI.CORE.CROSSCUTTING.MIDDLEWARE
             {
                 await _requestDelegate(httpContext);
             }
-            catch (ValidationException ex)
+            catch (Exception ex)// FLUENTVALIDATION (ValidationException ex)
             {
                 LogExtension.CreateLog(new LogObject
                 {

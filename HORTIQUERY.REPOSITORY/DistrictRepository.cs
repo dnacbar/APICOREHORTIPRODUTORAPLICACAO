@@ -12,9 +12,9 @@ namespace HORTIQUERY.REPOSITORY
     {
         public DistrictRepository(DBHORTICONTEXT dBHORTICONTEXT) : base(dBHORTICONTEXT) { }
 
-        public async Task<District> DistrictByIdOrName(IDistrictQuerySignature signature)
+        public Task<District> DistrictByIdOrName(IDistrictQuerySignature signature)
         {
-            return await EntityByFilter(Where: x => x.IdDistrict == signature.Id || x.DsDistrict == signature.District,
+            return EntityByFilter(Where: x => x.IdDistrict == signature.Id || x.DsDistrict == signature.District,
                                         Select: p => new District
                                         {
                                             IdDistrict = p.IdDistrict,
@@ -24,9 +24,9 @@ namespace HORTIQUERY.REPOSITORY
                                         });
         }
 
-        public async Task<IEnumerable<District>> FullListOfDistricts()
+        public Task<List<District>> FullListOfDistricts()
         {
-            return await FullListOfEntity(Select: x => new District
+            return FullListOfEntity(Select: x => new District
             {
                 IdDistrict = x.IdDistrict,
                 DsDistrict = x.DsDistrict,
@@ -36,9 +36,9 @@ namespace HORTIQUERY.REPOSITORY
             OrderBy: p => p.DsDistrict);
         }
 
-        public async Task<IEnumerable<District>> ListOfDistricts(IDistrictQuerySignature signature)
+        public Task<List<District>> ListOfDistricts(IDistrictQuerySignature signature)
         {
-            return await ListOfEntity(Where: x => signature.District == null || x.DsDistrict.Contains(signature.District),
+            return ListOfEntity(Where: x => signature.District == null || x.DsDistrict.Contains(signature.District),
             Select: p => new District
             {
                 IdDistrict = p.IdDistrict,

@@ -9,19 +9,19 @@ namespace HORTICOMMAND.REPOSITORY
     {
         public DistrictRepository(DBHORTICONTEXT DBHORTICONTEXT) : base(DBHORTICONTEXT) { }
 
-        public async Task CreateDistrict(District district)
+        public Task CreateDistrict(District district)
         {
-            await CreateEntity(district);
+            return CreateEntity(district);
         }
 
-        public async Task DeleteDistrict(District district)
+        public Task DeleteDistrict(District district)
         {
-            await DeleteEntity(district);
+            return DeleteEntity(district);
         }
 
-        public async Task UpdateDistrict(District district)
+        public Task UpdateDistrict(District district)
         {
-            await UpdateEntity(district);
+            return UpdateEntity(district);
         }
     }
 }

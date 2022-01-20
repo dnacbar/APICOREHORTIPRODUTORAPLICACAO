@@ -1,4 +1,4 @@
-﻿namespace HORTI.CORE.CROSSCUTTING.VALUEOBJECT
+﻿namespace HORTICOMMAND.DOMAIN.MODEL.VALUEOBJECT
 {
     public sealed class EmailObject
     {

@@ -15,7 +15,7 @@ namespace HORTI.CORE.CROSSCUTTING.ENCRYPTING
 
             var strReturn = string.Empty;
 
-            var strMd5Hash = CreateMd5Hash(strPassword).Result;
+            var strMd5Hash = CreateMd5Hash(strPassword);
             var strGuid = Guid.NewGuid().ToString().Replace("-", "").ToUpperInvariant();
 
             for (int i = 0; i < strGuid.Length; i++)
@@ -55,12 +55,12 @@ namespace HORTI.CORE.CROSSCUTTING.ENCRYPTING
             return strReturn == strPassword;
         }
 
-        private static async Task<string> CreateMd5Hash(string strMd5Hash)
+        private static string CreateMd5Hash(string strMd5Hash)
         {
             using (var md5Hash = MD5.Create())
             {
                 // CONVERT THE INPUT STRING TO A BYTE ARRAY AND COMPUTE THE HASH
-                var data = await Task.Run(() => md5Hash.ComputeHash(Encoding.UTF8.GetBytes(strMd5Hash)));
+                var data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(strMd5Hash));
 
                 var sBuilder = new StringBuilder();
 

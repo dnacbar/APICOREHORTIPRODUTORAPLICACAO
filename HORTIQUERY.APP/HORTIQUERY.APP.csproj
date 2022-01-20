@@ -1,15 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HORTI.CORE.CROSSCUTTING\HORTI.CORE.CROSSCUTTING.csproj" />
     <ProjectReference Include="..\HORTICOMMAND.DOMAIN\HORTICOMMAND.DOMAIN.csproj" />
-    <ProjectReference Include="..\HORTICOMMAND.VALIDATION\HORTICOMMAND.VALIDATION.csproj" />
-    <ProjectReference Include="..\HORTIQUERY.VALIDATION\HORTIQUERY.VALIDATION.csproj" />
+    <ProjectReference Include="..\HORTIQUERY.DOMAIN\HORTIQUERY.DOMAIN.csproj" />
   </ItemGroup>
 
 </Project>

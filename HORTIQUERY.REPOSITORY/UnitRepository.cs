@@ -12,9 +12,9 @@ namespace HORTIQUERY.REPOSITORY
     {
         public UnitRepository(DBHORTICONTEXT dBHORTICONTEXT) : base(dBHORTICONTEXT) { }
 
-        public async Task<IEnumerable<Unit>> ListOfUnits(IUnitQuerySignature signature)
+        public Task<List<Unit>> ListOfUnits(IUnitQuerySignature signature)
         {
-            return await ListOfEntity(Where: x => (signature.DsUnit == null || signature.DsUnit.Contains(x.DsUnit)),
+            return ListOfEntity(Where: x => (signature.DsUnit == null || signature.DsUnit.Contains(x.DsUnit)),
                 Select: p => new Unit
                 {
                     IdUnit = p.IdUnit,
@@ -26,9 +26,9 @@ namespace HORTIQUERY.REPOSITORY
                 OrderBy: o => o.IdUnit);
         }
 
-        public async Task<IEnumerable<Unit>> FullListOfUnits()
+        public Task<List<Unit>> FullListOfUnits()
         {
-            return await FullListOfEntity(Select: x => new Unit
+            return FullListOfEntity(Select: x => new Unit
             {
                 IdUnit = x.IdUnit,
                 DsUnit = x.DsUnit,
@@ -37,9 +37,9 @@ namespace HORTIQUERY.REPOSITORY
             OrderBy: p => p.DsUnit);
         }
 
-        public async Task<Unit> UnitByIdOrName(IUnitQuerySignature signature)
+        public Task<Unit> UnitByIdOrName(IUnitQuerySignature signature)
         {
-            return await EntityByFilter(Where: x => x.IdUnit == signature.Id || x.DsUnit == signature.DsUnit,
+            return EntityByFilter(Where: x => x.IdUnit == signature.Id || x.DsUnit == signature.DsUnit,
             Select: x => new Unit
             {
                 IdUnit = x.IdUnit,

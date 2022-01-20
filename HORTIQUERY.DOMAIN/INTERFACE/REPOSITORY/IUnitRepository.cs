@@ -7,8 +7,8 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY
 {
     public interface IUnitRepository
     {
-        Task<IEnumerable<Unit>> FullListOfUnits();
-        Task<IEnumerable<Unit>> ListOfUnits(IUnitQuerySignature signature);
+        Task<List<Unit>> FullListOfUnits();
+        Task<List<Unit>> ListOfUnits(IUnitQuerySignature signature);
         Task<Unit> UnitByIdOrName(IUnitQuerySignature signature);
     }
 }

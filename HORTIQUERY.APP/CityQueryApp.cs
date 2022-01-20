@@ -1,9 +1,9 @@
-﻿using HORTI.CORE.CROSSCUTTING.ENUM;
-using HORTIQUERY.DOMAIN.INTERFACE.APP;
+﻿using HORTIQUERY.DOMAIN.INTERFACE.APP;
 using HORTIQUERY.DOMAIN.INTERFACE.MODEL.RESULT;
 using HORTIQUERY.DOMAIN.INTERFACE.MODEL.SIGNATURE;
 using HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY;
 using HORTIQUERY.DOMAIN.MODEL.EXTENSION;
+using HORTIQUERY.DOMAIN.MODEL.RESULT;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,10 +20,7 @@ namespace HORTIQUERY.APP
 
         public async Task<ICityResult> GetCityByIdOrName(ICityQuerySignature signature)
         {
-            if (signature is null)
-                throw new FluentValidation.ValidationException(((int)EnumException.City).ToString());
-
-            return (await _cityRepository.CityByIdOrName(signature)).GetCityResult();
+            return new CityResult(await _cityRepository.CityByIdOrName(signature));
         }
 
         public async Task<IEnumerable<ICityResult>> GetFullListOfCities()
@@ -33,9 +30,6 @@ namespace HORTIQUERY.APP
 
         public async Task<IEnumerable<ICityResult>> GetListOfCities(ICityQuerySignature signature)
         {
-            if (signature is null)
-                throw new FluentValidation.ValidationException(((int)EnumException.City).ToString());
-
             return (await _cityRepository.ListOfCities(signature)).GetListOfCityResult();
         }
     }

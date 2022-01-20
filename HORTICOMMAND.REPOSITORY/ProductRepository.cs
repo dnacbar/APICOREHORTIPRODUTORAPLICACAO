@@ -9,19 +9,19 @@ namespace HORTICOMMAND.REPOSITORY
     {
         public ProductRepository(DBHORTICONTEXT DBHORTICONTEXT) : base(DBHORTICONTEXT) { }
 
-        public async Task CreateProduct(Product product)
+        public Task CreateProduct(Product product)
         {
-            await CreateEntity(product);
+            return CreateEntity(product);
         }
 
-        public async Task DeleteProduct(Product product)
+        public Task DeleteProduct(Product product)
         {
-            await DeleteEntity(product);
+            return DeleteEntity(product);
         }
 
-        public async Task UpdateProduct(Product product)
+        public Task UpdateProduct(Product product)
         {
-            await UpdateEntity(product);
+            return UpdateEntity(product);
         }
     }
 }

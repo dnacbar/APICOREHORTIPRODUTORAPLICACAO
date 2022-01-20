@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace HORTI.CORE.CROSSCUTTING.VALUEOBJECT
+namespace HORTICOMMAND.DOMAIN.MODEL.VALUEOBJECT
 {
     public sealed class PasswordObject
     {

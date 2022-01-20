@@ -2,13 +2,14 @@
 using HORTICOMMAND.DOMAIN.MODEL.SIGNATURE;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SpanJson;
 using System.Threading.Tasks;
 
 namespace HORTICOMMAND.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ClientController : ControllerBase  
+    public class ClientController : ControllerBase
     {
         private readonly IClientCommandApp _clientCommandApp;
 

@@ -12,9 +12,9 @@ namespace HORTIQUERY.REPOSITORY
     {
         public ProducerRepository(DBHORTICONTEXT dBHORTICONTEXT) : base(dBHORTICONTEXT) { }
 
-        public async Task<IEnumerable<Producer>> FullListOfProducers()
+        public Task<List<Producer>> FullListOfProducers()
         {
-            return await FullListOfEntity(Select: x => new Producer
+            return FullListOfEntity(Select: x => new Producer
             {
                 IdProducer = x.IdProducer,
                 DsProducer = x.DsProducer,
@@ -49,9 +49,9 @@ namespace HORTIQUERY.REPOSITORY
             OrderBy: p => p.DsProducer);
         }
 
-        public async Task<IEnumerable<Producer>> ListOfProducers(IProducerQuerySignature signature)
+        public Task<List<Producer>> ListOfProducers(IProducerQuerySignature signature)
         {
-            return await ListOfEntity(Where: x => (signature.Id == null || signature.Id == x.IdProducer)
+            return ListOfEntity(Where: x => (signature.Id == null || signature.Id == x.IdProducer)
                                                  && (signature.Email == null || signature.Email.Contains(x.DsEmail)),
                                         Select: p => new Producer
                                         {
@@ -90,9 +90,9 @@ namespace HORTIQUERY.REPOSITORY
                                         OrderBy: o => o.DsProducer);
         }
 
-        public async Task<Producer> ProducerByIdOrName(IProducerQuerySignature signature)
+        public Task<Producer> ProducerByIdOrName(IProducerQuerySignature signature)
         {
-            return await EntityByFilter(Where: x => x.IdProducer == signature.Id || x.DsProducer == signature.Producer,
+            return EntityByFilter(Where: x => x.IdProducer == signature.Id || x.DsProducer == signature.Producer,
             Select: p => new Producer
             {
                 IdProducer = p.IdProducer,

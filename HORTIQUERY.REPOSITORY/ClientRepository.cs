@@ -12,9 +12,9 @@ namespace HORTIQUERY.REPOSITORY
     {
         public ClientRepository(DBHORTICONTEXT dBHORTICONTEXT) : base(dBHORTICONTEXT) { }
 
-        public async Task<Client> ClientByIdOrName(IClientQuerySignature signature)
+        public Task<Client> ClientByIdOrName(IClientQuerySignature signature)
         {
-            return await EntityByFilter(Where: x => x.IdClient == signature.Id || x.DsClient == signature.Client,
+            return EntityByFilter(Where: x => x.IdClient == signature.Id || x.DsClient == signature.Client,
                                         Select: p => new Client
                                         {
                                             IdClient = p.IdClient,
@@ -40,9 +40,9 @@ namespace HORTIQUERY.REPOSITORY
                                         });
         }
 
-        public async Task<IEnumerable<Client>> FullListOfClients()
+        public Task<List<Client>> FullListOfClients()
         {
-            return await FullListOfEntity(Select: x => new Client
+            return FullListOfEntity(Select: x => new Client
             {
                 IdClient = x.IdClient,
                 DsClient = x.DsClient,
@@ -68,9 +68,9 @@ namespace HORTIQUERY.REPOSITORY
                                             OrderBy: p => p.DsClient);
         }
 
-        public async Task<IEnumerable<Client>> ListOfClients(IClientQuerySignature signature)
+        public Task<List<Client>> ListOfClients(IClientQuerySignature signature)
         {
-            return await ListOfEntity(Where: x => (signature.Id == null || signature.Id == x.IdClient)
+            return ListOfEntity(Where: x => (signature.Id == null || signature.Id == x.IdClient)
                                                  && (signature.Email == null || signature.Email == x.DsEmail)
                                                  && (signature.Client == null || signature.Client == x.DsClient),
                                         Select: x => new Client

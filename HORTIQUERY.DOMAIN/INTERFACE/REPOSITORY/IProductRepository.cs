@@ -7,8 +7,8 @@ namespace HORTIQUERY.DOMAIN.INTERFACE.REPOSITORY
 {
     public interface IProductRepository
     {
-        Task<IEnumerable<Product>> FullListOfProducts();
-        Task<IEnumerable<Product>> ListOfProducts(IProductQuerySignature signature);
+        Task<List<Product>> FullListOfProducts();
+        Task<List<Product>> ListOfProducts(IProductQuerySignature signature);
         Task<Product> ProductByIdOrName(IProductQuerySignature signature);
     }
 }

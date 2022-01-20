@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace HORTI.CORE.CROSSCUTTING.EXTENSION
+namespace HORTICOMMAND.DOMAIN.EXTENSION
 {
     public static class ExtensionString
     {
